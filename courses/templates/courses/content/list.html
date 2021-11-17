@@ -1,0 +1,41 @@
+{% extends 'courses/base.html' %} {%load static%}
+
+
+
+{%block content %}
+<section id="about-home">
+  <h2>Courses</h2>
+</section>
+
+<!-- courses section starts  -->
+<section id="course">
+  <h1>{% if category %}{{ category.name }}{% else %} Our Amazing Courses {% endif %}</h1>
+  <p>Replenish man have thing gathering lights yielding shall you</p>
+  
+  <div class="course-box">
+    
+        {% for course in courses %}
+        <div onclick="window.location.href='{{ course.get_absoule.url}}';" class="courses">
+            <img 
+            src="{% if course.cover %}{{ course.cover.url }} {% else %} {% static 'images/c3.jpg' %}{% endif %}" 
+            alt="{{ courses.name }}" />
+        <div class="details">
+            <span>{{course.updated}}</span>
+            <a href="{{ course.get_absolute_url }}"><h6>{{course.name}}</h6></a>
+            
+            <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>(23)</span>
+            </div>
+        </div>
+        <div class="cost">${{course.price_display}}</div>
+    </div>
+    {% endfor %}
+</section>
+
+{%endblock content%}
+

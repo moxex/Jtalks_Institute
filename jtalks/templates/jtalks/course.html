@@ -1,0 +1,40 @@
+{% extends 'jtalks/base.html' %} {%load static%}
+
+
+
+{%block content %}
+<section id="about-home">
+  <h2>Courses</h2>
+</section>
+
+<!-- courses section starts  -->
+<section id="course">
+  <h1>Our Amazing Courses</h1>
+  <p>Replenish man have thing gathering lights yielding shall you</p>
+  
+  <div class="course-box">
+        {% for courses in object_list %}
+        <div onclick="window.location.href='{{ course.get_absoule.url}}';" class="courses">
+            <img 
+            src="{% if courses.cover %}{{ courses.cover.url }} {% else %} {% static 'images/c3.jpg' %}{% endif %}" 
+            alt="{{ courses.name }}" />
+        <div class="details">
+            <span>{{courses.updated}}</span>
+            <a href="{{ course.get_absolute_url }}"></a>
+            <h6>{{courses.name}}</h6>
+            <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+            <span>(239)</span>
+            </div>
+        </div>
+        <div class="cost">${{courses.price_display}}</div>
+    </div>
+    {% endfor %}
+</section>
+
+{%endblock content%}
+

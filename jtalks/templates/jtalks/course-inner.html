@@ -1,0 +1,80 @@
+{% extends 'jtalks/base.html' %} {%load static%} {%block content %}
+
+<section id="about-home">
+  <h2>Enroll Our Popular Courses And Skill Up</h2>
+</section>
+
+<section id="course-inner">
+  <div class="overview">
+    <img
+      class="course-img"
+      src="{% if courses.cover %}{{ courses.cover.url }}{% else %}https://dummyimage{% endif %}"
+      alt="{{ courses.name }}"
+    />
+    <div class="course-head">
+      <div class="c-name">
+        <h2>{{courses.name}}</h2>
+        <div class="star">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <p>${{courses.description}}.</p>
+      </div>
+      <span>${{courses.price_display}}</span>
+    </div>
+    <h3>Instructor</h3>
+    <div class="tutor">
+      <img src="images/c4.jpg" alt="" />
+      <div class="tutor-det">
+        <h5>John Doe</h5>
+        <p>Web Developer At Google</p>
+      </div>
+    </div>
+    <hr />
+    <h3>Course Overview</h3>
+    <p>${{courses.description}}.</p>
+    <hr />
+    <h3>What you'll learn</h3>
+    <div class="learn">
+      <p>
+        <i class="far fa-check-circle"></i>JavaScript from scratch - beginner to
+        advanced
+      </p>
+      <p>
+        <i class="far fa-check-circle"></i>Everything you need to become a
+        JavaScript expert and apply for JavaScript jobs
+      </p>
+      <p>
+        <i class="far fa-check-circle"></i>All about variables, functions,
+        objects and arrays
+      </p>
+      <p>
+        <i class="far fa-check-circle"></i>All core features and concepts you
+        need to know in modern JavaScript development
+      </p>
+      <p>
+        <i class="far fa-check-circle"></i>Project-driven learning with plenty
+        of examples
+      </p>
+      <p><i class="far fa-check-circle"></i>Object-oriented programming</p>
+    </div>
+  </div>
+
+  <div class="enroll">
+    <h3>This course includes:</h3>
+    <p><i class="far fa-video"></i>52 hours video</p>
+    <p><i class="far fa-newspaper"></i>75 articles</p>
+    <p><i class="far fa-cloud-download"></i>Downloadable resources</p>
+    <p><i class="far fa-infinity"></i>Full lifetime access</p>
+    <p><i class="fas fa-mobile-alt"></i>Access on mobile and TV</p>
+    <p><i class="far fa-paperclip"></i>Assignments</p>
+    <p><i class="far fa-trophy-alt"></i>Certificate of completion</p>
+    <div class="enroll-btn">
+      <a class="blue" href="#"> Enroll Course</a>
+    </div>
+  </div>
+</section>
+{%endblock content%}

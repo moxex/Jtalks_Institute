@@ -1,0 +1,55 @@
+{% extends "blog/base.html" %}
+{%load static%}
+
+{%block content %}
+<section id="about-home">
+    <h2>Our Blog</h2>
+</section>
+
+<section id="blog-container">
+    <div class="blogs">
+        {% for post in posts %}
+        <div class="post">
+            <img src="{% if post.image %}{{ post.image.url }}{% else %}https://dummyimage{% endif %}" alt="">
+            <h3><a href="{{ post.get_absolute_url }}">
+                    {{ post.title }} 
+                </a>
+            </h3>
+            <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
+            <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+            <a class="blue" href="#">Read More</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="cate">
+        <h2>Categories</h2>
+        <hr>
+        <a href="#">
+            <p>Web Development</p>
+        </a>
+        <hr>
+        <a href="#">
+            <p>Web Design</p>
+        </a>
+        <hr>
+        <a href="#">
+            <p>App Development</p>
+        </a>
+        <hr>
+        <a href="#">
+            <p>Frontend Web</p>
+        </a>
+        <hr>
+        <a href="#">
+            <p>Python Programming</p>
+        </a>
+        <hr>
+        <a href="#">
+            <p>Javascript Hacks</p>
+        </a>
+    </div>
+    </section>
+</section>
+  {% include "pagination.html" with page=posts %}
+{%endblock content%}

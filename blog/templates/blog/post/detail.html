@@ -1,0 +1,43 @@
+{% extends "blog/base.html" %} {%load static%} {%block content %}
+<section id="about-home">
+  <h2>Impact before profit</h2>
+</section>
+
+<section id="blog-container">
+  <div class="blogs postpage">
+    <div class="post">
+      <img
+        src="{% if post.image %}{{ post.image.url }}{% else %}https://dummyimage{% endif %}"
+        alt=""
+      />
+      <h3>{% block title %}{{ post.title }}{% endblock %}</h3>
+      <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
+      <p>{{ post.body|linebreaks }}</p>
+
+      {% with comments.count as total_comments %}
+      <h2>{{ total_comments }} comment{{ total_comments|pluralize }}</h2>
+      {% endwith %} {% for comment in comments %}
+      <div class="form">
+        <p class="info">
+          Comment {{ forloop.counter }} by {{ comment.name }}
+          {{comment.created}}
+        </p>
+        {{ comment.body|linebreaks }}
+      </div>
+      {% empty %}
+      <p>There are no comments yet.</p>
+      {% endfor %} {% if new_comment %}
+      <h2>Your comment has been added.</h2>
+      {% else %}
+      <h2>Add a comment</h2>
+      <form method="post">
+        {{ comment_form.as_p }} {% csrf_token %}
+        <p><input type="submit" value="Add comment" /></p>
+      </form>
+      {% endif %}
+
+      <a class="blue" href="#">Read Next ?</a>
+    </div>
+  </div>
+</section>
+{%endblock content%}
