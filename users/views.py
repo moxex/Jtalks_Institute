@@ -1,9 +1,10 @@
+from django.contrib.auth import forms
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.models import Group
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
+from django.contrib.auth.models import Group, User
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect, HttpResponse
@@ -25,7 +26,6 @@ def user_signup(request):
         phone_number = request.POST['phone_number']
         referral = request.POST['referral']
         photo = request.FILES['photo']
-        about_me = request.POST['about_me']
         password = request.POST['password']
         password2 = request.POST['password2']
 
@@ -58,12 +58,12 @@ def user_signup(request):
         User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name,
                                  location=location, phone_number=phone_number,
                                  referral=referral, photo=photo,
-                                 about_me=about_me, gender=gender)
+                                gender=gender)
         user = User.objects.get(username=username)
         context = {
             'username': username, 'email': email, 'first_name': first_name, 'last_name': last_name,
             'location': location, 'phone_number': phone_number, 'referral': referral, 'photo': user.photo,
-            'about_me': about_me, 'gender': gender
+            'gender': gender
         }
         return render(request, 'users/signup_success.html', context)
     return render(request, 'users/signup.html')

@@ -1,97 +1,163 @@
 {% extends 'users/base.html' %} {% load static %} {% block title %}Sign Up
 Form{% endblock title %} {% block content %}
-<div class="webAppContainer">
-  <div class="webAppWrapper">
-    <h1 class="myheader">SignUp</h1>
-    <hr />
-    <div class="formContainer">
-      <form
-        method="POST"
-        name="signupForm"
-        enctype="multipart/form-data"
-        action=""
-      >
-        {% csrf_token %}
-        <div class="formInputs">
-          <input type="text" name="username" placeholder="Enter a username" />
-        </div>
+<section class="vh-105">
+  <div class="container py-5 h-110">
+    <div class="row justify-content-center align-items-center h-110">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-4 p-md-5">
+            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">Sign Up</h1>
+            <form method="POST" name="signupForm" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="firstName"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="firstName">First Name</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="lastName"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="lastName">Last Name</label>
+                  </div>
+                </div>
+              </div>
 
-        <div class="formInputs">
-          <input type="text" name="first_name" placeholder="First Name" />
-        </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 d-flex align-items-center">
+                  <div class="form-outline datepicker w-100">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      id="username"
+                    />
+                    <label for="username" class="form-label">Username</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <h6 class="mb-2 pb-1">Gender:</h6>
 
-        <div class="formInputs">
-          <input type="text" name="last_name" placeholder="Last Name" />
-        </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="femaleGender"
+                      value="option1"
+                      checked
+                    />
+                    <label class="form-check-label" for="femaleGender"
+                      >Female</label
+                    >
+                  </div>
 
-        <div class="formInputs">
-          <input type="text" name="email" placeholder="Email" />
-        </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="maleGender"
+                      value="option2"
+                    />
+                    <label class="form-check-label" for="maleGender"
+                      >Male</label
+                    >
+                  </div>
+                </div>
+              </div>
 
-        <div class="formInputs">
-          <input
-            type="text"
-            name="phone_number"
-            placeholder="Enter Your Phone Number"
-          />
-        </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input
+                      type="email"
+                      id="emailAddress"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="emailAddress">Email</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input
+                      type="tel"
+                      id="phoneNumber"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="phoneNumber"
+                      >Phone Number</label
+                    >
+                  </div>
+                </div>
+              </div>
 
-        <div class="formInputs">
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Your Password"
-          />
-        </div>
+              <div class="row">
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="referral"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="referral">Referral</label>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 pb-2">
+                  <div class="form-outline">
+                    <input
+                      type="file"
+                      id="photo"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="photo">Photo</label>
+                  </div>
+                </div>
+              </div>
 
-        <div class="formInputs">
-          <input
-            type="password"
-            name="password2"
-            placeholder="Confirm Your Password"
-          />
-        </div>
+              <div class="row">
+                <div class="col-12">
+                  <option class="mb-2 pb-1">How did you hear about us:</option>
+                  <select name="How did you hear about us">
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="Twitter">Twitter</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="YouTube">YouTube</option>
+                    <option value="Blog">Blog</option>
+                  </select>
+                  <!-- <label class="form-label select-label">Choose option</label> -->
+                </div>
+              </div>
 
-        <div class="myFormbase">
-          <h3>Select Your Gender Below:</h3>
-          <select name="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
-        </div>
+              <div class="mt-4 pt-2">
+                <input
+                  class="btn btn-secondary btn-lg"
+                  type="submit"
+                  value="Register"
+                />
+              </div>
 
-        <div class="formInputs">
-          <textarea
-            placeholder="...Tell us something more about yourself"
-            name="about_me"
-          ></textarea>
+              <p class="text-center text-muted mt-5 mb-0">
+                Have already an account?
+                <a href="#!" class="fw-bold text-body"><u>Login here</u></a>
+              </p>
+            </form>
+          </div>
         </div>
-
-        <div class="formInputs">
-          <input type="text" name="referral" placeholder="Referral" />
-        </div>
-
-        <div class="myFormbase">
-          <h6>How did you hear about us:</h6>
-          <select name="How did you hear about us">
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Facebook">Facebook</option>
-            <option value="Twitter">Twitter</option>
-            <option value="Instagram">Instagram</option>
-            <option value="YouTube">YouTube</option>
-            <option value="Blog">Blog</option>
-          </select>
-        </div>
-
-        <div class="formInputs">
-          <input type="file" name="photo" />
-        </div>
-
-        <div class="formInputs_sub">
-          <input type="submit" name="submitButton" value="Register" />
-        </div>
-      </form>
+      </div>
     </div>
   </div>
-</div>
+</section>
 {% endblock %}

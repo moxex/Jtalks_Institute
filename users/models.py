@@ -24,7 +24,6 @@ class User(AbstractUser):
     ]
     about_us = models.CharField(choices=Here_about_us, max_length=20, blank=True)
     referral = models.CharField(max_length=50, default="Referral Name", blank=True)
-    about_me = models.TextField(max_length=300, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
     # USERNAME_FIELD = "email"
