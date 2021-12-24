@@ -1,0 +1,92 @@
+{% extends "jtalks/base.html" %} {% load static %} {% block title %}Payment With
+Paystack{% endblock %} {% block content %}
+<div class="container" onload="payWithPaystack()">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+      <div id="output"></div>
+
+      <div id="success"></div>
+
+      <div id="display_info" style="display: none">
+        <p>
+          Click
+          <a href="{% url 'product:render_pdf' order.id %}" target="_blank"
+            >Here</a
+          >
+          to print receipt of your purchase
+        </p>
+        <p id="home">
+          Go Back To Shop <a href="{% url 'jtalks:jtalks-home' %}">Homepage</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block js %}
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script>
+  window.onload = function () {
+    $("#display_info").hide();
+    payWithPaystack();
+  };
+
+  function payWithPaystack() {
+    var a = "{{ cart.get_total_price }}";
+    var handler = PaystackPop.setup({
+      key: "pk_test_ce8979497f703eb955ab5ceb19fc54cdcb615e0d",
+      email: "{{email}}",
+      amount: parseInt(a) * 100,
+      currency: "NGN",
+      metadata: {
+        custom_fields: [
+          {
+            display_name: "Mobile Number",
+            variable_name: "mobile_number",
+            value: "{{phone}}",
+            order_id: "{{ order.id }}",
+          },
+        ],
+      },
+
+      callback: function (response) {
+        var ref = response.reference;
+        var order_random_id = "{{ order.order_id }}";
+        var order_id = "{{ order.id }}";
+        //console.log(order_id)
+
+        // $('div#home').show();
+        $.ajax({
+          method: "GET",
+          url: "{% url 'product:pay_with_paystack' %}",
+          data: {
+            id: order_id,
+            reference: ref,
+          },
+          dataType: "json",
+
+          success: function (data) {
+            if (data.message == "Your Payment was successfully received") {
+              $("#output").html(data.message);
+              $("#success").html(
+                `<p>Transaction reference is : <h2>${ref}</h2> and your order id is <h2>${order_random_id}</h2></p>`
+              );
+              $("#display_info").show();
+            } else if (data.message == "Your Payment Failed!!!") {
+              $("#output").html(data.message);
+              $("#success").html(
+                `<a href="{% url 'product:order_create' %}" class="button">Checkout</a>`
+              );
+            }
+          },
+        });
+      },
+
+      onClose: function () {
+        alert("window closed");
+      },
+    });
+
+    handler.openIframe();
+  }
+</script>
+{% endblock js %}

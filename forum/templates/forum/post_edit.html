@@ -1,0 +1,63 @@
+{% extends 'jtalks/base.html' %} {% load static %} {% block title %}Jtalk Blog |
+Edit Post{% endblock title %} {% block content %}
+<section class="vh-105">
+  <div class="container py-5 h-110">
+    <div class="row justify-content-center align-items-center h-110">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-4 p-md-5">
+            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">Edit Your Blog Post</h1>
+            <div class="message">
+              {% if messages %} {% for message in messages %}
+              <h3 style="text-align: center">{{ message }}</h3>
+              {% endfor %} {% endif %}
+            </div>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      class="form-control form-control-lg"
+                      value="{{ post.title }}"
+                      name="title"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <div class="form-outline">
+                    <textarea
+                      rows="8"
+                      cols="35"
+                      name="body"
+                      placeholder="Type your post here..."
+                    >
+{{ post.body }}</textarea
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-2">
+                <input
+                  class="btn btn-secondary btn-lg"
+                  type="submit"
+                  value="Update Post"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

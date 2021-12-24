@@ -1,5 +1,4 @@
 """jtalks_institute URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
 Examples:
@@ -28,14 +27,17 @@ sitemaps = {
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('jtalks.urls')),
+    path('', include('jtalks.urls', namespace='jtalks')),
+    path('forum/', include('forum.urls', namespace='forum')),
     # path("categories/", CourseListView.as_view(), name='category'),
     # path("course/", CourseListView.as_view(), name='courses'),
     # path("c/", include("courses.urls", namespace="courses")),
     path('signup/', user_signup, name='signup'),
     path('blog/', include('blog.urls', namespace='blog')),
     path('course/', include('courses.urls', namespace='courses')),
-    # path('signup/', include('signup.urls'), name='signup'),
+    path('product/', include('products.urls', namespace='product')),
+    path('users/', include('users.urls', namespace='users')),
+    path('cart/', include('cart.urls', namespace='cart')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]
 

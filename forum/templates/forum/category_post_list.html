@@ -1,0 +1,87 @@
+{% extends 'jtalks/base.html' %}
+{% load static %}
+{% block title %}Jtalk Blog | Blog Categories{% endblock title %}
+{% block blog_new %}Add Post{% endblock blog_new %}
+
+{% block blog_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/forum.css' %}" />
+{% endblock blog_style %}
+
+
+{% block content %}
+<div class="blog">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <div class="blog_content">
+                    <h2>{{ posts.count }} post{{ posts.count|pluralize }} in category: {{ category }}</h2>
+                    <!-- Add Blog Details -->
+                    {% if posts %}
+                    {% for post in posts %}
+                    <div class="blog_post">
+                        <div class="blog_image">
+                            <img src="{{ post.author.photo.url }}">
+                        </div>
+                        <div class="blog_title">
+                            <a href="{% url 'forum:post_detail' post.pk post.slug %}">{{ post.title }}</a>
+                        </div>
+                        <div class="blog_meta">
+                            <ul>
+                                <li>By <a href="{% url 'users:user_profile' post.author.id %}">{{ post.author }}</a></li>
+                                {% for category in post.categories.all %}
+                                <li>In {{ category.name }}</li>
+                                {% endfor %}
+                                {% if post.number_of_comments %}
+                                    {% with post.number_of_comments as total_comments %}
+                                        <li><a href="{% url 'forum:post_detail' post.pk post.slug %}">{{ total_comments }} Comment{{ total_comments|pluralize }}</a></li>
+                                    {% endwith %}
+                                {% else %}
+                                    <li>0 Comment</li>
+                                {% endif %}
+                                <li> On {{ post.date }}</li>
+                            </ul>
+                        </div>
+                        <div class="blog_text">
+                            <p>{{ post.body | slice:":150" }}...</p>
+                        </div>
+                        <div class="blog_buttons" style="display:flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                            <div class="blog_link"><a href="{% url 'forum:post_detail' post.pk post.slug %}">Read More</a></div>
+                            <div class="blog_link"><a href="{% url 'forum:post_new' %}">New Post</a></div>
+                            {% if request.user == post.author %}
+                                <div class="blog_link"><a href="{% url 'forum:post_edit' post.pk post.slug %}">Edit</a></div>
+                                <div class="blog_link"><a href="{% url 'forum:post_delete' post.pk post.slug %}">Delete</a></div>
+                            {% endif %}
+                            </div>
+                        <hr>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                        <h2>No blog post is available. Be the first to share a post</h2>
+                    {% endif %}
+                    <!-- End Blog Details -->
+
+
+                </div>
+
+                <div class="blog_pages">
+                    <ul>
+                        <span class="step-links">
+                            {% if posts.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                            </span>
+                            {% if posts.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+                            {% endif %}
+                        </span>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

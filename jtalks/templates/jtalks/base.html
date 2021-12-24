@@ -15,15 +15,10 @@
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-      crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{%static 'jtalks/style.css'%}" />
-    <script
-      src="https://code.jquery.com/jquery-3.6.0.min.js"
-      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="{%static 'jtalks/new_style.css'%}" />
+    {% block blog_style %} {% endblock blog_style %}
   </head>
 
   <body>
@@ -33,13 +28,46 @@
       <div class="navigation">
         <ul>
           <i id="menu-close" class="fas fa-times"></i>
-          <li><a href="#" class="active">Home</a></li>
+          <li>
+            <a href="{% url 'jtalks:jtalks-home' %}" class="active">Home</a>
+          </li>
           <li><a href="about.html">About</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="#">Courses</a></li>
+          <li><a href="{% url 'forum:post_list' %}">Blog</a></li>
+          <li>
+            <a href="{% url 'forum:post_new' %}"
+              >{% block blog_new %}{% endblock blog_new %}</a
+            >
+          </li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a class="blue" href="join.html">Login</a></li>
-          <li><a class="blue" href="join.html">Register</a></li>
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn">Course</button>
+              <div class="dropdown-content">
+                <a href="#">Courses (PDF)</a>
+                <a href="#">Courses (Video)</a>
+                <a href="#products_list">Products (hoodies and t-shirt)</a>
+              </div>
+            </div>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn">Personal</button>
+              <div class="dropdown-content">
+                <a href="{% url 'users:user_profile' request.user.id %}"
+                  >Your Profile</a
+                >
+                <a href="{% url 'courses:user_library' request.user.username %}"
+                  >Your Library</a
+                >
+              </div>
+            </div>
+          </li>
+          <li><a class="blue" href="{% url 'users:logout' %}">Logout</a></li>
+          {% else %}
+          <li><a class="blue" href="{% url 'users:login' %}">Login</a></li>
+          <li><a class="blue" href="{% url 'users:signup' %}">Register</a></li>
+          {% endif %}
         </ul>
         <img id="menu-btn" src="{%static 'jtalks/images/menu.png' %}" alt="" />
       </div>
@@ -51,10 +79,12 @@
     <footer>
       <div class="footer-col">
         <h3>Top Products</h3>
-        <li>Manage Reputation</li>
-        <li>Power Tools</li>
-        <li>Managed Website</li>
-        <li>Marketing Service</li>
+        <ul>
+          <li>Manage Reputation</li>
+          <li>Power Tools</li>
+          <li>Managed Website</li>
+          <li>Marketing Service</li>
+        </ul>
       </div>
       <div class="footer-col">
         <h3>Quick Links</h3>
@@ -98,19 +128,12 @@
       </div>
     </footer>
     <!-- footer end here -->
-
+    <!-- jQuery js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Boostrap js -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
-      integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
-      integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/"
-      crossorigin="anonymous"
-    ></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+    {% block js %} {% endblock js %}
     <script>
       $("#menu-btn").click(function () {
         $("nav .navigation ul").addClass("active");

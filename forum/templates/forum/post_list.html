@@ -1,0 +1,139 @@
+{% extends 'jtalks/base.html' %}
+{% load static %}
+{% block title %}Jtalk Blog | Home{% endblock title %}
+{% block blog_new %}Add Post{% endblock blog_new %}
+
+{% block blog_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/forum.css' %}" />
+{% endblock blog_style %}
+
+
+{% block content %}
+<div class="blog">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9">
+                <div class="blog_content">
+                  <hr>
+                    <!-- Add Blog Details -->
+                    {% if posts %}
+                    {% for post in posts %}
+                    <div class="blog_post">
+                        <div class="blog_image">
+                            <img src="{{ post.author.photo.url }}">
+                        </div>
+                        <div class="blog_title">
+                            <a href="{% url 'forum:post_detail' post.pk post.slug %}">{{ post.title }}</a>
+                        </div>
+                        <div class="blog_meta">
+                            <ul>
+                                <li>By <a href="{% url 'users:user_profile' post.author.id %}">{{ post.author }}</a></li>
+                                {% for category in post.categories.all %}
+                                <li>In
+                                    <a href="{% url 'forum:blog_category' category.name %}">
+                                        {{ category.name }}
+                                    </a></li>
+                                {% endfor %}
+                                {% if post.number_of_comments %}
+                                    {% with post.number_of_comments as total_comments %}
+                                        <li><a href="{% url 'forum:post_detail' post.pk post.slug %}">{{ total_comments }} Comment{{ total_comments|pluralize }}</a></li>
+                                    {% endwith %}
+                                {% else %}
+                                    <li>0 Comment</li>
+                                {% endif %}
+                                <li> On {{ post.date }}</li>
+                                <li>{{ post.total_likes }} Like{{ post.total_likes|pluralize }}</li>
+                            </ul>
+                        </div>
+                        <div class="blog_text">
+                            <p>{{ post.body | slice:":150" }}...</p>
+                        </div>
+                        <div class="blog_buttons" style="display:flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                            <div class="blog_link"><a href="{% url 'forum:post_detail' post.pk post.slug %}">Read More</a></div>
+                            <div class="blog_link"><a href="{% url 'forum:post_new' %}">New Post</a></div>
+                            {% if request.user == post.author %}
+                                <div class="blog_link"><a href="{% url 'forum:post_edit' post.pk post.slug %}">Edit</a></div>
+                                <div class="blog_link"><a href="{% url 'forum:post_delete' post.pk post.slug %}">Delete</a></div>
+                            {% endif %}
+                            </div>
+                        <hr>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                        <h2>No blog post is available. Be the first to share a post</h2>
+                    {% endif %}
+                    <!-- End Blog Details -->
+
+
+                </div>
+
+                <div class="blog_pages">
+                    <ul>
+                        <span class="step-links">
+                            {% if posts.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                            </span>
+                            {% if posts.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+                            {% endif %}
+                        </span>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 sidebar_col">
+                <div class="blog_sidebar">
+
+                    <div class="sidebar_section">
+                        <div class="sidebar_search">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input class="sidebar_search_input" type="search" placeholder="Search Posts" name="q" required>
+                                <input type="submit" name="submit" value="Search" class="input_button">
+                                <!--
+                                <button type="submit" name="submit" class="sidebar_search_button d-flex flex-column align-items-center justify-content-center">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                                -->
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="sidebar_section">
+                        <div class="sidebar_title">Latest Post</div>
+                        <div class="latest_news_container">
+
+                            <div class="latest_news d-flex flex-row align-items-start justify-content-start">
+                                <div class="latest_news_content">
+                                    <div class="latest_news_title"><a href="/forum/{{ id }}/{{ slug }}">{{ title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="sidebar_section">
+                        <div class="sidebar_title">Categories</div>
+                        <div class="sidebar_list">
+                            <ul>
+                                {% for category in categories %}
+                                <li>
+                                    <a class="d-flex flex-row align-items-start justify-content-start" href="{% url 'forum:blog_category' category.name %}">
+                                        {{ category }}<span class="ml-auto"></span></a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

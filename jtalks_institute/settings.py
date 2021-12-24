@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'courses.apps.CoursesConfig',
     'users.apps.UsersConfig',
     'blog.apps.BlogConfig',
-    # 'products.apps.ProductsConfig',
+    'products.apps.ProductsConfig',
+    'cart.apps.CartConfig',
+    'forum.apps.ForumConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -143,6 +145,10 @@ STATICFILES_FINDERS = [
 
 STATIC_ROOT = BASE_DIR / 'static'
 SASS_PROCESSOR_ROOT = STATIC_ROOT
+LOGIN_URL = '/users/login/'
+
+CART_SESSION_ID = 'cart'    # key to store the cart in the user session
+SITE_ID = 1
 
 # MEDIA 
 MEDIA_URL = "/media/"

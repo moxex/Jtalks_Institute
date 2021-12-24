@@ -1,4 +1,7 @@
-{% extends 'courses/base.html' %} {%load static%} {%block content %}
+{% extends 'jtalks/base.html' %}
+{%load static%}
+
+{%block content %}
 
 <section id="about-home">
   <h2>Enroll Our Popular Courses And Skill Up</h2>
@@ -6,31 +9,73 @@
 
 <section id="course-inner">
   <div class="overview">
-    <img
-      class="course-img"
-      src="{% if course.cover %}{{ course.cover.url }}{% else %}https://dummyimage{% endif %}"
-      alt="{{ course.name }}"
-    />
+    <div style="width: 100%;">
+      <img class="course-img" src="{% if course.cover %}{{ course.cover.url }}{% else %}https://dummyimage{% endif %}" alt="{{ course.name }}" style="max-width: 50%;"/>
+    </div>
     <div class="course-head">
       <div class="c-name">
         <h2>{{course.name}}</h2>
-        <div class="star">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="far fa-star"></i>
+        <div class="scores">
+          <div class="star">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <div class="review">
+            <h6>Reviews - {{ avg_reviews }}/5 <i class="far fa-star text-warning"></i></h6>
+          </div>
+          {% if request.user.is_authenticated %}
+            {% if can_add %}
+              <div>
+                <button type="button" class="btn btn-warning btn-sm float-right hide_btn" data-bs-toggle="modal" data-bs-target="#courseReview">Add Review</button>
+              </div>
+            {% endif %}
+          {% else %}
+          <h6>Please login to add your review</h6>
+          {% endif %}
+          <!-- Course Review Starts-->
+          <!-- Button trigger modal -->
+          <!-- Modal -->
+          {% if request.user.is_authenticated %}
+          <div class="modal fade" id="courseReview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Review This Course</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                  <form id="addForm" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <table class="table table-bordered">
+                      {{ form.as_table }}
+                    </table>
+                    <p class="ajaxRes"></p>
+                    <div class="modal-footer">
+                      <input id="review_submit" type="submit" class="btn btn-primary" value="Add Review">
+                    </div>
+                  </form>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <!-- Course Review Ends-->
         </div>
         <!-- <p>{{course.description|linebreaks }}</p> -->
       </div>
-      <span>${{course.price_display}}</span>
+      <span>&#8358;{{course.price}}</span>
     </div>
     <h3>Instructor</h3>
     <div class="tutor">
-      <img
-        src="{% if course.tutor_image %}{{ course.tutor_image.url }}{% else %}https://dummyimage{% endif %}"
-        alt=""
-      />
+      <div >
+        <img src="{% if course.tutor_image %}{{ course.tutor_image.url }}{% else %}https://dummyimage{% endif %}" alt=""/>
+      </div>
       <div class="tutor-det">
         <h5>{{course.tutor}}</h5>
         <p>{{course.tutor_title}}</p>
@@ -65,19 +110,96 @@
       <p><i class="far fa-check-circle"></i>Object-oriented programming</p>
     </div>
   </div>
-
-  <div class="enroll">
-    <h3>This course includes:</h3>
-    <p><i class="far fa-video"></i>52 hours video</p>
-    <p><i class="far fa-newspaper"></i>75 articles</p>
-    <p><i class="far fa-cloud-download"></i>Downloadable resources</p>
-    <p><i class="far fa-infinity"></i>Full lifetime access</p>
-    <p><i class="fas fa-mobile-alt"></i>Access on mobile and TV</p>
-    <p><i class="far fa-paperclip"></i>Assignments</p>
-    <p><i class="far fa-trophy-alt"></i>Certificate of completion</p>
-    <div class="enroll-btn">
-      <a class="blue" href="#"> Enroll Course</a>
+  
+  <div>
+    <div class="enroll">
+      <h3>This course includes:</h3>
+      <p><i class="far fa-video"></i>52 hours video</p>
+      <p><i class="far fa-newspaper"></i>75 articles</p>
+      <p><i class="far fa-cloud-download"></i>Downloadable resources</p>
+      <p><i class="far fa-infinity"></i>Full lifetime access</p>
+      <p><i class="fas fa-mobile-alt"></i>Access on mobile and TV</p>
+      <p><i class="far fa-paperclip"></i>Assignments</p>
+      <p><i class="far fa-trophy-alt"></i>Certificate of completion</p>
+      {% if request.user.is_authenticated %}
+        <div class="enroll-btn">
+          <a id="enroll_btn" class="blue" href="#" data-course-id="{{ course.id }}" data-user="{{ request.user.username }}" data-user-id="{{ request.user.id }}" data-price="{{course.price}}">
+            Enroll Course
+            <i class="fas fa-angle-double-right load-more-icon"></i>
+          </a>
+          <!--
+          <div>
+            <button id="enroll_btn" type="button" class="blue" data-bs-toggle="modal" data-bs-target="#enroll_course">Enroll</button>
+          </div>
+          -->
+        </div>
+      {% else %}
+        <div class="enroll-btn">
+          <a class="blue" href="{% url 'users:login' %}?next={{request.path}}">Login To Enroll For this Course</a>
+        </div>
+      {% endif %}
+    </div>
+    
+    <h3>User Reviews - {{ total_data }}</h3>
+  <div class="review-list">
+    {% for review in all_reviews %}
+    <div class="card review-box" style="margin-bottom: 15px; box-shadow: 0px 20px 40px 0px rgb(11 2 55 / 8%); border-radius: 11px; height: auto; padding-left: 5px;">
+      <div class="star-date" style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div class="star">
+        {% if review.review_rating == '1' %}
+        <i class="fas fa-star star_color"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        {% elif review.review_rating == '2' %}
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        {% elif review.review_rating == '3' %}
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        {% elif review.review_rating == '4' %}
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="far fa-star"></i>
+        {% elif review.review_rating == '5' %}
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        <i class="fas fa-star star_color"></i>
+        {% endif %}
+      </div>
+        
+        <div class="dated">
+          <small style="float: right;">{{ review.rated }}</small>
+        </div>
+      </div>
+      <p style="width:300px; word-wrap: break-word;">{{ review.review_text }}</p>
+      <small>by {{ review.user.first_name }} {{ review.user.last_name }}</small>
+    </div>
+    {% endfor %}
+  </div>
+    <div>
+      <button class="enroll-btn" id="load_more_review" data-total="{{ total_data }}" data-limit="3" data-course-id="{{ course.id }}">
+        <a class="blue">
+          Load More
+          <i class="fas fa-angle-double-right load-more-icon"></i>
+        </a>
+      </button>
+      <p class="review_end" style="display: none;">No more reviews...</p>
     </div>
   </div>
 </section>
 {%endblock content%}
+{% block js %}
+<script src="{% static 'jtalks/home.js' %}"></script>
+{% endblock js %}

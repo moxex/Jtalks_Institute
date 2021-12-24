@@ -1,0 +1,48 @@
+{% extends 'jtalks/base.html' %} {% load static %} {% block title %}User Profile
+Details{% endblock title %} {% block content %}
+<div class="container">
+  <center>
+    <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">User Profile Details Page</h1>
+  </center>
+  <div class="card offset-md-3" style="width: 30rem; margin-top: 30px">
+    <div class="card-body">
+      <p class="card-text">
+        Welcome, {{ user.first_name }} {{ user.last_name }}. Below are your
+        personal details:
+      </p>
+    </div>
+    <img
+      src="{{ user.photo.url }}"
+      class="card-img-top"
+      alt="user profile photo"
+    />
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <strong>First Name: </strong>{{ user.first_name }}
+      </li>
+      <li class="list-group-item">
+        <strong>Last Name: </strong>{{ user.last_name }}
+      </li>
+      <li class="list-group-item">
+        <strong>Phone Number: </strong>{{ user.phone_number }}
+      </li>
+      <li class="list-group-item">
+        <strong>Gender: </strong>{{ user.gender }}
+      </li>
+      <li class="list-group-item">
+        <strong>Location: </strong>{{ user.location }}
+      </li>
+      <li class="list-group-item">
+        <strong>How you heard about us: </strong>{{ user.about_us }}
+      </li>
+      <li class="list-group-item">
+        <strong>Your Referral Name: </strong>{{ user.referral }}
+      </li>
+      <li class="list-group-item">
+        <strong>Date Joined: </strong>{{ user.created_date }}
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

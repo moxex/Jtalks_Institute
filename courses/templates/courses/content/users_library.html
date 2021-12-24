@@ -1,0 +1,86 @@
+{% extends 'jtalks/base.html' %}
+{%load static%}
+
+{% block content %}
+  <div>
+    <center>Welcome to your library, {{ request.user.username }}</center>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <h1>Wish List</h1>
+        <h3>Courses you are yet to pay for will show up here</h3>
+        <div class="user_library" style="display: flex; flex-direction: row; flex-wrap: wrap;">
+          {% for library in my_library %}
+          {% if not library.paid %}
+            {% for course in library.courses.all %}
+              <div class="card" style="width: 18rem;">
+                <img src="{{ course.content_file.url }}" class="card-img-top" alt="{{ course.name }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ course.name }}</h5>
+                  <p class="card-text">{{ course.overview|slice:":50" }}...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">An item</li>
+                  <li class="list-group-item">A second item</li>
+                  <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                  <a href="{% url 'courses:course_detail' course.id course.slug %}" class="btn btn-primary">Course Details</a>
+                  <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <input type="hidden" name="course_price" value="{{ course.price }}">
+                    <input type="submit" class="btn btn-primary" value="Pay &#8358;{{ course.price}}">
+                  </form>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        </div>
+        
+      </div>
+      
+      <div class="col-6">
+        <h1>Paid Courses</h1>
+        <h3>All courses you have successfully paid for will show here</h3>
+        <div class="user_library" style="display: flex; flex-direction: row; flex-wrap: wrap;">
+        {% for library in my_library %}
+          {% if library.paid %}
+            {% for course in library.courses.all %}
+              <div class="card" style="width: 18rem;">
+                <img src="{{ course.content_file.url }}" class="card-img-top" alt="{{ course.name }}">
+                <div class="card-body">
+                  <h5 class="card-title">{{ course.name }}</h5>
+                  <p class="card-text">{{ course.overview|slice:":50" }}...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">An item</li>
+                  <li class="list-group-item">A second item</li>
+                  <li class="list-group-item">A third item</li>
+                </ul>
+                <div class="card-body">
+                  <a href="{% url 'courses:course_detail' course.id course.slug %}" class="btn btn-primary">Course Details</a>
+                  <a id="download_pdf" href="/media/pdf_courses/{{ course.slug }}.pdf" class="btn btn-primary" download>Download PDF</a>
+                </div>
+                
+                <div>
+                  <video width="300" height="240" controls controlsList="nodownload">
+                    <source src="{{ MEDIA_URL}}{{ course.course_video }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        </div>
+      </div>
+  </div>
+  </div>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'jtalks/home.js' %}"></script>
+{% endblock js %}

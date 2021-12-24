@@ -1,0 +1,80 @@
+{% extends 'jtalks/base.html' %} {% load static %} {% block title %} Login Form {% endblock title %} 
+{% block content %}
+<section class="vh-105">
+  <div class="container py-5 h-110">
+    <div class="row justify-content-center align-items-center h-110">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-4 p-md-5">
+            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">Login Form</h1>
+            <div class="message">
+              {% if messages %} {% for message in messages %}
+              <h3 style="text-align: center">{{ message }}</h3>
+              {% endfor %} {% endif %}
+            </div>
+            <form method="POST">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="username">Username:</label>
+                    <input
+                      type="text"
+                      name="username"
+                      class="form-control form-control-lg"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="password">Password:</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control form-control-lg"
+                      required
+                    />
+                    <input type="checkbox" onclick="showPassword()" /> Show
+                    Password
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-2">
+                <input
+                  class="btn btn-secondary btn-lg"
+                  type="submit"
+                  value="Login"
+                />
+              </div>
+
+              <p class="text-center text-muted mt-5 mb-0">
+                Don't have an account?
+                <a href="{% url 'users:signup' %}" class="fw-bold text-body"
+                  >Sign Up</a
+                >
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} {% block js %}
+<script>
+  function showPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>
+{% endblock js %}

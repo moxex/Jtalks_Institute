@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %} {% load static %} {% block title %}Sign Up
+{% extends 'jtalks/base.html' %} {% load static %} {% block title %}Sign Up
 Form{% endblock title %} {% block content %}
 <section class="vh-105">
   <div class="container py-5 h-110">
@@ -9,28 +9,37 @@ Form{% endblock title %} {% block content %}
           style="border-radius: 15px"
         >
           <div class="card-body p-4 p-md-5">
-            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">Sign Up</h1>
+            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">Sign Up Form</h1>
+            <div class="message">
+              {% if messages %} {% for message in messages %}
+              <h3 style="text-align: center">{{ message }}</h3>
+              {% endfor %} {% endif %}
+            </div>
             <form method="POST" name="signupForm" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
+                    <label class="form-label" for="first_name"
+                      >First Name:</label
+                    >
                     <input
                       type="text"
-                      id="firstName"
+                      name="first_name"
                       class="form-control form-control-lg"
+                      required
                     />
-                    <label class="form-label" for="firstName">First Name</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
+                    <label class="form-label" for="last_name">Last Name:</label>
                     <input
                       type="text"
-                      id="lastName"
+                      name="last_name"
                       class="form-control form-control-lg"
+                      required
                     />
-                    <label class="form-label" for="lastName">Last Name</label>
                   </div>
                 </div>
               </div>
@@ -38,12 +47,13 @@ Form{% endblock title %} {% block content %}
               <div class="row">
                 <div class="col-md-6 mb-4 d-flex align-items-center">
                   <div class="form-outline datepicker w-100">
+                    <label for="username" class="form-label">Username:</label>
                     <input
                       type="text"
+                      name="username"
                       class="form-control form-control-lg"
-                      id="username"
+                      required
                     />
-                    <label for="username" class="form-label">Username</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
@@ -53,27 +63,21 @@ Form{% endblock title %} {% block content %}
                     <input
                       class="form-check-input"
                       type="radio"
-                      name="inlineRadioOptions"
-                      id="femaleGender"
-                      value="option1"
+                      name="gender"
+                      value="Female"
                       checked
                     />
-                    <label class="form-check-label" for="femaleGender"
-                      >Female</label
-                    >
+                    <label class="form-check-label" for="gender">Female</label>
                   </div>
 
                   <div class="form-check form-check-inline">
                     <input
                       class="form-check-input"
                       type="radio"
-                      name="inlineRadioOptions"
-                      id="maleGender"
-                      value="option2"
+                      name="gender"
+                      value="Male"
                     />
-                    <label class="form-check-label" for="maleGender"
-                      >Male</label
-                    >
+                    <label class="form-check-label" for="gender">Male</label>
                   </div>
                 </div>
               </div>
@@ -81,24 +85,61 @@ Form{% endblock title %} {% block content %}
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
+                    <label class="form-label" for="email">Email:</label>
                     <input
                       type="email"
-                      id="emailAddress"
+                      name="email"
                       class="form-control form-control-lg"
+                      required
                     />
-                    <label class="form-label" for="emailAddress">Email</label>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
+                    <label class="form-label" for="phone_number"
+                      >Phone Number:</label
+                    >
                     <input
-                      type="tel"
-                      id="phoneNumber"
+                      type="text"
+                      name="phone_number"
+                      class="form-control form-control-lg"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="location">Location:</label>
+                    <input
+                      type="text"
+                      name="location"
+                      class="form-control form-control-lg"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="referral">Referral:</label>
+                    <input type="text" name="referral" class="form-control
+                    form-control-lg" placeholder="Enter referral name, leave
+                    blank if none""/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-4 pb-2">
+                  <div class="form-outline">
+                    <label class="form-label" for="photo">Photo:</label>
+                    <input
+                      type="file"
+                      name="photo"
                       class="form-control form-control-lg"
                     />
-                    <label class="form-label" for="phoneNumber"
-                      >Phone Number</label
-                    >
                   </div>
                 </div>
               </div>
@@ -106,30 +147,40 @@ Form{% endblock title %} {% block content %}
               <div class="row">
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
+                    <label class="form-label" for="password">Password:</label>
                     <input
-                      type="text"
-                      id="referral"
+                      type="password"
+                      name="password"
+                      id="password"
                       class="form-control form-control-lg"
+                      required
                     />
-                    <label class="form-label" for="referral">Referral</label>
+                    <input type="checkbox" onclick="showPassword()" /> Show
+                    Password
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 pb-2">
                   <div class="form-outline">
+                    <label class="form-label" for="password2"
+                      >Confirm Password:</label
+                    >
                     <input
-                      type="file"
-                      id="photo"
+                      type="password"
+                      name="password2"
+                      id="password2"
                       class="form-control form-control-lg"
+                      required
                     />
-                    <label class="form-label" for="photo">Photo</label>
+                    <input type="checkbox" onclick="showPassword2()" /> Show
+                    Password
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-12">
-                  <option class="mb-2 pb-1">How did you hear about us:</option>
-                  <select name="How did you hear about us">
+                  <h6 class="mb-2 pb-1">How did you hear about us::</h6>
+                  <select name="about_us">
                     <option value="WhatsApp">WhatsApp</option>
                     <option value="Facebook">Facebook</option>
                     <option value="Twitter">Twitter</option>
@@ -150,8 +201,10 @@ Form{% endblock title %} {% block content %}
               </div>
 
               <p class="text-center text-muted mt-5 mb-0">
-                Have already an account?
-                <a href="#!" class="fw-bold text-body"><u>Login here</u></a>
+                Already have an account?
+                <a href="{% url 'users:login' %}" class="fw-bold text-body"
+                  >Login here</a
+                >
               </p>
             </form>
           </div>
@@ -160,4 +213,24 @@ Form{% endblock title %} {% block content %}
     </div>
   </div>
 </section>
-{% endblock %}
+{% endblock %} {% block js %}
+<script>
+  function showPassword() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+
+  function showPassword2() {
+    var x = document.getElementById("password2");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+</script>
+{% endblock js %}

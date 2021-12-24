@@ -1,0 +1,160 @@
+{% extends 'jtalks/base.html' %}
+{% load static %}
+{% block title %}Jtalk Blog | Post Details{% endblock title %}
+{% block blog_new %}Add Post{% endblock blog_new %}
+
+{% block blog_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/forum.css' %}" />
+{% endblock blog_style %}
+
+
+{% block content %}
+<div class="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="blog_content">
+                    <!-- Add Blog Details -->
+                    <div class="blog_post">
+                      <hr>
+                        <div class="blog_image">
+                            <img src="{{ post.author.photo.url }}">
+                        </div>
+                        <div class="blog_title">
+                            {{ post.title }}
+                        </div>
+                        <div class="blog_meta">
+                            <ul>
+                                <li>By <a href="{% url 'users:user_profile' post.author.id %}">{{ post.author }}</a></li>
+                                {% for category in post.categories.all %}
+                                <li>In
+                                    <a href="{% url 'forum:blog_category' category.name %}">
+                                        {{ category.name }}
+                                    </a></li>
+                                {% endfor %}
+                                {% if comments %}
+                                    {% with comments.count as total_comments %}
+                                        <li>{{ total_comments }} Comment{{ total_comments|pluralize }}</li>
+                                    {% endwith %}
+                                {% else %}
+                                    <li>0 Comment</li>
+                                {% endif %}
+                                <li> On {{ post.date }}</li>
+                                <li>{{ post.total_likes }} Like{{ post.total_likes|pluralize }}</li>
+                            </ul>
+                        </div>
+                        <div class="blog_text">
+                            <p>{{ post.body}}</p>
+                        </div>
+                        <div class="blog_buttons" style="display:flex; flex-direction: row; justify-content: space-between; align-items: center;">
+                            <div class="blog_link"><a href="{% url 'forum:post_new' %}">New Post</a></div>
+                            <div class="blog_link"><a href="{% url 'forum:post_list' %}">All Posts</a></div>
+                            {% if request.user == post.author %}
+                                <div class="blog_link"><a href="{% url 'forum:post_edit' post.pk post.slug %}">Edit</a></div>
+                                <div class="blog_link"><a href="{% url 'forum:post_delete' post.pk post.slug %}">Delete</a></div>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                          
+                          {% if user.is_authenticated %}
+                            <form action="{% url 'forum:like_post' post.id post.slug %}" method="POST">
+                              {% csrf_token %}
+                              <button class="like_post" type="submit" name="post_id" value="{{ post.id }}">Like Post</button>
+                              <strong>- {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</strong>
+                            </form>
+                          {% else %}
+                            <form action="{% url 'forum:like_post' post.id post.slug %}" method="POST" class="request_login">
+                              {% csrf_token %}
+                              <small><a href="{% url 'users:login' %}?next={{request.path}}" style="color: purple;">Please Login to like this post</a></small>
+                            </form>
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- End Blog Details -->
+            </div>
+
+            <div class="col-lg-5">
+                <span>
+                    <img src="#" alt="" style="max-width: 100%";>
+                </span>
+            </div>
+
+            <!-- Start Comment Section -->
+            <div class="col-lg-6">
+                <!-- Display Comment Section -->
+                {% if comments %}
+                    <!-- <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong> -->
+                    {% with comments.count as total_comments %}
+                        <strong>{{ total_comments }} comment{{ total_comments|pluralize }}</strong>
+                    {% endwith %}
+                    <hr>
+                    <ul>
+                        {% for comment in comments %}
+                            <li>
+                                <div class="blog_meta">
+                                    <ul>
+                                        <li>Comment {{ forloop.revcounter }} By <a href="{% url 'users:user_profile' comment.author.id %}">{{ comment.author }}</a></li>
+                                        <li> On {{ comment.date }}</li>
+                                    </ul>
+                                </div>
+                                <div class="blog_text">
+                                    {% if comment.author.gender == 'Male' %}
+                                    <p> He wrote:<br>{{ comment.comment|safe }}</p>
+                                    {% else %}
+                                    <p> She wrote:<br>{{ comment.comment|safe }}</p>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            <hr>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <strong class="text-secondary">No comments yet...</strong>
+                {% endif %}
+                <!-- End Display Comment Section -->
+            </div>
+
+            <div class="col-lg-6">
+                <!--Add Comment Form -->
+                <div class="blog_title">
+                    <h2>Leave your comment:</h2>
+                </div>
+                <div id="contact_form_section">
+                    {% if user.is_authenticated %}
+                        {% if new_comment %}
+                            <h2>Your comment has been added successfully.</h2>
+                            <h2>Add another comment</h2>
+                            <form class="contact_form" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {{ comment_form.as_p }}
+                                </div>
+                                <button class="like_post">Add comment</button>
+                            </form>
+                        {% else %}
+                            <h2>Add a new comment</h2>
+                            <form class="contact_form" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    {{ comment_form.as_p }}
+                                </div>
+                                <button class="like_post">Add comment</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <button class="like_post">
+                            <a href="{% url 'users:login' %}?next={{request.path}}" style="color: purple;">Please Log in to add a comment!</a>
+                        </button>
+                    {% endif %}
+                </div>
+                <!--End Comment Form -->
+            </div>
+            <!-- End Comment Section -->
+
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

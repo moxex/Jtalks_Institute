@@ -1,0 +1,98 @@
+{% extends 'jtalks/base.html' %}
+{% load static %}
+{% block title %}Jtalk Blog | New Post{% endblock title %}
+{% block content %}
+<section class="vh-105">
+  <div class="container py-5 h-110">
+    <div class="row justify-content-center align-items-center h-110">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
+          <div class="card-body p-4 p-md-5">
+            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">Add New Blog Post</h1>
+            <div class="message">
+              {% if messages %}
+                {% for message in messages %}
+                  <h3 style="text-align: center;">{{ message }}</h3>
+                {% endfor %}
+              {% endif %}
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-12">
+                  <h6 class="mb-2 pb-1">Categories:</h6>
+                  <select name="category">
+                    {% for category in categories%}
+                      <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                  </select>
+                  <!-- <label class="form-label select-label">Choose option</label> -->
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="title">Enter the title of your post:</label>
+                    <input type="text" name="title" class="form-control form-control-lg" required />
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12 mb-4">
+                  <div class="form-outline">
+                    <textarea rows="8" cols="35" name="body" placeholder="Type your post here..."></textarea>
+                  </div>
+                </div>
+              </div>
+                
+                <div class="row">
+                <div class="col-md-12 mb-4">
+                  <div class="form-outline">
+                    <label class="form-label" for="photo"
+                      >Enter post image:</label
+                    >
+                    <input
+                      type="file"
+                      name="photo"
+                      class="form-control form-control-lg"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mt-4 pt-2">
+                <input class="btn btn-secondary btn-lg" type="submit" value="Add Post" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block js %}
+<script>
+    function showPassword() {
+    var x = document.getElementById('password');
+    if (x.type === 'password') {
+        x.type = 'text';
+    } else {
+        x.type = 'password'
+    }
+};
+
+function showPassword2() {
+    var x = document.getElementById('password2');
+    if (x.type === 'password') {
+        x.type = 'text';
+    } else {
+        x.type = 'password'
+    }
+}
+</script>
+{% endblock js %}

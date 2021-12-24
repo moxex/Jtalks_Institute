@@ -1,0 +1,57 @@
+{% for review in data %}
+<div
+  class="card review-box"
+  style="
+    margin-bottom: 15px;
+    box-shadow: 0px 20px 40px 0px rgb(11 2 55 / 8%);
+    border-radius: 11px;
+    height: auto;
+    padding-left: 5px;
+  "
+>
+  <div
+    class="star-date"
+    style="display: flex; flex-direction: row; justfy-content: space-between"
+  >
+    <div class="star">
+      {% if review.review_rating == '1' %}
+      <i class="fas fa-star star_color"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif review.review_rating == '2' %}
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif review.review_rating == '3' %}
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif review.review_rating == '4' %}
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="far fa-star"></i>
+      {% elif review.review_rating == '5' %}
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      <i class="fas fa-star star_color"></i>
+      {% endif %}
+    </div>
+
+    <div class="dated">
+      <small style="float: right">{{ review.rated }}</small>
+    </div>
+  </div>
+  <p style="width: 300px; word-wrap: break-word">{{ review.review_text }}</p>
+  <small>by {{ review.user.first_name }} {{ review.user.last_name }}</small>
+</div>
+{% endfor %}

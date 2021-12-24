@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+
+    <title>Order Summary</title>
+    <style type="text/css">
+      @page {
+        size: A4;
+        margin: 1cm;
+      }
+
+      .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 5px;
+        background-color: #fff;
+      }
+
+      .table th,
+      .table td {
+        padding: 5px;
+        vertical-align: top;
+        border-top: 1px solid #000;
+        text-align: center;
+      }
+
+      .table thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #000;
+      }
+
+      .table tbody + tbody {
+        border-top: 2px solid #000;
+      }
+
+      .table .table {
+        background-color: #fff;
+      }
+
+      .list-group {
+        display: block;
+        width: 100%;
+        list-style: none;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .list-group p {
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        list-style: none;
+        font-size: 1.1em;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header">
+          <div class="header">
+            <h1>ADS Online Shopping Center</h1>
+            <h3>
+              Address: 58, Onibuore Area, Off Monatan - Iyana Church Road,
+              Monatan Ibadan, Nigeria.
+            </h3>
+            <small>Contact: 08187669362, 09032055129</small>
+            <small>Email: akinade.mayowa@gmail.com</small>
+          </div>
+
+          <h3 style="float: right">Date - {{ today | date:"d/m/Y" }}</h3>
+        </div>
+
+        <div class="list-group">
+          <h3>Order Summary:</h3>
+          <div class="row">
+            <div class="col-6">
+              <p>
+                Name: {{ order_item.first_name }} {{ order_item.last_name }}
+              </p>
+              <p>Paid: {{ order_item.paid }}</p>
+              <p>Reference ID: {{ order_item.reference_id }}</p>
+              <p>Order ID: {{ order_item.order_id }}</p>
+            </div>
+            <div class="col-6">
+              <p>Email: {{ order_item.email }}</p>
+              <p>Address: {{ order_item.address }}</p>
+              <p>Phone Number: {{ order_item.phone_number }}</p>
+              <p>City: {{ order_item.city }}</p>
+            </div>
+          </div>
+        </div>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>N{{ item.total_price }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+              <td colspan="3">TOTAL</td>
+              <td>{{ cart.get_total_price}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

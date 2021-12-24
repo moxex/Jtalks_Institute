@@ -1,18 +1,12 @@
-from django.contrib.auth import forms
-from django.shortcuts import render
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, get_user_model, update_session_auth_hash
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
-from django.contrib.auth.models import Group, User
-from django.core.files.storage import FileSystemStorage
-from django.core.mail import send_mail
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic.base import View
-# from .decorators import unauthorised_user
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+
 
 User = get_user_model()
+
 
 # Create your views here.
 def user_signup(request):
@@ -26,6 +20,7 @@ def user_signup(request):
         phone_number = request.POST['phone_number']
         referral = request.POST['referral']
         photo = request.FILES['photo']
+        about_us = request.POST['about_us']
         password = request.POST['password']
         password2 = request.POST['password2']
 
@@ -56,17 +51,43 @@ def user_signup(request):
             return render(request, 'users/signup.html')
 
         User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name,
-                                 location=location, phone_number=phone_number,
-                                 referral=referral, photo=photo,
-                                gender=gender)
+                                 location=location, phone_number=phone_number, about_us=about_us,
+                                 referral=referral, photo=photo, gender=gender)
         user = User.objects.get(username=username)
         context = {
             'username': username, 'email': email, 'first_name': first_name, 'last_name': last_name,
             'location': location, 'phone_number': phone_number, 'referral': referral, 'photo': user.photo,
-            'gender': gender
+            'gender': gender, 'about_us': about_us
         }
         return render(request, 'users/signup_success.html', context)
     return render(request, 'users/signup.html')
 
 
+# login view
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, 'This Username, ' + username + ', Does Not Exist...')
+            return render(request, 'users/login.html')
+        else:
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('/')
+    return render(request, 'users/login.html')
 
+
+# logout view
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+
+# user Profile
+def user_profile(request, id):
+    user = get_object_or_404(User, id=id)
+    return render(request, 'users/user_profile.html', {'user': user})
