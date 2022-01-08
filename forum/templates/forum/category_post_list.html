@@ -21,7 +21,7 @@
                     {% for post in posts %}
                     <div class="blog_post">
                         <div class="blog_image">
-                            <img src="{{ post.author.photo.url }}">
+                            <img src="{{ post.image.url }}">
                         </div>
                         <div class="blog_title">
                             <a href="{% url 'forum:post_detail' post.pk post.slug %}">{{ post.title }}</a>

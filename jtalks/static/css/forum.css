@@ -20,11 +20,10 @@ div {
 }
 
 .container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 8vw;
 }
 
 .row {
@@ -36,10 +35,12 @@ div {
 
 .blog_post {
   margin-bottom: 50px;
+  padding-bottom: 60px;
 }
 
 .blog_image {
   width: 100%;
+  border-radius: 19px;
 }
 
 .blog_title {
@@ -50,11 +51,12 @@ div {
 }
 
 .blog_title a {
-  color: rgb(206, 101, 206);
+  color: rgb(148, 10, 125);
+  text-decoration: none;
 }
 
 .blog_title a:hover {
-  color: #fdc93b;
+  color: #070500;
   transition: 0.3s ease;
 }
 
@@ -66,11 +68,12 @@ div {
   margin-top: 34px;
 }
 
-.blog_link {
+.blog_link{
   margin-top: 17px;
 }
 
 .blog_link a {
+  text-decoration: none;
   font-size: 14px;
   font-weight: 500;
   border: 1px solid purple;
@@ -78,6 +81,12 @@ div {
   background: white;
   color: purple;
   padding: 13px;
+}
+
+.blog_link a:hover {
+  color: #fff;
+  background: purple;
+  transition: 0.3s ease;
 }
 
 .like_post {
@@ -160,11 +169,12 @@ ul {
   position: relative;
   font-size: 11px;
   font-weight: 500;
-  color: purple;
+  color: black;
   margin-right: 4px;
 }
 
 .blog_meta ul li a {
+  text-decoration: none;
   font-size: 11px;
   font-weight: 500;
   color: purple;
@@ -221,10 +231,12 @@ p:last-of-type {
 }
 
 .sidebar_list ul li a {
+  text-decoration: none;
   width: 100px;
   font-size: 14px;
   font-weight: 500;
   color: purple;
+ 
 }
 
 .sidebar_search_input {
@@ -248,8 +260,11 @@ p:last-of-type {
 }
 
 button,
-input {
+input:hover{
   overflow: visible;
+  color: #fff;
+  background: purple;
+  transition: 0.3s ease;
 }
 
 .sidebar_title {
@@ -276,6 +291,7 @@ input {
   font-weight: 500;
   line-height: 1.71;
   transition: all 200ms ease;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 575px) {

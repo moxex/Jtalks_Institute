@@ -75,7 +75,7 @@ nav .navigation ul li a {
 
 nav .navigation ul li a:hover,
 nav .navigation ul li a.active {
-  color: #fdc93b;
+  color:  rgb(21, 21, 100);
 }
 
 nav .navigation ul li a.blue {
@@ -92,7 +92,7 @@ nav .navigation ul li a.blue {
 }
 
 nav .navigation ul li a.blue:hover {
-  color: #fdc93b;
+  color:  rgb(21, 21, 100);
   transition: 0.3s ease;
 }
 
@@ -1016,6 +1016,14 @@ footer .pro-link i:hover {
   height: 100%;
 }
 
+.contact_form .form {
+  width: 60%;
+  background: #f7f6fa;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+
 @media (max-width: 769px) {
   nav {
     padding: 15px 20px;
@@ -1257,20 +1265,20 @@ far-star {
   border: 1ox solid #ffc107;
 }
 
-.products-cards {
+/* .products-cards {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
   height: auto;
   align-items: baseline;
-}
+} */
 
-.products-cards .card {
+/* .products-cards .card {
   border: 1px solid #f542d7;
   border-radius: 20px;
   margin-right: 10px;
   height: auto;
-}
+} */
 
 .course-cards {
   display: flex;

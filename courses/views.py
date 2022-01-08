@@ -148,7 +148,7 @@ def user_library(request, username):
     if request.method == 'POST':
         course_id = request.POST['course_id']
         course_price = request.POST['course_price']
-        course = UserLibrary.objects.get(courses__id=course_id)
+        course = UserLibrary.objects.get(id=course_id)
         """for c in course.courses.all():
             print(c.name)"""
         context = {

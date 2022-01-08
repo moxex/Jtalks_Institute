@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import Post, Category, Comment
+from .models import Post, Category, Comment, About
 from .forms import CategoryForm, CommentForm
 
 
@@ -36,7 +36,6 @@ def post_list(request):
         'slug': all_posts[0].slug if all_posts else None,
     }
     return render(request, 'forum/post_list.html', context)
-
 
 def post_detail(request, id, slug):
     post = get_object_or_404(Post, id=id, slug=slug)
@@ -160,3 +159,7 @@ def blog_category(request, category):
         "posts": posts
     }
     return render(request, "forum/category_post_list.html", context)
+
+
+# def about(request):
+#     return render(request, 'jtalks/about.html')

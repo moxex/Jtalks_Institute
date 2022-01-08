@@ -17,6 +17,7 @@ $(document).ready(function () {
         $(".load-more-icon").addClass("fa-spinner");
       },
       success: function (res) {
+        console.log(res.data)
         $(".course-cards").append(res.data);
         $("#load_more").attr("disabled", false);
         $(".load-more-icon").removeClass("fa-spinner");
@@ -36,7 +37,7 @@ $(document).ready(function () {
     var _currentProducts = $(".card-box").length;
     var _limit = $(this).attr("data-limit");
     var _total = $(this).attr("data-total");
-
+    console.log(_currentProducts, _limit, _total)
     // start ajax
     $.ajax({
       url: "/load_more_products/",
@@ -50,6 +51,7 @@ $(document).ready(function () {
         $(".load-more-icon").addClass("fa-spinner");
       },
       success: function (res) {
+        console.log(res.data)
         $(".products-cards").append(res.data);
         $("#load_more_products").attr("disabled", false);
         $(".load-more-icon").removeClass("fa-spinner");

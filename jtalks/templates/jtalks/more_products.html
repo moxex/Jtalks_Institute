@@ -1,32 +1,14 @@
 {% for product in data %}
-<div class="card card-box" style="width: 18rem">
-  <img
-    src="{{ product.image.url }}"
-    class="card-img-top"
-    alt="{{ product.name }}"
-  />
-  <div class="card-body">
-    <h5 class="card-title">{{ product.name }}</h5>
-    <h5>&#8358;{{ product.price }}</h5>
-  </div>
-  <div class="card-body">
-    <button
-      style="
-        text-decoration: none;
-        padding: 13px 45px;
-        background: rgb(50, 50, 136);
-        border: 1px solid #412e88;
-        border-radius: 11px;
-        color: white;
-      "
-    >
-      <a
-        style="color: white"
-        href="{% url 'product:product_detail' product.id product.slug %}"
-      >
-        Read More
-      </a>
-    </button>
-  </div>
-</div>
-{% endfor %}
+    <div class="courses card-box">
+      <img src="{{ product.image.url }}" alt="{{ courses.name }}" />
+      <div class="details">
+        <!-- <span>Updated 21/8/21</span> -->
+        
+        <h6>{{ product.name }}</h6>
+        <h6><a href="{% url 'product:product_detail' product.id product.slug %}">
+                    Read More
+        </a></h6>
+      </div>
+      <div class="cost">${{ product.price }}</div>
+    </div>
+    {% endfor %}

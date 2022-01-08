@@ -8,14 +8,13 @@ from courses.models import Category, Courses
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
 from products.models import Product
+from forum.models import About, ContactUs
 
 
 def home(request):
     cart = Cart(request)
     categories = Category.objects.all()
     courses = Courses.objects.all().order_by('-id')[:2]
-    for course in courses:
-        print(course.is_featured)
     total_data = Courses.objects.count()
 
     # for products
@@ -48,6 +47,7 @@ def load_more_products(request):
     limit = int(request.GET['limit'])
     data = Product.objects.order_by('-id')[offset:offset+limit]
     t = render_to_string('jtalks/more_products.html', {'data': data})
+    print(data)
     return JsonResponse({'data': t})
 
 
@@ -74,9 +74,34 @@ def home(request):
     return render(request, 'jtalks/home.html', context)
 """
 
-
+# AboutUs Views
 def about(request):
-    return render(request, 'jtalks/about.html')
+    about = About.objects.all()
+    context = {
+    'abouts': about,    
+    }
+    return render(request, 'jtalks/about.html', context)
+
+# ContactUs Views
+def contact_us(request):
+    if request.method == 'POST':
+        full_name = request.POST['full_name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        address = request.POST['address']
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        ContactUs.objects.create(
+            full_name=full_name,
+            email=email,
+            phone_number=phone_number,
+            address=address,
+            subject=subject,
+            message=message
+        )
+        return render(request, 'jtalks/contact_us_success.html')
+    return render(request, 'jtalks/contact.html')
 
 
 class GetCourses(View):

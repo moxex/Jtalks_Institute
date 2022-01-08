@@ -1,0 +1,69 @@
+{% extends 'jtalks/base.html' %}
+{%load static%}
+
+{% block content %}
+  <div>
+    <center>Welcome to your library, {{ request.user.username }}</center>
+  </div>
+  <!-- Wish List -->
+<section id="course">
+  <h1>Wish List</h1>
+  <p>Courses you are yet to pay for will show up here</p>
+  <div class="course-box course-cards">
+    {% for library in my_library %}
+      {% if library.paid %}
+        {% for course in library.courses.all %}
+    <div class="courses">
+      <img src="{{ course.cover.url }}" alt="{{ courses.name }}" />
+      
+      <div class="details">
+        <h6>{{ course.name }}</h6>
+        <a href="{% url 'courses:course_detail' course.id course.slug %}" class="btn btn-primary">Course Details</a>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="course_id" value="{{ course.id }}">
+            <input type="hidden" name="course_price" value="{{ course.price }}">
+            <input type="submit" class="btn btn-primary" value="Pay &#8358;{{ course.price}}">
+        </form>
+      </div>
+    </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Paid courses -->
+<section id="course">
+  <h1>Paid Courses</h1>
+  <p>All courses you have successfully paid for will show here</p>
+  <div class="course-box course-cards">
+    {% for library in my_library %}
+      {% if library.paid %}
+        {% for course in library.courses.all %}
+    <div class="courses">
+      <img src="{{ course.cover.url }}" alt="{{ courses.name }}" />
+
+      <div class="details">
+        <h6>{{ course.name }}</h6>
+        <a href="{% url 'courses:course_detail' course.id course.slug %}" class="btn btn-primary">Course Details</a>
+        <a id="download_pdf" href="/media/pdf_courses/{{ course.slug }}.pdf" class="btn btn-primary" download>Download PDF</a>
+      </div>
+    </div>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div id="course">
+      <video width="300" height="240" controls controlsList="nodownload">
+          <source src="{{ MEDIA_URL}}{{ course.course_video }}" type="video/mp4">
+                    Your browser does not support the video tag.
+      </video>
+  </div>
+</section>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static 'jtalks/home.js' %}"></script>
+{% endblock js %}

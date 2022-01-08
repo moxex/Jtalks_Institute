@@ -22,23 +22,59 @@
   </head>
 
   <body>
+
     <nav>
       <img onclick="window.location.href='index.html'" src="#" alt="" />
       <!-- logo here -->
       <div class="navigation">
         <ul>
           <i id="menu-close" class="fas fa-times"></i>
+          <li><a href="{% url 'jtalks:jtalks-home' %}" class="active">Home</a></li>
+          <li><a href="{% url 'jtalks:jtalks-about' %}">About</a></li>
+          <li><a href="{% url 'forum:post_list' %}">Blog</a></li>
+          <li><a href="{% url 'jtalks:jtalks-contact' %}">Contact</a></li>
+
+          {% if request.user.is_authenticated %}
+          <li>
+            <div class="dropdown">
+              <button class="dropbtn">Personal</button>
+              <div class="dropdown-content">
+                <a href="{% url 'users:user_profile' request.user.id %}"
+                  >Your Profile</a
+                >
+                <a href="{% url 'courses:user_library' request.user.username %}"
+                  >Your Library</a
+                >
+              </div>
+            </div>
+          </li>
+           <li><a class="blue" href="{% url 'users:logout' %}">Logout</a></li>
+          {% else %}
+          <li><a class="blue" href="{% url 'users:login' %}">Login</a></li>
+          <li><a class="blue" href="{% url 'users:signup' %}">Register</a></li>
+          {% endif %}
+        </ul>
+        <img id="menu-btn" src="{%static 'jtalks/images/menu.png' %}" alt="" />
+      </div>
+    </nav>
+
+    <!-- <nav>
+      <img onclick="window.location.href='index.html'" src="#" alt="" /> -->
+      <!-- logo here -->
+      <!-- <div class="navigation">
+        <ul>
+          <i id="menu-close" class="fas fa-times"></i>
           <li>
             <a href="{% url 'jtalks:jtalks-home' %}" class="active">Home</a>
           </li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="{% url 'jtalks:jtalks-about' %}">About</a></li>
           <li><a href="{% url 'forum:post_list' %}">Blog</a></li>
           <li>
             <a href="{% url 'forum:post_new' %}"
               >{% block blog_new %}{% endblock blog_new %}</a
             >
           </li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="{% url 'jtalks:jtalks-contact' %}">Contact</a></li>
           <li>
             <div class="dropdown">
               <button class="dropbtn">Course</button>
@@ -71,7 +107,7 @@
         </ul>
         <img id="menu-btn" src="{%static 'jtalks/images/menu.png' %}" alt="" />
       </div>
-    </nav>
+    </nav> -->
 
     {%block content %} {%endblock content%}
 

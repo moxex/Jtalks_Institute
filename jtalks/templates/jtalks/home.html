@@ -50,9 +50,9 @@
           </button>
       </form>
   <p>All our courses are available in both pdf and video formats</p>
-  <div class="course-box">
+  <div class="course-box course-cards">
     {% for course in courses %}
-    <div class="courses">
+    <div class="courses product-box">
       <img src="{{ course.cover.url }}" alt="{{ courses.name }}" />
       <div class="details">
         <!-- <span>Updated 21/8/21</span> -->
@@ -90,9 +90,9 @@
           </button>
       </form> -->
   <p>We have diffrent kinds of T-shirts and Hoodies</p>
-  <div class="course-box">
+  <div class="course-box products-cards">
     {% for product in products %}
-    <div class="courses">
+    <div class="courses card-box">
       <img src="{{ product.image.url }}" alt="{{ courses.name }}" />
       <div class="details">
         <!-- <span>Updated 21/8/21</span> -->
@@ -109,11 +109,11 @@
   <br>
   
  <div>
-      <button style="text-decoration: none; padding: 13px 45px; background: rgb(240, 236, 245); border: 1px solid #dcd9e6; border-radius: 11px; color: black;" id="load_more" data-total="{{ total_data }}" data-limit="3">
+      <button style="text-decoration: none; padding: 13px 45px; background: rgb(240, 236, 245); border: 1px solid #dcd9e6; border-radius: 11px; color: black;" id="load_more_products" data-total="{{ total_data }}" data-limit="3">
             Load More
           <i class="fas fa-angle-double-right load-more-icon"></i>
       </button>
-        <p class="product_end" style="display: none;">No more courses...</p>
+        <p class="end-products" style="display: none;">No more courses...</p>
   </div>
 </section>
 

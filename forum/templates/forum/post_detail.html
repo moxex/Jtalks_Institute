@@ -5,10 +5,130 @@
 
 {% block blog_style %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/forum.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'jtalks/sytle.css' %}">
 {% endblock blog_style %}
 
 
 {% block content %}
+<section id="blog-container">
+        <div class="blogs postpage">
+            <div class="post">
+                <img src="{{ post.image.url }}" alt="">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.body}}</p>
+
+                {% if posts.has_previous %}
+                    <a class="blue" href="?page={{ posts.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                </span>
+                {% if posts.has_next %}
+                <a class="blue" href="?page={{ posts.next_page_number }}">Read Next ?</a>
+                {% endif %}
+            </div>
+
+            <div class="blog_pages">
+                    <ul>
+                        <span class="step-links">
+                            {% if posts.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+                            {% endif %}
+                            <span class="current">
+                                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                            </span>
+                            {% if posts.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+                            {% endif %}
+                        </span>
+                    </ul>
+                </div>
+        </div>
+</section>
+
+<!-- Start Comment Section -->
+<section id="blog-container">
+<div class="blogs postpage">
+    <!--Add Comment Form -->
+    <div class="post">
+        <!-- <h2>Leave your comment:</h2> -->
+    </div>
+    <div id="contact_form_section">
+        {% if user.is_authenticated %}
+            {% if new_comment %}
+                <h2>Your comment has been added successfully.</h2>
+                <h2>Add another comment</h2>
+                <form class="contact_form" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        {{ comment_form.as_p }}
+                    </div>
+                    <button class="like_post">Add comment</button>
+                </form>
+            {% else %}
+                <h3>Add a new comment</h3>
+                <form class="contact_form" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        {{ comment_form.as_p }}
+                    </div>
+                    <button class="like_post">Add comment</button>
+                </form>
+            {% endif %}
+        {% else %}
+            <button class="like_post">
+                <a href="{% url 'users:login' %}?next={{request.path}}" style="color: purple;">Please Log in to add a comment!</a>
+            </button>
+        {% endif %}
+    </div>
+    <!--End Comment Form -->
+</div>
+</section>
+<!-- End Comment Section -->
+
+<section id="blog-container">
+<div class="blogs postpage">
+    <!-- Display Comment Section -->
+    {% if comments %}
+        <!-- <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong> -->
+        {% with comments.count as total_comments %}
+            <strong>{{ total_comments }} comment{{ total_comments|pluralize }}</strong>
+        {% endwith %}
+        <hr>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <div class="blog_meta">
+                        <ul>
+                            <li>Comment {{ forloop.revcounter }} By <a href="{% url 'users:user_profile' comment.author.id %}">{{ comment.author }}</a></li>
+                            <li> On {{ comment.date }}</li>
+                        </ul>
+                    </div>
+                    <div class="post">
+                        {% if comment.author.gender == 'Male' %}
+                        <p> He wrote:<br>{{ comment.comment|safe }}</p>
+                        {% else %}
+                        <p> She wrote:<br>{{ comment.comment|safe }}</p>
+                        {% endif %}
+                    </div>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <strong class="text-secondary">No comments yet...</strong>
+    {% endif %}
+    <!-- End Display Comment Section -->
+</div>
+</section>
+
+{% endblock content %}
+
+
+
+
+
+
 <div class="blog">
     <div class="container">
         <div class="row">
@@ -18,7 +138,7 @@
                     <div class="blog_post">
                       <hr>
                         <div class="blog_image">
-                            <img src="{{ post.author.photo.url }}">
+                            <img src="{{ post.image.url }}">
                         </div>
                         <div class="blog_title">
                             {{ post.title }}
@@ -45,14 +165,6 @@
                         </div>
                         <div class="blog_text">
                             <p>{{ post.body}}</p>
-                        </div>
-                        <div class="blog_buttons" style="display:flex; flex-direction: row; justify-content: space-between; align-items: center;">
-                            <div class="blog_link"><a href="{% url 'forum:post_new' %}">New Post</a></div>
-                            <div class="blog_link"><a href="{% url 'forum:post_list' %}">All Posts</a></div>
-                            {% if request.user == post.author %}
-                                <div class="blog_link"><a href="{% url 'forum:post_edit' post.pk post.slug %}">Edit</a></div>
-                                <div class="blog_link"><a href="{% url 'forum:post_delete' post.pk post.slug %}">Delete</a></div>
-                            {% endif %}
                         </div>
 
                         <div>
@@ -81,80 +193,8 @@
                 </span>
             </div>
 
-            <!-- Start Comment Section -->
-            <div class="col-lg-6">
-                <!-- Display Comment Section -->
-                {% if comments %}
-                    <!-- <strong class="text-secondary">{{ object.number_of_comments }} Comment{{ object.number_of_comments|pluralize }}</strong> -->
-                    {% with comments.count as total_comments %}
-                        <strong>{{ total_comments }} comment{{ total_comments|pluralize }}</strong>
-                    {% endwith %}
-                    <hr>
-                    <ul>
-                        {% for comment in comments %}
-                            <li>
-                                <div class="blog_meta">
-                                    <ul>
-                                        <li>Comment {{ forloop.revcounter }} By <a href="{% url 'users:user_profile' comment.author.id %}">{{ comment.author }}</a></li>
-                                        <li> On {{ comment.date }}</li>
-                                    </ul>
-                                </div>
-                                <div class="blog_text">
-                                    {% if comment.author.gender == 'Male' %}
-                                    <p> He wrote:<br>{{ comment.comment|safe }}</p>
-                                    {% else %}
-                                    <p> She wrote:<br>{{ comment.comment|safe }}</p>
-                                    {% endif %}
-                                </div>
-                            </li>
-                            <hr>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <strong class="text-secondary">No comments yet...</strong>
-                {% endif %}
-                <!-- End Display Comment Section -->
-            </div>
-
-            <div class="col-lg-6">
-                <!--Add Comment Form -->
-                <div class="blog_title">
-                    <h2>Leave your comment:</h2>
-                </div>
-                <div id="contact_form_section">
-                    {% if user.is_authenticated %}
-                        {% if new_comment %}
-                            <h2>Your comment has been added successfully.</h2>
-                            <h2>Add another comment</h2>
-                            <form class="contact_form" method="POST">
-                                {% csrf_token %}
-                                <div class="row">
-                                    {{ comment_form.as_p }}
-                                </div>
-                                <button class="like_post">Add comment</button>
-                            </form>
-                        {% else %}
-                            <h2>Add a new comment</h2>
-                            <form class="contact_form" method="POST">
-                                {% csrf_token %}
-                                <div class="row">
-                                    {{ comment_form.as_p }}
-                                </div>
-                                <button class="like_post">Add comment</button>
-                            </form>
-                        {% endif %}
-                    {% else %}
-                        <button class="like_post">
-                            <a href="{% url 'users:login' %}?next={{request.path}}" style="color: purple;">Please Log in to add a comment!</a>
-                        </button>
-                    {% endif %}
-                </div>
-                <!--End Comment Form -->
-            </div>
-            <!-- End Comment Section -->
-
+            
 
         </div>
     </div>
 </div>
-{% endblock content %}

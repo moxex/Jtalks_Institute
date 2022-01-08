@@ -1,25 +1,30 @@
 {% extends 'jtalks/base.html' %}
+{% load static %}
+
 
 {%block content%}
 <section id="about-home">
-    <h2>About Us /</h2>
+    <h2>About Us</h2>
 </section>
 
 <section id="about-container">
+    {% for about in abouts %}
     <div class="about-img">
-        <img src="images/a.png" alt="">
+        <img src="{{ about.image_abt.url }}" alt="">
     </div>
 
     <div class="about-text">
-        <h2>Welcome to TechEduca, Enhance your skills with best Online Courses</h2>
-        <p>You can start and finish one of these popular courses in under a day – for free! Check out the list below..
-            Take the course for free</p>
+        <h2>{{ about.title }}</h2>
+        <p>{{ about.about_us }}</p>
+<!-- 
+        <h3>{{ about.title_2 }}</h3>
+        <p>{{ about.achieve }}</p> -->
 
         <div class="about-fe">
             <img src="images/fe1.png" alt="">
             <div class="fe-text">
-                <h5>400+ Courses</h5>
-                <p>You can start and finish one of these popular courses in under our site</p>
+                <h5>{{ about.title_2 }}</h5>
+                <p>{{ about.achieve }}</p>
             </div>
         </div>
         <div class="about-fe">
@@ -31,6 +36,7 @@
         </div>
 
     </div>
+    {% endfor %}
 </section>
 
 <section id="features">
