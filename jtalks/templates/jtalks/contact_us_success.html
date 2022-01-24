@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %}
+{% extends 'jtalks/base.html' %}
 {% load static %}
 {% block title %}Successfully Sent{% endblock title %}
 
@@ -11,21 +11,16 @@
 
 
 {% block content %}
-    <div class="new_page container">
-        <div class="contact_form_section">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="row">
-                            Thank You For Contacting Us. <br>
-                            Your Message Has Been Successfully Received.<br>
-                            We'll Get Back To You Once It Has Been Reviewed.
-                        </div>
-                    </div>
-                </div>
+    <section id="blog-container">
+        <div class="blogs postpage">
+            <div class="post">
+                <p>Thank You For Contacting Us. <br>
+                    Your Message Has Been Successfully Received.<br>
+                    We'll Get Back To You Once It Has Been Reviewed.
+                </p>
             </div>
         </div>
-    </div>
+</section>
 {% endblock content %}
 
 

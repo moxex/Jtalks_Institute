@@ -23,49 +23,6 @@
             <i class="fas fa-star"></i>
             <i class="far fa-star"></i>
           </div>
-          <div class="review">
-            <h6>Reviews - {{ avg_reviews }}/5 <i class="far fa-star text-warning"></i></h6>
-          </div>
-          {% if request.user.is_authenticated %}
-            {% if can_add %}
-              <div>
-                <button type="button" class="btn btn-warning btn-sm float-right hide_btn" data-bs-toggle="modal" data-bs-target="#courseReview">Add Review</button>
-              </div>
-            {% endif %}
-          {% else %}
-          <h6>Please login to add your review</h6>
-          {% endif %}
-          <!-- Course Review Starts-->
-          <!-- Button trigger modal -->
-          <!-- Modal -->
-          {% if request.user.is_authenticated %}
-          <div class="modal fade" id="courseReview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Review This Course</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                
-                <div class="modal-body">
-                  <form id="addForm" method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="course_id" value="{{ course.id }}">
-                    <table class="table table-bordered">
-                      {{ form.as_table }}
-                    </table>
-                    <p class="ajaxRes"></p>
-                    <div class="modal-footer">
-                      <input id="review_submit" type="submit" class="btn btn-primary" value="Add Review">
-                    </div>
-                  </form>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          <!-- Course Review Ends-->
         </div>
         <!-- <p>{{course.description|linebreaks }}</p> -->
       </div>
@@ -109,37 +66,53 @@
       </p>
       <p><i class="far fa-check-circle"></i>Object-oriented programming</p>
     </div>
-  </div>
-  
-  <div>
-    <div class="enroll">
-      <h3>This course includes:</h3>
-      <p><i class="far fa-video"></i>52 hours video</p>
-      <p><i class="far fa-newspaper"></i>75 articles</p>
-      <p><i class="far fa-cloud-download"></i>Downloadable resources</p>
-      <p><i class="far fa-infinity"></i>Full lifetime access</p>
-      <p><i class="fas fa-mobile-alt"></i>Access on mobile and TV</p>
-      <p><i class="far fa-paperclip"></i>Assignments</p>
-      <p><i class="far fa-trophy-alt"></i>Certificate of completion</p>
-      {% if request.user.is_authenticated %}
-        <div class="enroll-btn">
-          <a id="enroll_btn" class="blue" href="#" data-course-id="{{ course.id }}" data-user="{{ request.user.username }}" data-user-id="{{ request.user.id }}" data-price="{{course.price}}">
-            Enroll Course
-            <i class="fas fa-angle-double-right load-more-icon"></i>
-          </a>
-          <!--
-          <div>
-            <button id="enroll_btn" type="button" class="blue" data-bs-toggle="modal" data-bs-target="#enroll_course">Enroll</button>
+
+    <!-- Users Review Starts -->
+    <hr>
+      <div class="review">
+            <h6>Reviews - {{ avg_reviews }}/5 <i class="far fa-star text-warning"></i></h6>
           </div>
-          -->
-        </div>
-      {% else %}
-        <div class="enroll-btn">
-          <a class="blue" href="{% url 'users:login' %}?next={{request.path}}">Login To Enroll For this Course</a>
-        </div>
-      {% endif %}
-    </div>
-    
+          {% if request.user.is_authenticated %}
+            {% if can_add %}
+              <div>
+                <button type="button" class="btn btn-warning btn-sm float-right hide_btn" data-bs-toggle="modal" data-bs-target="#courseReview">Add Review</button>
+              </div>
+            {% endif %}
+          {% else %}
+          <h6>Please login to add your review</h6>
+          {% endif %}
+          <!-- Course Review Starts-->
+          <!-- Button trigger modal -->
+          <!-- Modal -->
+          {% if request.user.is_authenticated %}
+          <div class="modal fade" id="courseReview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Review This Course</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body">
+                  <form id="addForm" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <table class="table table-bordered">
+                      {{ form.as_table }}
+                    </table>
+                    <p class="ajaxRes"></p>
+                    <div class="modal-footer">
+                      <input id="review_submit" type="submit" class="btn btn-primary" value="Add Review">
+                    </div>
+                  </form>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <!-- Course Review Ends-->
+    <hr>
     <h3>User Reviews - {{ total_data }}</h3>
   <div class="review-list">
     {% for review in all_reviews %}
@@ -187,7 +160,7 @@
       <small>by {{ review.user.first_name }} {{ review.user.last_name }}</small>
     </div>
     {% endfor %}
-  </div>
+
     <div>
       <button class="enroll-btn" id="load_more_review" data-total="{{ total_data }}" data-limit="3" data-course-id="{{ course.id }}">
         <a class="blue">
@@ -198,6 +171,37 @@
       <p class="review_end" style="display: none;">No more reviews...</p>
     </div>
   </div>
+  </div>
+  </div>
+  
+  <div>
+    <div class="enroll">
+      <h3>This course includes:</h3>
+      <p><i class="far fa-video"></i>52 hours video</p>
+      <p><i class="far fa-newspaper"></i>75 articles</p>
+      <p><i class="far fa-cloud-download"></i>Downloadable resources</p>
+      <p><i class="far fa-infinity"></i>Full lifetime access</p>
+      <p><i class="fas fa-mobile-alt"></i>Access on mobile and TV</p>
+      <p><i class="far fa-paperclip"></i>Assignments</p>
+      <p><i class="far fa-trophy-alt"></i>Certificate of completion</p>
+      {% if request.user.is_authenticated %}
+        <div class="enroll-btn">
+          <a id="enroll_btn" class="blue" href="#" data-course-id="{{ course.id }}" data-user="{{ request.user.username }}" data-user-id="{{ request.user.id }}" data-price="{{course.price}}">
+            Enroll Course
+            <i class="fas fa-angle-double-right load-more-icon"></i>
+          </a>
+          <!--
+          <div>
+            <button id="enroll_btn" type="button" class="blue" data-bs-toggle="modal" data-bs-target="#enroll_course">Enroll</button>
+          </div>
+          -->
+        </div>
+      {% else %}
+        <div class="enroll-btn">
+          <a class="blue" href="{% url 'users:login' %}?next={{request.path}}">Login To Enroll</a>
+        </div>
+      {% endif %}
+    </div>
 </section>
 {%endblock content%}
 {% block js %}

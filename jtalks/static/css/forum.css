@@ -172,13 +172,13 @@ ul {
   color: black;
   margin-right: 4px;
 }
-
+/* 
 .blog_meta ul li a {
   text-decoration: none;
   font-size: 11px;
   font-weight: 500;
-  color: purple;
-}
+  color: black;
+} */
 
 *,
 ::after,
@@ -201,7 +201,7 @@ ul {
 }
 
 a:hover {
-  color: #fdc93b;
+  color: #c01f98;
   transition: 0.3s ease;
 }
 
@@ -262,9 +262,9 @@ p:last-of-type {
 button,
 input:hover{
   overflow: visible;
-  color: #fff;
+  /* color: #fff;
   background: purple;
-  transition: 0.3s ease;
+  transition: 0.3s ease; */
 }
 
 .sidebar_title {

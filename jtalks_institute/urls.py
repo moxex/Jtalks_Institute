@@ -16,29 +16,24 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-# from courses.views import CourseListView
 from users.views import user_signup
-from django.contrib.sitemaps.views import sitemap
-from blog.sitemaps import PostSitemap
+from django.contrib.auth import views as auth_views
 
-sitemaps = {
-'posts': PostSitemap,
-}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('jtalks.urls', namespace='jtalks')),
     path('forum/', include('forum.urls', namespace='forum')),
-    # path("categories/", CourseListView.as_view(), name='category'),
-    # path("course/", CourseListView.as_view(), name='courses'),
-    # path("c/", include("courses.urls", namespace="courses")),
     path('signup/', user_signup, name='signup'),
-    path('blog/', include('blog.urls', namespace='blog')),
     path('course/', include('courses.urls', namespace='courses')),
     path('product/', include('products.urls', namespace='product')),
     path('users/', include('users.urls', namespace='users')),
     path('cart/', include('cart.urls', namespace='cart')),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name='users/password_reset.html'), name='password_reset'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
+    path('reset/complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
+   
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

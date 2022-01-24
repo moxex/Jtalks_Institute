@@ -16,34 +16,26 @@
                 <img src="{{ post.image.url }}" alt="">
                 <h3>{{ post.title }}</h3>
                 <p>{{ post.body}}</p>
+            </div>
+        </div>
+</section>
 
+<section id="blog-container">
+    <div class="blog_pages">
+        <ul>
+            <span class="step-links">
                 {% if posts.has_previous %}
-                    <a class="blue" href="?page={{ posts.previous_page_number }}">Previous</a>
+                    <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
                 {% endif %}
                 <span class="current">
                     Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
                 </span>
                 {% if posts.has_next %}
-                <a class="blue" href="?page={{ posts.next_page_number }}">Read Next ?</a>
+                    <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
                 {% endif %}
-            </div>
-
-            <div class="blog_pages">
-                    <ul>
-                        <span class="step-links">
-                            {% if posts.has_previous %}
-                                <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
-                            {% endif %}
-                            <span class="current">
-                                Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-                            </span>
-                            {% if posts.has_next %}
-                                <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
-                            {% endif %}
-                        </span>
-                    </ul>
-                </div>
-        </div>
+            </span>
+        </ul>
+    </div>
 </section>
 
 <!-- Start Comment Section -->
