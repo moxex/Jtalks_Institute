@@ -1,41 +1,202 @@
-{% extends 'courses/base.html' %} {%load static%}
-
-
+{% extends 'jtalks/base.html' %} {%load static%}
 
 {%block content %}
-<section id="about-home">
-  <h2>Courses</h2>
+<!-- header section ends -->
+<section class="heading-link">
+   <h3>our courses</h3>
+   <p> <a href="{% url 'jtalks:jtalks-home' %}">home</a> / courses </p>
 </section>
 
-<!-- courses section starts  -->
-<section id="course">
-  <h1>{% if category %}{{ category.name }}{% else %} Our Amazing Courses {% endif %}</h1>
-  <p>Replenish man have thing gathering lights yielding shall you</p>
-  
-  <div class="course-box">
-    
+ <!-- Our Featured coureses -->
+<section class="featured" id="featured">
+
+    <h1 class="heading"><span>featured</span> courses</h1>
+
+    <div class="box-container">
         {% for course in courses %}
-        <div onclick="window.location.href='{{ course.get_absoule.url}}';" class="courses">
-            <img 
-            src="{% if course.cover %}{{ course.cover.url }} {% else %} {% static 'images/c3.jpg' %}{% endif %}" 
-            alt="{{ courses.name }}" />
-        <div class="details">
-            <span>{{course.updated}}</span>
-            <a href="{{ course.get_absolute_url }}"><h6>{{course.name}}</h6></a>
-            
-            <div class="star">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="far fa-star"></i>
-            <span>(23)</span>
+        <div class="box">
+            <div class="image-container">
+                <img src="{{ course.cover.url }}" alt="">
+            </div>
+            <div class="content">
+                <div class="price">
+                    <h3>${{ course.price }}</h3>
+                </div>
+                <div class="location">
+                    <h3>{{ course.name }}</h3>
+                    <p>{{course.overview|linebreaks }}</p>
+                </div>
+                <div class="details">
+                    <h3>Instructor: {{course.tutor}}</h3>
+                </div>
+                <div class="buttons">
+                    {% if request.user.is_authenticated %}
+                    <a id="enroll_btn" href="#" data-course-id="{{ course.id }}" data-user="{{ request.user.username }}" data-user-id="{{ request.user.id }}" data-price="{{course.price}}" class="btn-btn">Buy</a>
+
+                    {% else %}
+                    <a href="{% url 'users:login' %}?next={{request.path}}" class="btn-btn">Login to Buy</a>
+                    {% endif %}
+                    <a href="/course/{{ course.id }}/{{ course.slug }}/" class="btn-btn">Read More</a>
+                </div>
             </div>
         </div>
-        <div class="cost">${{course.price_display}}</div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+
 </section>
 
-{%endblock content%}
+<!-- <section class="courses">
 
+   <h1 class="heading"> our famous courses </h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-1.jpg' %}" alt="">
+            <h3>development</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-2.jpg' %}" alt="">
+            <h3>engineering</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-3.jpg' %}" alt="">
+            <h3>mathemetics</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-4.jpg' %}" alt="">
+            <h3>doctor</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-5.jpg' %}" alt="">
+            <h3>science</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-6.jpg' %}" alt="">
+            <h3>business</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box hide">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-7.jpg' %}" alt="">
+            <h3>teaching</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box hide">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-8.jpg' %}" alt="">
+            <h3>designing</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+      <div class="box hide">
+         <div class="image">
+            <img src="{%static 'jtalks/images/course-2-9.jpg' %}" alt="">
+            <h3>dancing</h3>
+         </div>
+         <div class="content">
+            <h3>choose what's best for you!</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, odit!</p>
+            <a href="#" class="btn">read more</a>
+            <div class="icons">
+               <span> <i class="fas fa-book"></i> 12 modules </span>
+               <span> <i class="fas fa-clock"></i> 6 hours </span>
+            </div>
+         </div>
+      </div>
+
+   </div>
+
+   <div class="load-more"> <div class="btn">load more</div> </div>
+
+</section> -->
+{%endblock content%}

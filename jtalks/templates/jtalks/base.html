@@ -1,182 +1,207 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jtalks</title>
-    <link
-      rel="stylesheet"
-      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jtalks-Institute</title>
 
-    <!-- custom css file link  -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{%static 'jtalks/style.css'%}" />
-    <link rel="stylesheet" href="{%static 'jtalks/new_style.css'%}" />
+
+    <!-- custom css link -->
+    <link rel="stylesheet" href="{%static 'jtalks/style.css' %}">
+    <link rel="stylesheet" href="{%static 'jtalks/media_queries.css' %}">
+    <link rel="stylesheet" href="{%static 'jtalks/animation.css' %}">
+    <link rel="stylesheet" href="{%static 'jtalks/variables.css' %}">
+    <link rel="stylesheet" href="{%static 'jtalks/reg.css' %}">
+    <link rel="stylesheet" href="{%static 'jtalks/dashboard.css' %}">
+
+    <!-- Font -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800;900&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+    
     {% block blog_style %} {% endblock blog_style %}
-  </head>
 
-  <body>
+</head>
+<body>
 
-    <nav>
-      <img onclick="window.location.href='index.html'" src="#" alt="" />
-      <!-- logo here -->
-      <div class="navigation">
-        <ul>
-          <i id="menu-close" class="fas fa-times"></i>
-          <li><a href="{% url 'jtalks:jtalks-home' %}" class="active">Home</a></li>
-          <li><a href="{% url 'jtalks:jtalks-about' %}">About</a></li>
-          <li><a href="{% url 'forum:post_list' %}">Blog</a></li>
-          <li><a href="{% url 'jtalks:jtalks-contact' %}">Contact</a></li>
+    <!-- main container -->
+    <div class="container">
 
-          {% if request.user.is_authenticated %}
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">Personal</button>
-              <div class="dropdown-content">
-                <a href="{% url 'users:user_profile' request.user.id %}"
-                  >Your Profile</a
-                >
-                <a href="{% url 'courses:user_library' request.user.username %}"
-                  >Your Library</a
-                >
-              </div>
+        <!-- header -->
+
+        <header>
+            <nav class="navbar">
+
+                <div class="navbar-brand">
+                    <a href="#" class="logo"><span>Jtalks</span></a>
+                    <!-- <img src="images/logo.png" alt="Jtalks-Institute logo"> -->
+                </div>
+
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a href="{% url 'jtalks:jtalks-home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#courses">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'forum:post_list' %}">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact">Contact</a>
+                    </li>
+
+                    {% if request.user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a href="{% url 'courses:user_library' request.user.username %}">My Dashboard</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'users:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'users:signup' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                <button class="btn btn-primary">
+                    <p class="btn-text">Try for free</p>
+                    <span class="square"></span>
+                </button>
+
+                <button class="nav-toggle-btn">
+                    <span class="one"></span>
+                    <span class="two"></span>
+                    <span class="three"></span>
+                </button>
+
+            </nav>
+        </header>
+
+        {%block content %} {%endblock content%}
+
+        <!-- FOOTER SECTION -->
+        <footer>
+
+            <div class="footer-grid">
+
+                <div class="grid-item">
+
+                    <div class="footer-logo navbar-brand">
+                         <a href="#" class="logo"><span>Jtalks</span></a>
+                    </div>
+
+                    <p class="footer-text">
+                        Lorem ipsum, dolor sit amet consectetur 
+                        adipisicing elit. Eveniet
+                    </p>
+
+                    <div class="social-link">
+                        <a href="#">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="logo-instagram"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="logo-twitter"></ion-icon>
+                        </a>
+                        <a href="#">
+                            <ion-icon name="logo-youtube"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <ul class="grid-item">
+
+                    <h4 class="item-heading">Our Link</h4>
+
+                    <li class="list-item">
+                        <a href="home">Home</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#courses">Courses</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#blog">Blog</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#about">About</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+
+                <ul class="grid-item">
+
+                    <h4 class="item-heading">Other Link</h4>
+
+                    <li class="list-item">
+                        <a href="#">Instructor</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#">FAQ</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#">Event</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#">Privacy Policy</a>
+                    </li>
+
+                    <li class="list-item">
+                        <a href="#">Terms & Condition</a>
+                    </li>
+                </ul>
+
+                <div class="grid-item">
+                    <h4 class="item-heading">Subcribe Now</h4>
+
+                    <div class="wrapper">
+                        <input type="text" name="subscribe" placeholder="Email Address">
+                        <button class="send-btn">
+                            <ion-icon name="paper-plane"></ion-icon>
+                        </button>
+                    </div>
+                </div>
             </div>
-          </li>
-           <li><a class="blue" href="{% url 'users:logout' %}">Logout</a></li>
-          {% else %}
-          <li><a class="blue" href="{% url 'users:login' %}">Login</a></li>
-          <li><a class="blue" href="{% url 'users:signup' %}">Register</a></li>
-          {% endif %}
-        </ul>
-        <img id="menu-btn" src="{%static 'jtalks/images/menu.png' %}" alt="" />
-      </div>
-    </nav>
 
-    <!-- <nav>
-      <img onclick="window.location.href='index.html'" src="#" alt="" /> -->
-      <!-- logo here -->
-      <!-- <div class="navigation">
-        <ul>
-          <i id="menu-close" class="fas fa-times"></i>
-          <li>
-            <a href="{% url 'jtalks:jtalks-home' %}" class="active">Home</a>
-          </li>
-          <li><a href="{% url 'jtalks:jtalks-about' %}">About</a></li>
-          <li><a href="{% url 'forum:post_list' %}">Blog</a></li>
-          <li>
-            <a href="{% url 'forum:post_new' %}"
-              >{% block blog_new %}{% endblock blog_new %}</a
-            >
-          </li>
-          <li><a href="{% url 'jtalks:jtalks-contact' %}">Contact</a></li>
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">Course</button>
-              <div class="dropdown-content">
-                <a href="#">Courses (PDF)</a>
-                <a href="#">Courses (Video)</a>
-                <a href="#products_list">Products (hoodies and t-shirt)</a>
-              </div>
-            </div>
-          </li>
-          {% if request.user.is_authenticated %}
-          <li>
-            <div class="dropdown">
-              <button class="dropbtn">Personal</button>
-              <div class="dropdown-content">
-                <a href="{% url 'users:user_profile' request.user.id %}"
-                  >Your Profile</a
-                >
-                <a href="{% url 'courses:user_library' request.user.username %}"
-                  >Your Library</a
-                >
-              </div>
-            </div>
-          </li>
-          <li><a class="blue" href="{% url 'users:logout' %}">Logout</a></li>
-          {% else %}
-          <li><a class="blue" href="{% url 'users:login' %}">Login</a></li>
-          <li><a class="blue" href="{% url 'users:signup' %}">Register</a></li>
-          {% endif %}
-        </ul>
-        <img id="menu-btn" src="{%static 'jtalks/images/menu.png' %}" alt="" />
-      </div>
-    </nav> -->
+            <p class="copyright">
+               Copyright &copy; 2022 Jtalks Institute.</a> All right reserved.
+            </p>
+        </footer>
+    </div>
 
-    {%block content %} {%endblock content%}
+{% block js %}
+    <!-- custom js -->
+    <script src="{%static 'jtalks/script.js' %}"></script>
 
-    <!-- Footer starts here -->
-    <footer>
-      <div class="footer-col">
-        <h3>Top Products</h3>
-        <ul>
-          <li>Manage Reputation</li>
-          <li>Power Tools</li>
-          <li>Managed Website</li>
-          <li>Marketing Service</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>Quick Links</h3>
-        <li>Jobs</li>
-        <li>Brand Assets</li>
-        <li>Investor Relations</li>
-        <li>Terms of Service</li>
-      </div>
-      <div class="footer-col">
-        <h3>Features</h3>
-        <li>Manage Reputation</li>
-        <li>Power Tools</li>
-        <li>Managed Website</li>
-        <li>Marketing Service</li>
-      </div>
-      <div class="footer-col">
-        <h3>Resources</h3>
-        <li>Guides</li>
-        <li>Research</li>
-        <li>Experts</li>
-        <li>Marketing Service</li>
-      </div>
-      <div class="footer-col">
-        <h3>Newsletter</h3>
-        <p>You can trust us. we only send promo offers,</p>
-        <div class="subscribe">
-          <input type="text" name="" placeholder="Your Email Address" id="" />
-          <a class="yellow" href="#">SUBSCRIBE</a>
-        </div>
-      </div>
-      <div class="copyright">
-        <p>
-          Copyright ©2021 All rights reserved | This template is made by
-          <a href="#">MoxTech</a>
-        </p>
-        <div class="pro-link">
-          <i class="fab fa-facebook-f"></i>
-          <i class="fab fa-instagram"></i>
-          <i class="fab fa-linkedin-in"></i>
-        </div>
-      </div>
-    </footer>
-    <!-- footer end here -->
-    <!-- jQuery js -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Boostrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
-    {% block js %} {% endblock js %}
-    <script>
-      $("#menu-btn").click(function () {
-        $("nav .navigation ul").addClass("active");
-      });
-      $("#menu-close").click(function () {
-        $("nav .navigation ul").removeClass("active");
-      });
-    </script>
-  </body>
+    <!-- BootstrapJS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- ionicon link -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+{% endblock js %}
+</body>
 </html>

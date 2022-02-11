@@ -1,218 +1,35 @@
 {% extends 'jtalks/base.html' %} {% load static %} {% block title %}Sign Up
 Form{% endblock title %} {% block content %}
-<section class="vh-105">
-  <div class="container py-5 h-110">
-    <div class="row justify-content-center align-items-center h-110">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <div
-          class="card shadow-2-strong card-registration"
-          style="border-radius: 15px"
-        >
-          <div class="card-body p-4 p-md-5">
-            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5">Sign Up Form</h1>
-            <div class="message">
-              {% if messages %} {% for message in messages %}
-              <h3 style="text-align: center">{{ message }}</h3>
-              {% endfor %} {% endif %}
-            </div>
-            <form method="POST" name="signupForm" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="row">
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <label class="form-label" for="first_name"
-                      >First Name:</label
-                    >
-                    <input
-                      type="text"
-                      name="first_name"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <label class="form-label" for="last_name">Last Name:</label>
-                    <input
-                      type="text"
-                      name="last_name"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-6 mb-4 d-flex align-items-center">
-                  <div class="form-outline datepicker w-100">
-                    <label for="username" class="form-label">Username:</label>
-                    <input
-                      type="text"
-                      name="username"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                  <h6 class="mb-2 pb-1">Gender:</h6>
+<div class="form-container">
 
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="gender"
-                      value="Female"
-                      checked
-                    />
-                    <label class="form-check-label" for="gender">Female</label>
-                  </div>
-
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="gender"
-                      value="Male"
-                    />
-                    <label class="form-check-label" for="gender">Male</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                    <label class="form-label" for="email">Email:</label>
-                    <input
-                      type="email"
-                      name="email"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                    <label class="form-label" for="phone_number"
-                      >Phone Number:</label
-                    >
-                    <input
-                      type="text"
-                      name="phone_number"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <label class="form-label" for="location">Location:</label>
-                    <input
-                      type="text"
-                      name="location"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                  <div class="form-outline">
-                    <label class="form-label" for="referral">Referral:</label>
-                    <input type="text" name="referral" class="form-control
-                    form-control-lg" placeholder="Enter referral name, leave
-                    blank if none""/>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12 mb-4 pb-2">
-                  <div class="form-outline">
-                    <label class="form-label" for="photo">Photo:</label>
-                    <input
-                      type="file"
-                      name="photo"
-                      class="form-control form-control-lg"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                    <label class="form-label" for="password">Password:</label>
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                    <input type="checkbox" onclick="showPassword()" /> Show
-                    Password
-                  </div>
-                </div>
-                <div class="col-md-6 mb-4 pb-2">
-                  <div class="form-outline">
-                    <label class="form-label" for="password2"
-                      >Confirm Password:</label
-                    >
-                    <input
-                      type="password"
-                      name="password2"
-                      id="password2"
-                      class="form-control form-control-lg"
-                      required
-                    />
-                    <input type="checkbox" onclick="showPassword2()" /> Show
-                    Password
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-12">
-                  <h6 class="mb-2 pb-1">How did you hear about us::</h6>
-                  <select name="about_us">
+   <form method="POST" name="signupForm" enctype="multipart/form-data">
+     {% csrf_token %}
+      <h3>Sign Up Form</h3>
+            {% if messages %} {% for message in messages %}
+            <span class="error-msg">{{ message }}</span>
+            {% endfor %} {% endif %}
+      <input type="text" name="first_name" required placeholder="Enter Your First Name">
+      <input type="text" name="last_name" required placeholder="Enter Your Last Name">
+      <input type="text" name="username" required placeholder="Enter Your Your Username">
+      <input type="email" name="email" required placeholder="Enter Your Email">
+      <input type="password" name="password" required placeholder="Enter Your Password" id="password">
+      <input type="password" name="password2" required placeholder="Confirm Your Password">
+      <input type="file" name="photo">
+      <select name="about_us">
+                    <option value="">How did you hear about us</option>
                     <option value="WhatsApp">WhatsApp</option>
                     <option value="Facebook">Facebook</option>
                     <option value="Twitter">Twitter</option>
                     <option value="Instagram">Instagram</option>
                     <option value="YouTube">YouTube</option>
                     <option value="Blog">Blog</option>
-                  </select>
-                  <!-- <label class="form-label select-label">Choose option</label> -->
-                </div>
-              </div>
+      <input type="submit" name="submit" value="register now" class="form-btn">
+      <p>already have an account? <a href="login_form.php">login now</a></p>
+   </form>
 
-              <div class="mt-4 pt-2">
-                <input
-                  class="btn btn-secondary btn-lg"
-                  type="submit"
-                  value="Register"
-                />
-              </div>
+</div>
 
-              <p class="text-center text-muted mt-5 mb-0">
-                Already have an account?
-                <a href="{% url 'users:login' %}" class="fw-bold text-body"
-                  >Login here</a
-                >
-              </p>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 {% endblock %} {% block js %}
 <script>
   function showPassword() {
