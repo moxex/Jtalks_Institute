@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
 }
@@ -17,16 +17,16 @@ div {
   padding-top: 30px;
   padding-bottom: 30px;
   background: #fff;
-}
+} */
 
-.container {
+/* .container {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   padding: 8vw;
-}
+} */
 
-.row {
+/* .row {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
@@ -58,7 +58,7 @@ div {
 .blog_title a:hover {
   color: #070500;
   transition: 0.3s ease;
-}
+} */
 
 .blog_meta {
   margin-top: 1px;

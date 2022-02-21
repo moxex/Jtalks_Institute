@@ -44,7 +44,68 @@
         top: 270px;
         right: 0;
     }
+
+    .blog-post {
+         flex-direction: column;
+     }
+
 }
+
+
+/* Blog Details Page */
+@media (max-width: 475px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  /* Blog Section */
+  #blog-container {
+    flex-direction: column;
+  }
+  #blog-container .blogs {
+    width: 100%;
+  }
+  #blog-container .cate {
+    width: 100%;
+  }
+  #blog-container .postpage {
+    width: 100%;
+    margin-top: 70px;
+  }
+
+  /* Course_inner */
+  #course-inner .overview .course-head h2 {
+    font-size: 22px;
+  }
+  #course-inner .overview .course-head span {
+    font-size: 22px;
+  }
+  #course-inner .enroll {
+    width: 100%;
+  }
+
+  /* contact */
+  #contact {
+    flex-direction: column;
+    justify-content: center;
+  }
+  #contact .form {
+    width: 100%;
+    padding: 30px 20px;
+  }
+  #contact .form .form-row {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+  }
+  #contact .form .form-row input {
+    width: 100%;
+  }
+  #contact .getin {
+    width: 100%;
+    margin-bottom: 60px;
+  }
+}
+
 
 @media (min-width: 575px) {
     
@@ -90,7 +151,21 @@
     /* CONTACT */
     .contact h2 { font-size: 37px;}
 
+     /* Blog Details */
+
+     .blog-post {
+         flex-direction: column;
+     }
+
+    .blog-post.blog-details {
+        width: 100%;
+        margin-top: 70px;
+    }
+
+
+    
 }
+
 
 @media (min-width: 767px) {
     /* variables */
@@ -116,8 +191,73 @@
 
     /* CONTACT */
     .contact-card { padding: 40px 60px;}
+
+    /* Blog Details */
+    .blog-post {
+       padding: 9vw 5vw;
+    }
+
+    .blog-details {
+        width: 100%;
+        margin-top: 30px
+    }
+
+    .blog-post .blog-details img {
+        width: 100%;
+        height: 50vh;
+        object-fit: cover;
+    }
+
 }
 
+/* Blog Post Details */
+@media (max-width: 769px) {
+
+  /* Blog Section */
+  #blog-container {
+    padding: 8vw 4vw;
+  }
+  /* Post Section */
+  #blog-container .postpage {
+    width: 100%;
+    margin-top: 30px;
+  }
+  #blog-container .postpage img {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+  }
+
+  /* Course Inner */
+  #course-inner {
+    padding: 8vw 4vw;
+    flex-direction: column;
+  }
+  #course-inner .overview {
+    width: 100%;
+    padding-bottom: 30px;
+  }
+  #course-inner .overview .course-img {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Contact */
+  #contact {
+    padding: 8vw 4vw;
+  }
+  #contact .getin {
+    width: 250px;
+  }
+ 
+}
+
+/* Sign Up & Login form */
+@media screen and (max-width: 768px) {
+  .fh5co-form {
+    padding: 15px;
+  }
+}
 
 
 @media (min-width: 850px) {
@@ -293,5 +433,3 @@
     /* CONTACT */
     .contact-card h2 { font-size: 45px;}
 }
-
-

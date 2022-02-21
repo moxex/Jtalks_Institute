@@ -1,9 +1,8 @@
 {% extends 'jtalks/base.html' %}
 {%load static%}
 
+
 {% block content %}
-
-
  <!-- SIDEBAR -->
 <section id="sidebar">
   <a href="#" class="brand">
@@ -165,14 +164,8 @@
     </main>
     <!-- MAIN -->
 </section>
-  </div>
-        <!-- CONTENT -->
 
-
-
-
-
-
+{% endblock %}
 
 
 
@@ -246,8 +239,9 @@
       </video>
   </div>
 </section> -->
-{% endblock %}
+
 
 {% block js %}
+  <script src="{%static 'jtalks/script.js' %}"></script>
   <script src="{% static 'jtalks/home.js' %}"></script>
 {% endblock js %}

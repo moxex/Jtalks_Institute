@@ -1,24 +1,50 @@
 {% extends 'jtalks/base.html' %}
 {% load static %}
-{% block title %}Jtalk Blog | Post Details{% endblock title %}
+{% block title %}Jtalk Blog | {{ post.title }} {% endblock title %}
 {% block blog_new %}Add Post{% endblock blog_new %}
 
 {% block blog_style %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/forum.css' %}" />
+  
   <link rel="stylesheet" type="text/css" href="{% static 'jtalks/sytle.css' %}">
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/forum.css' %}" /> -->
 {% endblock blog_style %}
 
 
 {% block content %}
+
 <section id="blog-container">
-        <div class="blogs postpage">
-            <div class="post">
-                <img src="{{ post.image.url }}" alt="">
-                <h3>{{ post.title }}</h3>
-                <p>{{ post.body}}</p>
-            </div>
+    <div class="blogs postpage">
+        <div class="post">
+            <img src="{{ post.image.url }}" alt="">
+            <h3>{{ post.title }}</h3>
+            <div class="blog_meta">
+                <ul>
+                    <li>By <a href="{% url 'users:user_profile' post.author.id %}">{{ post.author }}</a></li>
+                    {% for category in post.categories.all %}
+                    <li>In
+                        <a href="{% url 'forum:blog_category' category.name %}">
+                            {{ category.name }}
+                        </a></li>
+                    {% endfor %}
+                    <li> On {{ post.date }}</li>
+                </ul>
+                </div>
+            <p>{{ post.body|linebreaks }}</p>
+            <a class="blue" href="page={{ posts.next_page_number }}">Read Next ?</a>
         </div>
+
+    </div>
+
 </section>
+
+{% endblock content %}
+
+
+
+
+
+
+
 
 <section id="blog-container">
     <div class="blog_pages">
@@ -114,7 +140,7 @@
 </div>
 </section>
 
-{% endblock content %}
+
 
 
 
