@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Jtalks-Institutes is an online platform that believe in impact before profit" />
-    {% block title %}Jtalks Institute {% endblock title %}
+    
+    <title>
+        {% block title %}Jtalks Institute {% endblock title %}
+    </title>
 
     <!-- custom css link -->
     <link rel="stylesheet" href="{%static 'jtalks/style.css' %}">
@@ -73,7 +76,7 @@
                     {% if request.user.is_authenticated %}
 
                     <li class="nav-item">
-                        <a href="{% url 'courses:user_library' request.user.username %}">My Dashboard</a>
+                        <a href="{% url 'users:logout' %}">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
