@@ -4,862 +4,194 @@
 
 {%block content %}
 <main>
-    <!-- Home section -->
-    <section class="home" id="home">
-        <div class="deco-shape shape-1">
-            <img src="{%static 'jtalks/images/shape-1.png' %}" alt="art shape" width="70">
+        <div class="intro-wrapper">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-5 col-xl-4 ms-auto mt-5">
+                <h1>Let's start something big <span class="yellow-stroke">together</span></h1>
+                <label for="">Get your update about <span>courses</span></label>
+                <div class="news-form">
+                  <input type="email" name="email" placeholder="Enter your email" id="">
+                  <button class="main-btn" type="submit">Send <img style="width: 15px; margin-left: 15px;" src="{%static 'jtalks/images/icon/arrow-right-icon-black.svg' %}" alt=""></button>
+                </div>
+              </div>
+              <div class="col-12 d-md-flex justify-content-between mb-5">
+                <div class="light-box first">
+                    <h4>Cryptocurency<br>Lesson</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing </p>
+                    <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+                <div  class="light-box second">
+                    <h4>Brand<br>Identity</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing </p>
+                    <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+                <div  class="light-box third">
+                    <h4>Email<br>Marketing</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing </p>
+                    <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="deco-shape shape-2">
-            <img src="{%static 'jtalks/images/shape-2.png' %}" alt="art shape" width="55">
+        <div class="container">
+          <!-- Clients -->
+          <!-- <div class="clients text-center">
+            <p class="text-muted text-uppercase pb-4">Some of our trusted clients</p>
+            <div class="client-logo">
+              <div><img src="img/icon/go-sm-logo.svg" alt=""></div>
+              <div><img src="img/icon/social-road-logo.svg" alt=""></div>
+              <div><img src="img/icon/firmbee-logo.svg" alt=""></div>
+              <div><img src="img/icon/create-paper.svg" alt=""></div>
+              <div><img src="img/icon/point-design-logo.svg" alt=""></div>
+            </div>
+          </div> -->
+          <!-- See our projects -->
+          <div class="see-our-projects">
+            <h1>See our <span class="yellow-stroke">courses</span> </h1>
+            <div class="projects-wrapper">
+              <div class="project">
+                <div class="project-logo">
+                  <img src="{%static 'jtalks/images/icon/marketing.svg' %}" alt="">
+                </div>
+                <p class="project-title">Digital<br>
+                  Currency</p>
+                  <p class="project-description">Lorem Ipsum is simply dummy text of the printing </p>
+              </div>
+              <div class="project">
+                <div class="project-logo">
+                  <img src="{%static 'jtalks/images/icon/identity.svg' %}" alt="">
+                </div>
+                <p class="project-title">Copy<br>Writing</p>
+                  <p class="project-description">Lorem Ipsum is simply dummy text of the printing </p>
+              </div>
+              <div class="project">
+                <div class="project-logo">
+                  <img src="{%static 'jtalks/images/icon/email.svg' %}" alt="">
+                </div>
+                <p class="project-title">Email<br>Marketing</p>
+                  <p class="project-description">Lorem Ipsum is simply dummy text of the printing </p>
+              </div>
+            </div>
+            <a href="" class="main-btn">View All <strong>Courses</strong></a>
+          </div>
+
+          <!-- What people say -->
+          <div class="testimonials">
+            <h1>What people say <span class="yellow-stroke">About Us</span> </h1>
+            <div id="carouseltestimonials" class="carousel slide w-100" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="testimonial">
+                    <div class="photo">
+                      <img src="{%static 'jtalks/images/person-1.jpg' %}" alt="">
+                    </div>
+                    <div class="testimonial-text">
+                      <div class="quote-test"><img src="{%static 'jtalks/images/icon/quaote.png' %}" alt=""></div>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+                        a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                      <p class="name">-  John Bag</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="testimonial">
+                    <div class="photo">
+                      <img src="{%static 'jtalks/images/person-2.jpg' %}"" alt="">
+                    </div>
+                    <div class="testimonial-text">
+                      <div class="quote-test"><img src="{%static 'jtalks/images/icon/quaote.png' %}" alt=""></div>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+                        a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                      <p class="name">-  John Bag</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="testimonial">
+                    <div class="photo">
+                      <img src="{%static 'jtalks/images/person-3.jpg' %}"" alt="">
+                    </div>
+                    <div class="testimonial-text">
+                      <div class="quote-test"><img src="{%static 'jtalks/images/icon/quaote.png' %}" alt=""></div>
+                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took
+                        a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                      <p class="name">-  John Bag</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="controllers">
+                  <button  type="button" data-bs-target="#carouseltestimonials" data-bs-slide="prev">
+                    <img class="black" src="{%static 'jtalks/images/icon/arrow-left-icon-black.svg' %}" alt="" >
+                    <img class="yellow" src="{%static 'jtalks/images/icon/arrow-left-icon.svg' %}" alt="">
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button  type="button" data-bs-target="#carouseltestimonials" data-bs-slide="next">
+                    <img class="black" src="{%static 'jtalks/images/icon/arrow-right-icon-black.svg' %}" alt="">
+                    <img class="yellow" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt="">
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              </div>  
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="update-news">
+            <div class="row">
+              <div class="col-md-6 news-text">
+                <h2>Sign Up for our online classes</h2>
+                <p>If you going to use a passage of Lotem Ipsum, you need to be sure there  isn’t anything embarrassing.</p>
+              </div>
+              <div class="col-md-6 news-form">
+                <input type="email" name="email" placeholder="Enter your email" id="">
+                <button class="main-btn" type="submit">Send <img style="width: 15px; margin-left: 15px;" src="{%static 'jtalks/images/icon/arrow-right-icon-black.svg' %}" alt=""></button>
+              </div>
+            </div>
+            </div>
+           <!-- Variations -->
+          <div class="variations">
+              <div class="text">
+                <h1>We believe in Impact before profit</h1>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                <a href="" class="main-btn">Read more</a>
+              </div>
+              <div class="img">
+                <img src="{%static 'jtalks/images/jtalks-img.png' %}" alt="">
+              </div>
+          </div> 
+
+          <!-- Latest Articles -->
+          <div class="latest-articles text-center">
+            <h1>Our latest <span class="yellow-stroke">Articles</span></h1>
+            <div class="latest-articles-wrapper">
+              <div class="article">
+                <img src="{%static 'jtalks/images/post-1.png' %}" alt="">
+                <p class="article-meta"><img src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""><span class="data text-muted">August 24, 2021</span></p>
+                <a href="single-post.html"><h4 class="title">Develop Marketing</h4></a>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+              </div>
+              <div class="article">
+                <img src="{%static 'jtalks/images/post-2.png' %}" alt="">
+                <p class="article-meta"><img src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""><span class="data text-muted">July 13, 2021</span></p>
+                <a href="single-post.html"><h4 class="title">Resources Your Blog</h4></a>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+              </div>
+              <div class="article">
+                <img src="{%static 'jtalks/images/post-1.png' %}" alt="">
+                <p class="article-meta"><img src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""><span class="data text-muted">April 18, 2021</span></p>
+                <a href="single-post.html"><h4 class="title">Know Your Audience</h4></a>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="deco-shape shape-3">
-            <img src="{%static 'jtalks/images/shape-3.png' %}" alt="art shape" width="120">
-        </div>
-        <div class="deco-shape shape-4">
-            <img src="{%static 'jtalks/images/shape-4.png' %}" alt="art shape" width="30">
-        </div>
-
-        <div class="home-left">
-            <p class="section-subtitle left">Welcome to Jtalks Institute</p>
-
-            <h1 class="main-heading">
-                Impact Before Profit
-                <!-- <span class="underline-img">Instructor <img src="{%static 'jtalks/images/banner-line.png' %}" alt="line"></span> -->
-            </h1>
-
-            <p class="section-text sec">
-                We Offer Premimum Course On Cryptocurrency, Social Media Marketing, Website Development And Personal Finance.
-            </p>
-
-            <div class="home-btn-group">
-                <button class="btn btn-primary">
-                    <p class="btn-text">Explore Courses</p>
-                    <span class="square"></span>
-                </button>
-
-                <button class="btn btn-secondary">
-                    <p class="btn-text">Learn More</p>
-                    <span class="square"></span>
-                </button>
-            </div>
-        </div>
-
-        <div class="home-right">
-            <div class="img-box">
-                <!-- <img src="images/banner-img-bg.png" alt="colorful background-shape" class="background-shape"> -->
-                <img src="{%static 'jtalks/images/jtalks-img.png' %}" alt="banner image" class="banner-img">
-
-                <img src="{%static 'jtalks/images/banner-aliment-icon-1.png' %}" alt="" class="icon-1 smooth-zigzag-amin-1" width="250">
-                <img src="{%static 'jtalks/images/banner-aliment-icon-2.png' %}" alt="" class="icon-2 smooth-zigzag-amin-2" width="240">
-                <img src="{%static 'jtalks/images/banner-aliment-icon-3.png' %}" alt="" class="icon-3 smooth-zigzag-amin-3" width="195">
-                <img src="{%static 'jtalks/images/banner-aliment-icon-4.png' %}" alt="" class="icon-4 drop-amin">
-            </div>
-        </div>
-    </section>
-
-    <!-- Course Category section -->
-    <section class="category">
-        <p class="section-subtitle">Course Category</p>
-        <h1 class="section-title">Explore Popular Courses</h1>
-
-        <ul class="course-item-group">
-
-            <li class="course-category-item">
-                <div class="wrapper">
-                    <img src="{%static 'jtalks/images/course-category-icon-1.png' %}" alt="category icon" class="category-icon default">
-                    <img src="{%static 'jtalks/images/course-category-icon-1-w.png' %}" alt="category-icon" class="category-icon hover">
-                </div>
-
-                <div class="course-category-content">
-                    <h3 class="catogory-title">
-                        <a href="#">Cryptocurrency</a>
-                    </h3>
-
-                    <p class="category-subtitle">Everything about Crypto</p>
-                </div>
-            </li>
-
-            <li class="course-category-item">
-                <div class="wrapper">
-                    <img src="{%static 'jtalks/images/course-category-icon-2.png' %}" alt="category icon" class="category-icon default">
-                    <img src="{%static 'jtalks/images/course-category-icon-2-w.png' %}" alt="category-icon" class="category-icon hover">
-                </div>
-
-                <div class="course-category-content">
-                    <h3 class="catogory-title">
-                        <a href="#">Personal Branding</a>
-                    </h3>
-
-                    <p class="category-subtitle">Improve your brand</p>
-                </div>
-            </li>
-
-            <li class="course-category-item">
-                <div class="wrapper">
-                    <img src="{%static 'jtalks/images/course-category-icon-3.png' %}" alt="category icon" class="category-icon default">
-                    <img src="{%static 'jtalks/images/course-category-icon-3-w.png' %}" alt="category-icon" class="category-icon hover">
-                </div>
-
-                <div class="course-category-content">
-                    <h3 class="catogory-title">
-                        <a href="#">Graphic & Design</a>
-                    </h3>
-
-                    <p class="category-subtitle">Fun & challenging</p>
-                </div>
-            </li>
-
-            <li class="course-category-item">
-                <div class="wrapper">
-                    <img src="{%static 'jtalks/images/course-category-icon-4.png' %}" alt="category icon" class="category-icon default">
-                    <img src="{%static 'jtalks/images/course-category-icon-4-w.png' %}" alt="category-icon" class="category-icon hover">
-                </div>
-
-                <div class="course-category-content">
-                    <h3 class="catogory-title">
-                        <a href="#">Mobile Videography</a>
-                    </h3>
-
-                    <p class="category-subtitle">New Skills, New You</p>
-                </div>
-            </li>
-
-            <li class="course-category-item">
-                <div class="wrapper">
-                    <img src="{%static 'jtalks/images/course-category-icon-5.png' %}" alt="category icon" class="category-icon default">
-                    <img src="{%static 'jtalks/images/course-category-icon-5-w.png' %}" alt="category-icon" class="category-icon hover">
-                </div>
-
-                <div class="course-category-content">
-                    <h3 class="catogory-title">
-                        <a href="#">Writing Content</a>
-                    </h3>
-
-                    <p class="category-subtitle">Improve your Writing</p>
-                </div>
-            </li>
-
-            <li class="course-category-item">
-                <div class="wrapper">
-                    <img src="{%static 'jtalks/images/course-category-icon-6.png' %}" alt="category icon" class="category-icon default">
-                    <img src="{%static 'jtalks/images/course-category-icon-6-w.png' %}" alt="category-icon" class="category-icon hover">
-                </div>
-
-                <div class="course-category-content">
-                    <h3 class="catogory-title">
-                        <a href="#">Copywriting</a>
-                    </h3>
-
-                    <p class="category-subtitle">Fun & challenging</p>
-                </div>
-            </li>
-        </ul>
-
-    </section>
-
-
-    <!-- ABOUT SECTION -->
-    <section class="about">
-
-        <div class="about-left">
-            <div class="img-box">
-                <!-- <img src="{%static 'jtalks/images/about-img-bg.png' %}" alt="about bg" class="about-bg"> -->
-                <img src="{%static 'jtalks/images/jtalks-img.png' %}" alt="about person" class="about-img">
-                <img src="{%static 'jtalks/images/banner-aliment-icon-1.png' %}" alt="" class="icon-1 smooth-zigzag-amin-1" width="250">
-                <img src="{%static 'jtalks/images/banner-aliment-icon-3.png' %}" alt="" class="icon-2 smooth-zigzag-amin-3" width="195">
-            </div>
-        </div>
-
-        <div class="about-right">
-            <p class="section-subtitle">About Us</p>
-            <h1 class="section-title">We Believe In Impact Before Profit</h1>
-
-            <p class="section-text">
-                We Offer Premimum Course On Cryptocurrency, Social Media Marketing, 
-                Website Development And Personal Finance.
-            </p>
-
-            <ul class="about-ul">
-                <li>
-                    <ion-icon name="checkmark-circle"></ion-icon>
-                    <p>An Online Platform That Helps The Young Become Millionaires. Our Academy 
-                        Has Africa's Most Imapactful And Profiting Cryptocurrency Courses.</p>
-                </li>
-
-                <li>
-                    <ion-icon name="checkmark-circle"></ion-icon>
-                    <p>To Help Cure Financial Illiteracy By Educating And Empowering Young 
-                        People In Africa With Financial Education And Prowess In Digital Skills.</p>
-                </li>
-
-                <li>
-                    <ion-icon name="checkmark-circle"></ion-icon>
-                    <p>Jtalks Institute Main Goal Is To Be Known As A Multinational Brand 
-                        That Specializes In Making Millionaires Out Of Young People In Africa And Beyond.</p>
-                </li>
-            </ul>
-
-            <button class="btn btn-primary">
-                <p class="btn-text">Explore More</p>
-                <span class="square"></span>
-            </button>
-        </div>
-    </section>
-
-    <!-- COURSE SECTION -->
-    <section class="course" id="course">
-        <p class="section-subtitle">Our Amazing Courses</p>
-
-        <h1 class="section-title">Find the right course for you</h1>
-
-        <div class="course-grid">
-            <div class="course-card">
-                <div class="course-banner">
-                    <img src="{%static 'jtalks/images/coming-soon1.png' %}" alt="course banner">
-
-                    <div class="course-tag-box">
-                        <!-- <a href="" class="badge-tag purple">Business</a> -->
-                        <!-- <a href="" class="badge-tag blue">Marketing</a> -->
-                    </div>
-                </div>
-
-                <div class="course-content">
-                    <h3 class="card-title">
-                        <a href="#">Branding for Business and Personal Branding</a>
-                    </h3>
-                
-
-                    <div class="wrapper border-bottom">
-                        <div class="author">
-                            <img src="{%static 'jtalks/images/course-instructor-img.jpg' %}" alt="course Instructor image" class="author-img">
-                            <a href="#" class="author-name">None</a>
-                        </div>
-
-                        <div class="rating">
-                            <ion-icon name="star"></ion-icon>
-                            <p>5.0 (2k)</p>
-                        </div>
-                    </div>
-
-                    <div class="wrapper">
-                        <div class="course-price">$</div>
-
-                        <div class="enrolled">
-                            <div class="icon-user">
-                                <img src="{%static 'jtalks/images/student-icon.png' %}" alt="user icon">
-                            </div>
-
-                            <!-- <p>600k</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-banner">
-                    <img src="{%static 'jtalks/images/coming-soon2.png' %}" alt="course banner">
-
-                    <div class="course-tag-box">
-                        <!-- <a href="" class="badge-tag purple">Business</a> -->
-                        <!-- <a href="" class="badge-tag blue">Marketing</a> -->
-                    </div>
-                </div>
-
-                <div class="course-content">
-                    <h3 class="card-title">
-                        <a href="#">Writing Content Like Pro</a>
-                    </h3>
-                
-
-                    <div class="wrapper border-bottom">
-                        <div class="author">
-                            <img src="{%static 'jtalks/images/course-instructor-img.jpg' %}" alt="course Instructor image" class="author-img">
-                            <a href="#" class="author-name">None</a>
-                        </div>
-
-                        <div class="rating">
-                            <ion-icon name="star"></ion-icon>
-                            <p>5.0 (2k)</p>
-                        </div>
-                    </div>
-
-                    <div class="wrapper">
-                        <div class="course-price">$</div>
-
-                        <div class="enrolled">
-                            <div class="icon-user">
-                                <img src="{%static 'jtalks/images/student-icon.png' %}" alt="user icon">
-                            </div>
-
-                            <!-- <p>600k</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-banner">
-                    <img src="{%static 'jtalks/images/coming-soon3.png' %}" alt="course banner">
-
-                    <div class="course-tag-box">
-                        <!-- <a href="" class="badge-tag purple">Business</a> -->
-                        <!-- <a href="" class="badge-tag blue">Marketing</a> -->
-                    </div>
-                </div>
-
-                <div class="course-content">
-                    <h3 class="card-title">
-                        <a href="#">Copywriting</a>
-                    </h3>
-                
-
-                    <div class="wrapper border-bottom">
-                        <div class="author">
-                            <img src="{%static 'jtalks/images/course-instructor-img.jpg' %}" alt="course Instructor image" class="author-img">
-                            <a href="#" class="author-name">None</a>
-                        </div>
-
-                        <div class="rating">
-                            <ion-icon name="star"></ion-icon>
-                            <p>5.0 (2k)</p>
-                        </div>
-                    </div>
-
-                    <div class="wrapper">
-                        <div class="course-price">$</div>
-
-                        <div class="enrolled">
-                            <div class="icon-user">
-                                <img src="{%static 'jtalks/images/student-icon.png' %}" alt="user icon">
-                            </div>
-
-                            <!-- <p>600k</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-banner">
-                    <img src="{%static 'jtalks/images/coming-soon4.png' %}" alt="course banner">
-
-                    <div class="course-tag-box">
-                        <!-- <a href="" class="badge-tag purple">Business</a> -->
-                        <!-- <a href="" class="badge-tag blue">Marketing</a> -->
-                    </div>
-                </div>
-
-                <div class="course-content">
-                    <h3 class="card-title">
-                        <a href="#">Graphic Design</a>
-                    </h3>
-                
-
-                    <div class="wrapper border-bottom">
-                        <div class="author">
-                            <img src="{%static 'jtalks/images/course-instructor-img.jpg' %}" alt="course Instructor image" class="author-img">
-                            <a href="#" class="author-name">None</a>
-                        </div>
-
-                        <div class="rating">
-                            <ion-icon name="star"></ion-icon>
-                            <p>5.0 (2k)</p>
-                        </div>
-                    </div>
-
-                    <div class="wrapper">
-                        <div class="course-price">$</div>
-
-                        <div class="enrolled">
-                            <div class="icon-user">
-                                <img src="{%static 'jtalks/images/student-icon.png' %}" alt="user icon">
-                            </div>
-
-                            <!-- <p>600k</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-banner">
-                    <img src="{%static 'jtalks/images/coming-soon5.png' %}" alt="course banner">
-
-                    <div class="course-tag-box">
-                        <!-- <a href="" class="badge-tag purple">Business</a> -->
-                        <!-- <a href="" class="badge-tag blue">Marketing</a> -->
-                    </div>
-                </div>
-
-                <div class="course-content">
-                    <h3 class="card-title">
-                        <a href="#">Mobile Videography</a>
-                    </h3>
-                
-
-                    <div class="wrapper border-bottom">
-                        <div class="author">
-                            <img src="{%static 'jtalks/images/course-instructor-img.jpg' %}" alt="course Instructor image" class="author-img">
-                            <a href="#" class="author-name">None</a>
-                        </div>
-
-                        <div class="rating">
-                            <ion-icon name="star"></ion-icon>
-                            <p>5.0 (2k)</p>
-                        </div>
-                    </div>
-
-                    <div class="wrapper">
-                        <div class="course-price">$</div>
-
-                        <div class="enrolled">
-                            <div class="icon-user">
-                                <img src="{%static 'jtalks/images/student-icon.png' %}" alt="user icon">
-                            </div>
-
-                            <!-- <p>600k</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <div class="course-banner">
-                    <img src="{%static 'jtalks/images/course-6.jpg' %}" alt="course banner">
-
-                    <div class="course-tag-box">
-                        <!-- <a href="" class="badge-tag purple">Business</a> -->
-                        <!-- <a href="" class="badge-tag blue">Marketing</a> -->
-                    </div>
-                </div>
-
-                <div class="course-content">
-                    <h3 class="card-title">
-                        <a href="#">Public Speaking</a>
-                    </h3>
-                
-
-                    <div class="wrapper border-bottom">
-                        <div class="author">
-                            <img src="{%static 'jtalks/images/course-instructor-img.jpg' %}" alt="course Instructor image" class="author-img">
-                            <a href="#" class="author-name">None</a>
-                        </div>
-
-                        <div class="rating">
-                            <ion-icon name="star"></ion-icon>
-                            <p>5.0 (2k)</p>
-                        </div>
-                    </div>
-
-                    <div class="wrapper">
-                        <div class="course-price">$</div>
-
-                        <div class="enrolled">
-                            <div class="icon-user">
-                                <img src="{%static 'jtalks/images/student-icon.png' %}" alt="user icon">
-                            </div>
-
-                            <!-- <p>600k</p> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button class="btn btn-primary">
-            <p class="btn-text">View All Course</p>
-            <span class="square"></span>
-        </button>
-    </section>
-
-
-    <!-- EVENT SECTION -->
-    <section class="event">
-        <div class="event-left">
-            
-            <div class="event-banner">
-                <img src="{%static 'jtalks/images/event-image.JPG' %}" alt="event banner" class="banner-img">
-            </div>
-
-            <button class="play smooth-zigzag-amin-1">
-                
-                <div class="play-icon pulse-amin">
-                    <ion-icon name="play-circle"></ion-icon>
-                </div>
-
-                <p>Watch Us!</p>
-            </button>
-        </div>
-
-        <div class="event-right">
-            <p class="section-subtitle">Our Events</p>
-
-            <h2 class="section-title">Join Our Free Telegram Class</h2>
-
-            <div class="event-card-group">
-                <div class="event-card">
-                    <div class="content-left">
-                        <p class="day">28</p>
-                        <p class="month">Feb, 2022</p>
-                    </div>
-
-                    <div class="content-right">
-                        <div class="schedule">
-                            <p class="time">10:30am to 2:30pm</p>
-                            <p class="place">Telegram</p>
-                        </div>
-
-                        <a href="#" class="event-name">Jtalks Workshop</a>
-                    </div>
-                </div>
-
-                <div class="event-card">
-                    <div class="content-left">
-                        <p class="day">15</p>
-                        <p class="month">Mar, 2022</p>
-                    </div>
-
-                    <div class="content-right">
-                        <div class="schedule">
-                            <p class="time">10:30am to 2:30pm</p>
-                            <p class="place">Telegram</p>
-                        </div>
-
-                        <a href="#" class="event-name">Jtalks Workshop</a>
-                    </div>
-                </div>
-
-                <div class="event-card">
-                    <div class="content-left">
-                        <p class="day">15</p>
-                        <p class="month">Apr, 2022</p>
-                    </div>
-
-                    <div class="content-right">
-                        <div class="schedule">
-                            <p class="time">10:30am to 2:30pm</p>
-                            <p class="place">Telegram</p>
-                        </div>
-
-                        <a href="#" class="event-name">Jtalks Workshop</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FEATURES SECTIONS -->
-    <section class="features">
-        <div class="features-left">
-            <p class="section-subtitle core">Our Core Features</p>
-
-            <h2 class="section-title">See What Our mission Are</h2>
-
-            <ul>
-                <li class="features-item">
-                    <div class="item-icon-box blue">
-                        <img src="{%static 'jtalks/images/feature-icon-1.png' %}" alt="features icon">
-                    </div>
-
-                    <div class="wrapper">
-                        <h3 class="item-title">Financial Illiteracy</h3>
-
-                        <p class="item-text">Educating and Empowering young people in Africa</p>
-                    </div>
-                </li>
-
-                <li class="features-item">
-                    <div class="item-icon-box pink">
-                        <img src="{%static 'jtalks/images/feature-icon-2.png' %}" alt="features icon">
-                    </div>
-
-                    <div class="wrapper">
-                        <h3 class="item-title">Digital Skills</h3>
-
-                        <p class="item-text">To help close the gap in the Digital world</p>
-                    </div>
-                </li>
-
-                <li class="features-item">
-                    <div class="item-icon-box purple">
-                        <img src="{%static 'jtalks/images/feature-icon-3.png' %}" alt="features icon">
-                    </div>
-
-                    <div class="wrapper">
-                        <h3 class="item-title">Impacting</h3>
-
-                        <p class="item-text">We Believe in Impact Before Profit</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="features-right">
-            <img src="{%static 'jtalks/images/coure-features-img.jpg' %}" alt="core features image">
-        </div>
-    </section>
-
-
-    <!-- INSTRUCTOR SECTION -->
-    <section class="instructor">
-        <p class="section-subtitle">Best Coach</p>
-
-        <h2 class="section-title">Our Expert Instructor</h2>
-
-
-        <div class="instructor-grid">
-
-            <div class="instructor-card">
-                <div class="instructor-img-box">
-                    <img src="{%static 'jtalks/images/instructor-1.jpg' %}" alt="instructor image">
-
-                    <div class="social-link">
-                        <a href="#" class="facebook">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
-
-                        <a href="#" class="instagram">
-                            <ion-icon name="logo-instagram"></ion-icon>
-                        </a>
-
-                        <a href="#" class="twitter">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a>
-                    </div>
-                </div>
-
-                <h4 class="instructor-name">None</h4>
-
-                <p class="instructor-title">Instructor</p>
-            </div>
-
-            <div class="instructor-card">
-                <div class="instructor-img-box">
-                    <img src="{%static 'jtalks/images/instructor-2.jpg' %}" alt="instructor Moses Akoji">
-
-                    <div class="social-link">
-                        <a href="#" class="facebook">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
-
-                        <a href="#" class="instagram">
-                            <ion-icon name="logo-instagram"></ion-icon>
-                        </a>
-
-                        <a href="#" class="twitter">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a>
-                    </div>
-                </div>
-
-                <h4 class="instructor-name">None</h4>
-
-                <p class="instructor-title">Instructor</p>
-            </div>
-
-            <div class="instructor-card">
-                <div class="instructor-img-box">
-                    <img src="{%static 'jtalks/images/instructor-3.jpg' %}" alt="instructor image">
-
-                    <div class="social-link">
-                        <a href="#" class="facebook">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
-
-                        <a href="#" class="instagram">
-                            <ion-icon name="logo-instagram"></ion-icon>
-                        </a>
-
-                        <a href="#" class="twitter">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a>
-                    </div>
-                </div>
-
-                <h4 class="instructor-name">None</h4>
-
-                <p class="instructor-title">Instructor</p>
-            </div>
-
-            <div class="instructor-card">
-                <div class="instructor-img-box">
-                    <img src="{%static 'jtalks/images/instructor-4.jpg' %}" alt="instructor image">
-
-                    <div class="social-link">
-                        <a href="#" class="facebook">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
-
-                        <a href="#" class="instagram">
-                            <ion-icon name="logo-instagram"></ion-icon>
-                        </a>
-
-                        <a href="#" class="twitter">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a>
-                    </div>
-                </div>
-
-                <h4 class="instructor-name">None</h4>
-
-                <p class="instructor-title">Instructor</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIAL -->
-    <section class="testimonial">
-
-        <div class="testimonial-left">
-
-            <p class="section-subtitle">Testimonial</p>
-
-            <h2 class="section-title">What Our Clients Says About Us</h2>
-
-            <p class="testimonial-text">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odit omnis eligendi culpa animi quam maiores expedita ad quidem, nemo officia facilis modi. 
-                Voluptatum earum harum possimus aut obcaecati accusantium voluptas.
-            </p>
-        </div>
-
-        <div class="testimonial-right">
-            <div class="testimonial-card">
-                <img src="{%static 'jtalks/images/quote.png' %}" alt="quote" class="quote-img">
-
-                <p class="testimonial-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa maxime aperiam ad. Sed nobis quasi quas esse veritatis voluptate corrupti, quis 
-                    laborum cum numquam vel quaerat quisquam dolorum, voluptatibus quam. Lorem, ipsum dolor. Lorem ipsum dolor sit amet.
-                </p>
-                
-                <div class="testimonials-client">
-
-                    <div class="client-img-box">
-                        <img src="{%static 'jtalks/images/client.jpg' %}" alt="client Moses Akoji">
-                    </div>
-
-                    <div class="client-detail">
-                        <h4 class="client-name">None</h4>
-
-                        <p class="client-title">Student</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- BLOG -->
-    <section class="blog" id="blog">
-        <p class="section-subtitle">Our Blog</p>
-
-        <h2 class="section-title">Latest Blog & Update</h2>
-
-        <div class="blog-grid">
-
-            <div class="blog-card">
-
-                <div class="blog-banner-box">
-                    <img src="{%static 'jtalks/images/blog-1.jpg' %}" alt="blog banner">
-                </div>
-
-                <div class="blog-content">
-                    <h3 class="blog-title">
-                        <a href="">Cryptocurrency</a>
-                    </h3>
-
-                    <div class="wrapper">
-                        <div class="blog-pulish-date">
-                            <img src="{%static 'jtalks/images/calendar.png' %}" alt="calender icon">
-                            
-                            <a href="#">07 Jan, 2021</a>
-                        </div>
-
-                        <div class="blog-comment">
-                            <img src="{%static 'jtalks/images/comment.png' %}" alt="comment icon">
-
-                            <a href="#">3 comment</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blog-card">
-
-                <div class="blog-banner-box">
-                    <img src="{%static 'jtalks/images/blog-2.jpg' %}" alt="blog banner">
-                </div>
-
-                <div class="blog-content">
-                    <h3 class="blog-title">
-                        <a href="">Cryptocurrency</a>
-                    </h3>
-
-                    <div class="wrapper">
-                        <div class="blog-pulish-date">
-                            <img src="{%static 'jtalks/images/calendar.png' %}" alt="calender icon">
-                            
-                            <a href="#">22 Jan, 2021</a>
-                        </div>
-
-                        <div class="blog-comment">
-                            <img src="{%static 'jtalks/images/comment.png' %}" alt="comment icon">
-
-                            <a href="#">10 comment</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blog-card">
-
-                <div class="blog-banner-box">
-                    <img src="{%static 'jtalks/images/blog-3.jpg' %}" alt="blog banner">
-                </div>
-
-                <div class="blog-content">
-                    <h3 class="blog-title">
-                        <a href="">Cryptocurrency</a>
-                    </h3>
-
-                    <div class="wrapper">
-                        <div class="blog-pulish-date">
-                            <img src="{%static 'jtalks/images/calendar.png' %}" alt="calender icon">
-                            
-                            <a href="#">31 Jan, 2021</a>
-                        </div>
-
-                        <div class="blog-comment">
-                            <img src="{%static 'jtalks/images/comment.png' %}" alt="comment icon">
-
-                            <a href="#">6 comment</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section class="contact">
-
-        <div class="contact-card" id="contact">
-            <img src="{%static 'jtalks/images/cta-bg-img.png' %}" alt="shape" class="contact-card-bg">
-
-            <h2>Start Your Best Online Classes With Us</h2>
-
-            <button class="btn btn-primary">
-                <p class="btn-text">Contact Us</p>
-                <span class="square"></span>
-            </button>
-        </div>
-    </section>
-</main>
+      </main>
 {%endblock content%}
 
 {% block js %}
-    <!-- custom js -->
-    <script src="{%static 'jtalks/script.js' %}"></script>
-
-    <!-- ionicon link -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="{%static 'jtalks/js/nav-bg.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {% endblock js %}

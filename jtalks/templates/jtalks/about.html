@@ -3,78 +3,129 @@
 
 
 {%block content%}
-<section id="about-home">
-    <h2>About Us</h2>
-</section>
+<div class="main container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="aboutus">
+              <h2>Welcome to Jtalk Institute</h2>
+              <h3>Who We Are</h3>
+                <p>An online platform that helps the young become millionaires.
 
-<section id="about-container">
-    {% for about in abouts %}
-    <div class="about-img">
-        <img src="{{ about.image_abt.url }}" alt="">
-    </div>
 
-    <div class="about-text">
-        <h2>{{ about.title }}</h2>
-        <p>{{ about.about_us }}</p>
-<!-- 
-        <h3>{{ about.title_2 }}</h3>
-        <p>{{ about.achieve }}</p> -->
+                JTALKS empire started on October 4th, 2020 with a vision of raising 70 millionaires in the space of 10 years. 
 
-        <div class="about-fe">
-            <img src="images/fe1.png" alt="">
-            <div class="fe-text">
-                <h5>{{ about.title_2 }}</h5>
-                <p>{{ about.achieve }}</p>
+                JTALKS empire was founded by Uzondu Victor Joshua "the cryptoevangelist and extemporaneous orator". He's currently a student of Nnamdi Azikiwe University, Awka in Nigeria. 
+
+                </p>
+                <br>
+                
+                <h3>Our Mission</h3>
+                <p>Our mission is to help cure financial illiteracy by educating and empowering young people in Africa with financial education and prowess in digital skills.
+
+                The goal of JTALKS empire is to be known as a multinational brand that specializes in Making millionaires out of young people in Africa and beyond. The brand's motto is "Impact before profit". 
+
+                In an attempt to actualize  it's vision the brand set up a system called the " JTALKS ACADEMY"  amongst many to come, which has Africa's most impactful and profiting cryptocurrency course</p>
+                <figure class="quote text-start">
+                  <blockquote class="blockquote">
+                    <p>Impact Before Profit</p>
+                  </blockquote>
+                  <figcaption class="blockquote-footer">
+                    Someone famous in <cite title="Source Title">Source Title</cite>
+                  </figcaption>
+                </figure>
+                <div class="team text-center mt-5">
+                  <h3>A team that’s growing every day</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum ab est repudiandae quasi hic sapiente earum velit fuga odio neque numquam eligendi qui tenetur ipsam, animi atque expedita eaque nesciunt in.Atque ut blanditiis quos excepturi perferendis a, quidem modi.</p>
+                  <div class="team-person py-3">
+                    <div class="person">
+                      <div class="photo"><img src="{%static 'jtalks/images/team-1.jpg' %}" alt=""></div>
+                      <span class="name">John Fox</span>
+                      <span>Marketing Manager</span>
+                    </div>
+                    <div class="person">
+                      <div class="photo"><img src="{%static 'jtalks/images/team-2.jpg' %}" alt=""></div>
+                      <span class="name">Kate Rose</span>
+                      <span>SEO</span>
+                    </div>
+                    <div class="person">
+                      <div class="photo"><img src="{%static 'jtalks/images/team-3.jpg' %}" alt=""></div>
+                      <span class="name">Anna Brown</span>
+                      <span>UI Expert</span>
+                    </div>
+                    <div class="person">
+                      <div class="photo"><img src="{%static 'jtalks/images/team-4.jpg' %}" alt=""></div>
+                      <span class="name">Mike Doe</span>
+                      <span>Web Developer</span>
+                    </div>
+                  </div>
+                </div>
             </div>
-        </div>
-        <div class="about-fe">
-            <img src="images/fe2.png" alt="">
-            <div class="fe-text">
-                <h5>Lifetime Access</h5>
-                <p>You can start and finish one of these popular courses in under our site</p>
+          </div>
+          <div class="sidebar col-lg-4">
+            <div class="input-group">
+              <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" placeholder="search" />
+              </div>
+              <button id="search-button" type="button" class="btn dark">
+                <i class="fas fa-search"></i>
+              </button>
             </div>
+            <div class="sidebar-category">
+              <h4>We take care of your business</h4>
+              <div class="category">
+                <div class="category-item">
+                  <img class="category-icon" src="{%static 'jtalks/images/icon/marketing.svg' %}" alt="">
+                  <h3 class="category-title">Digital<br>Marketing</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+                <div class="category-item">
+                  <img class="category-icon" src="{%static 'jtalks/images/icon/identity.svg' %}" alt="">
+                  <h3 class="category-title">Corporate<br>Identity</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+                <div class="category-item">
+                  <img class="category-icon" src="{%static 'jtalks/images/icon/email.svg' %}" alt="">
+                  <h3 class="category-title">Email<br>Marketing</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+          </div>
+            </div> 
+            <div class="recent-posts my-5">
+              <h4>Our latest Articles</h4>
+              <a href="">All category <img style="width: 20px; margin-left: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+            <div class="latest-articles-wrapper">
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-1.png" alt=""></div>
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Develop Marketing</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">August 24, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-2.png" alt=""></div>  
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Resources Your Blog</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">July 13, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-3.png" alt=""></div>
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Know Your Audience</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">April 18, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+            </div>       
+          </div>
+          </div>
         </div>
-
-    </div>
-    {% endfor %}
-</section>
-
-<section id="features">
-    <h1>Awesome Feature</h1>
-    <p>Replenish man have thing gathering lights yielding shall you</p>
-    <div class="fea-base">
-        <div class="fea-box">
-            <i class="fas fa-graduation-cap"></i>
-            <h3>Scholarship Facility</h3>
-            <p>One make creepeth, man bearing theira firmament won't great heaven</p>
-        </div>
-
-        <div class="fea-box">
-            <i class="fas fa-file-certificate"></i>
-            <h3>Sell Online Course</h3>
-            <p>One make creepeth, man bearing theira firmament won't great heaven</p>
-        </div>
-
-        <div class="fea-box">
-            <i class="fas fa-award"></i>
-            <h3>Global Certification</h3>
-            <p>One make creepeth, man bearing theira firmament won't great heaven</p>
-        </div>
-    </div>
-</section>
-
-<section id="trust">
-    <h1>Trusted By</h1>
-    <p>Replenish man have thing gathering lights yielding shall you</p>
-    <div class="trust-images">
-        <img src="images/trust (1).png" alt="">
-        <img src="images/trust (2).png" alt="">
-        <img src="images/trust (3).png" alt="">
-        <img src="images/trust (4).png" alt="">
-        <img src="images/trust (5).png" alt="">
-        <img src="images/trust (6).png" alt="">
-    </div>
-</section>
+      </div>
 {%endblock content%}
 
 <!-- about section ends -->

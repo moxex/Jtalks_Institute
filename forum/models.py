@@ -58,8 +58,6 @@ class Comment(models.Model):
 class About(models.Model):
     title = models.CharField(max_length=250, null=True, blank=True)
     about_us = models.TextField()
-    title_2 = models.CharField(max_length=250, null=True, blank=True)
-    achieve = models.TextField(blank=True)
     image_abt = models.ImageField(upload_to="admin_pics", null=True)
 
     class Meta:

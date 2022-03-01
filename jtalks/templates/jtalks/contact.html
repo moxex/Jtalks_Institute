@@ -3,6 +3,113 @@
 {% block title %}Jtalks | Contact Us {% endblock title %}
 
 {%block content%}
+<div class="main container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="contact-page">
+              <h2>Please let us know if you have any questions</h2>
+              <p class="py-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum sunt optio consequuntur ducimus odit. Deleniti optio saepe unde omnis. Sapiente aliquam repellendus error id veniam totam dolores recusandae non dolorum?</p>
+              <form id="contactForm">
+                <!-- Name input -->
+                <div class="mb-3">
+                  <input class="form-control" id="name" type="text" placeholder="Name *" data-sb-validations="required" />
+                  <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
+                </div>
+                <!-- Email address input -->
+                <div class="mb-3">
+                  <input class="form-control" id="emailAddress" type="email*" placeholder="Email Address *" data-sb-validations="required, email" />
+                  <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
+                  <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
+                </div>
+                <!-- Form submissions success message -->
+                <div class="d-none" id="submitSuccessMessage">
+                  <div class="text-center mb-3">Form submission successful!</div>
+                </div>
+                <!-- Form submissions error message -->
+                <div class="d-none" id="submitErrorMessage">
+                  <div class="text-center text-danger mb-3">Error sending message!</div>
+                </div>
+                <!-- Message input -->
+                <div class="mb-3">
+                  <textarea class="form-control" id="contact" type="text" placeholder="Leave a Message" style="height: 10rem;" data-sb-validations="required"></textarea>
+                  <div class="invalid-feedback" data-sb-feedback="message:required">Message is required.</div>
+                </div>
+                <!-- Form submit button -->
+                <div class="d-grid">
+                  <button class="main-btn mt-0 disabled" id="submitButton" type="submit">Send message</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="sidebar col-lg-4">
+            <div class="input-group">
+              <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" placeholder="search" />
+              </div>
+              <button id="search-button" type="button" class="btn dark">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            
+            <div class="sidebar-category">
+              <h4>We take care of your business</h4>
+              <div class="category">
+                <div class="category-item">
+                  <img class="category-icon" src="{%static 'jtalks/images/icon/marketing.svg' %}" alt="">
+                  <h3 class="category-title">Digital<br>Marketing</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+                <div class="category-item">
+                  <img class="category-icon" src="{%static 'jtalks/images/icon/identity.svg' %}" alt="">
+                  <h3 class="category-title">Corporate<br>Identity</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+                <div class="category-item">
+                  <img class="category-icon" src="{%static 'jtalks/images/icon/email.svg' %}" alt="">
+                  <h3 class="category-title">Email<br>Marketing</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+                </div>
+          </div>
+            </div> 
+            <div class="recent-posts my-5">
+              <h4>Our latest Articles</h4>
+              <a href="">All category <img style="width: 20px; margin-left: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
+            <div class="latest-articles-wrapper">
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-1.png" alt=""></div>
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Develop Marketing</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">August 24, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-2.png" alt=""></div>  
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Resources Your Blog</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">July 13, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-3.png" alt=""></div>
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Know Your Audience</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">April 18, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+            </div>       
+          </div>
+          </div>
+        </div>
+      </div>
+{%endblock content%}
+
+
 <section id="about-home">
     <h2>Contact Us</h2>
 </section>
@@ -77,4 +184,3 @@
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7496148.936202814!2d85.84688993406176!3d23.452203814785097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30adaaed80e18ba7%3A0xf2d28e0c4e1fc6b!2sBangladesh!5e0!3m2!1sen!2sbd!4v1630132319493!5m2!1sen!2sbd"
         style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 </section>
-{%endblock content%}

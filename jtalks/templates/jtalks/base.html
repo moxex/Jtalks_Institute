@@ -5,215 +5,101 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Jtalks-Institutes is an online platform that believe in impact before profit" />
-    
-    <title>
-        {% block title %}Jtalks Institute {% endblock title %}
-    </title>
-
-    <!-- custom css link -->
-    <link rel="stylesheet" href="{%static 'jtalks/style.css' %}">
-
-
-    <link rel="stylesheet" href="{%static 'jtalks/media_queries.css' %}">
-    <link rel="stylesheet" href="{%static 'jtalks/animation.css' %}">
-    <link rel="stylesheet" href="{%static 'jtalks/variables.css' %}">
-    <link rel="stylesheet" href="{%static 'jtalks/reg.css' %}">
-    <link rel="stylesheet" href="{%static 'jtalks/dashboard.css' %}">
-
-    
-	<link rel="stylesheet" href="{%static 'css/animate.css' %}">
-	<!-- <link rel="stylesheet" href="{%static 'css/style.css' %}"> -->
-
-        <!-- Boostrap -->
-    <!-- Latest compiled and minified CSS -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous"> -->
-
-    <!-- Font -->
-    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-
-    <!-- google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700;800;900&family=Roboto:wght@400;500&display=swap"
-    rel="stylesheet" />
-
-    
-    {% block blog_style %} {% endblock blog_style %}
-
+    <title>Jtalks Institute</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0e035b9984.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{%static 'https://use.typekit.net/rrg4put.css' %}">
+    <link rel="stylesheet" href="{%static 'jtalks/css/main.css' %}">
 </head>
 <body>
-
-    <!-- main container -->
-    <div class="container">
-
-        <!-- header -->
-
-        <header>
-            <nav class="navbar">
-
-                <div class="navbar-brand">
-                    <a href="#" class="logo"><span>Jtalks</span></a>
-                    <!-- <img src="images/logo.png" alt="Jtalks-Institute logo"> -->
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'jtalks:jtalks-home' %}">Jtalk Institute<img claass="w-100" src="" alt=""></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-card-item">
+                <a class="nav-link  active" href="{% url 'jtalks:jtalks-home' %}">Home</a>
+              </li>
+              <li class="nav-card-item">
+                <a class="nav-link" href="{% url 'forum:post_list' %}">Blog</a>
+              </li>
+              <li class="nav-card-item">
+                <a class="nav-link" href="{% url 'jtalks:jtalks-contact' %}">Contact</a>
+              </li>
+              <li class="nav-card-item">
+                <a class="nav-link" href="{% url 'jtalks:jtalks-about' %}">About</a>
+              </li>         
+            </ul>
+          </div>
+        </div>
+      </nav>
+      {%block content %} {%endblock content%}
+      <!-- Footer -->
+      <footer>
+          <div class="container text-center text-md-start">
+            <div class="footer-wrap">
+              <div class="about">
+                <img src="{%static 'jtalks/images/icon/company-logo-black.svg' %}" alt="">
+                <p class="text-muted py-4">
+                  Impact Before Profit
+                </p>
+                <div class="social-media">
+                  <a href="" class="me-2 text-reset"><img src="{%static 'jtalks/images/icon/instagram-icon.svg' %}" alt=""></a>
+                  <a href="" class="me-2 text-reset"><img src="{%static 'jtalks/images/icon/facebook-icon.svg' %}" alt=""></a>
+                  <a href="" class="me-2 text-reset"><img src="{%static 'jtalks/images/icon/twitter-icon.svg' %}" alt=""></a>
+                  <a href="" class="me-2 text-reset"><img src="{%static 'jtalks/images/icon/linkedin-icon.svg' %}" alt=""></a>
                 </div>
-
-                <ul class="navbar-nav">
-
-                    <li class="nav-item">
-                        <a href="{% url 'jtalks:jtalks-home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#courses">Courses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'forum:post_list' %}">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'jtalks:jtalks-contact' %}">Contact</a>
-                    </li>
-
-                    {% if request.user.is_authenticated %}
-
-                    <li class="nav-item">
-                        <a href="{% url 'users:logout' %}">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a href="{% url 'users:login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{% url 'users:signup' %}">Register</a>
-                    </li>
-                    {% endif %}
-                </ul>
-
-                <button class="btn btn-primary">
-                    <p class="btn-text">Try for free</p>
-                    <span class="square"></span>
-                </button>
-
-                <button class="nav-toggle-btn">
-                    <span class="one"></span>
-                    <span class="two"></span>
-                    <span class="three"></span>
-                </button>
-
-            </nav>
-        </header>
-
-        {%block content %} {%endblock content%}
-
-        <!-- FOOTER SECTION -->
-        <footer>
-
-            <div class="footer-grid">
-
-                <div class="grid-item">
-
-                    <div class="footer-logo navbar-brand">
-                         <a href="#" class="logo"><span>Jtalks</span></a>
-                    </div>
-
-                    <p class="footer-text">
-                        Lorem ipsum, dolor sit amet consectetur 
-                        adipisicing elit. Eveniet
-                    </p>
-
-                    <div class="social-link">
-                        <a href="#">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="logo-instagram"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a>
-                        <a href="#">
-                            <ion-icon name="logo-youtube"></ion-icon>
-                        </a>
-                    </div>
-                </div>
-
-                <ul class="grid-item">
-
-                    <h4 class="item-heading">Our Link</h4>
-
-                    <li class="list-item">
-                        <a href="home">Home</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#courses">Courses</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#blog">Blog</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#about">About</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-
-                <ul class="grid-item">
-
-                    <h4 class="item-heading">Other Link</h4>
-
-                    <li class="list-item">
-                        <a href="#">Instructor</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#">FAQ</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#">Event</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#">Privacy Policy</a>
-                    </li>
-
-                    <li class="list-item">
-                        <a href="#">Terms & Condition</a>
-                    </li>
-                </ul>
-
-                <div class="grid-item">
-                    <h4 class="item-heading">Subcribe Now</h4>
-
-                    <div class="wrapper">
-                        <input type="text" name="subscribe" placeholder="Email Address">
-                        <button class="send-btn">
-                            <ion-icon name="paper-plane"></ion-icon>
-                        </button>
-                    </div>
-                </div>
+              </div>
+              <div class="company">
+                <p class="fw-bold">Company</p>
+                <p><a href="">About us</a></p>
+                <p><a href="">Services</a></p>
+                <p><a href="">Team</a></p>
+                <p><a href="">Courses</a></p>
+                <p><a href="">Blog</a></p>
+                <p><a href="">Login</a></p>
+              </div> 
+              <div class="useful-links">
+                <p class="fw-bold">Useful links</p>
+                <p><a href="">Terms of </a></p>
+                <p><a href="">Services</a></p>
+                <p><a href="">Privacy Policy</a></p>
+              </div>
+              <div class="newsletter">
+                <p class="fw-bold">Newsletter</p>
+                <p class="text-muted">Sign up and receive the latest tips
+                  via email.</p>
+                  <form id="subscribe" action="">
+                    <label for="email">Youre e-mail:</label>
+                    <input type="email" placeholder="e-mail:" name="email" required>
+                    <button type="submit" class="main-btn">Subscribe</button>
+                  </form>
+              </div> 
             </div>
+            <div class="copyright">
+              <p>&copy; 2022 Jtalk Institute | Created by <a href="#">Moxex</a></p>
+              <!--
+              This template is licenced under Attribution 3.0 (CC BY 3.0 PL),
+              You are free to: Share and Adapt. You must give appropriate credit, you may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+              --> 
+          </div>
+          </div>
+      </footer>
+    <div class="fb2022-copy">Fbee 2022 copyright</div>
 
-            <p class="copyright">
-               Copyright &copy; 2022 Jtalks Institute.</a> All right reserved.
-            </p>
-        </footer>
-    </div>
+    
 
-{% block js %}
-    <!-- custom js -->
-    <script src="{%static 'jtalks/script.js' %}"></script>
-
-    <!-- BootstrapJS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- ionicon link -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-{% endblock js %}
+    {% block js %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="{%static 'jtalks/js/nav-bg.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock js %}
 </body>
 </html>
