@@ -12,7 +12,8 @@ from .forms import CategoryForm, CommentForm
 
 def post_list(request):
     all_posts = Post.objects.all().order_by('-date')
-    paginator = Paginator(all_posts, 5)
+    latest_posts = Post.objects.order_by('-date')[:3]
+    paginator = Paginator(all_posts, 4)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     categories = Category.objects.all()
@@ -24,44 +25,48 @@ def post_list(request):
         if query is not None:
             lookups = Q(title__icontains=query) | Q(body__icontains=query)
             results = Post.objects.filter(lookups).distinct()
-            context = {
+            contexts = {
                 'query': query,
                 'results': results,
                 'submit_button': submit_button
             }
-            return render(request, 'forum/search_results.html', context)
+            return render(request, 'forum/search_results.html', contexts)
     context = {
         'posts': posts,
         'categories': categories,
         'title': all_posts[0].title if all_posts else None,
         'id': all_posts[0].id if all_posts else None,
         'slug': all_posts[0].slug if all_posts else None,
+        'latest_posts': latest_posts
     }
     return render(request, 'forum/post_list.html', context)
+
 
 def post_detail(request, id, slug):
     post = get_object_or_404(Post, id=id, slug=slug)
     comments = post.comments.filter(active=True).order_by('-updated')
-    new_comment = None
     liked = False
+    latest_posts = Post.objects.order_by('-date')[:3]
+    categories = Category.objects.all()
+
     if post.likes.filter(id=request.user.id).exists:
         liked = True
     if request.method == 'POST':
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
-            new_comment.post = post
-            new_comment.author = request.user
-            new_comment.save()
-    else:
-        comment_form = CommentForm()
+        body = request.POST['body']
+        full_name = request.POST['full_name']
+        email = request.POST['email']
 
+        new_comment = Comment(
+            name=full_name, email=email, post=post, comment=body
+        )
+        new_comment.save()
+        return HttpResponseRedirect('/forum/')
     context = {
         'post': post,
         'comments': comments,
-        'new_comment': new_comment,
-        'comment_form': comment_form,
-        'liked': liked
+        'liked': liked,
+        'latest_posts': latest_posts,
+        'categories': categories
     }
     return render(request, 'forum/post_detail.html', context)
 

@@ -36,13 +36,23 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('forum:post_detail', args=[str(self.id)])
 
+    def get_days(self):
+        current = timezone.now()
+        delta = current - self.date
+        if delta.days <= 1:
+            return f'{delta.days} day ago'
+        else:
+            return f'{delta.days} days ago'
+
+
     @property
     def number_of_comments(self):
         return Comment.objects.filter(post=self).count()
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=255)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     comment = models.TextField()
     date = models.DateTimeField(default=timezone.now)

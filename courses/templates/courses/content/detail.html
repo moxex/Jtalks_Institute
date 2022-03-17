@@ -2,81 +2,137 @@
 {%load static%}
 {% block title %}Jtalk Blog | Detail {% endblock title %}
 
+
+{% block blog_style %}
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'jtalks/sytle.css' %}">
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/forum.css' %}" /> -->
+{% endblock blog_style %}
+
 {%block content %}
-
-<section id="course-inner">
-        <div class="overview">
-            <img class="course-img" src="{% if course.cover %}{{ course.cover.url }}{% else %}https://dummyimage{% endif %}" alt="">
-            <div class="course-head">
-                <div class="c-name">
-                    <h2>{{course.name}}</h2>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-
-                    </div>
-                    <p>Modern JavaScript from the beginning - all the way up to JS expert level! THE must-have JavaScript resource in 2021.</p>
-                </div>
-                <span>${{course.price}}</span>
-            </div>
-            <h3>Instructor</h3>
-            <div class="tutor">
-                <img src="images/c4.jpg" alt="">
-                <div class="tutor-det">
-                    <h5>{{course.tutor}}</h5>
-                    <p>{{course.tutor_title}}</p>
-                </div>
-            </div>
-            <hr>
-            <h3>Course Overview</h3>
-            <p>{{course.overview|linebreaks }}</p>
-            <hr>
-            <h3>What you'll learn</h3>
-            <div class="learn">
-                <p><i class="far fa-check-circle"></i>JavaScript from scratch - beginner to advanced</p>
-                <p><i class="far fa-check-circle"></i>Everything you need to become a JavaScript expert and apply for JavaScript jobs</p>
-                <p><i class="far fa-check-circle"></i>All about variables, functions, objects and arrays</p>
-                <p><i class="far fa-check-circle"></i>All core features and concepts you need to know in modern JavaScript development</p>
-                <p><i class="far fa-check-circle"></i>Project-driven learning with plenty of examples</p>
-                <p><i class="far fa-check-circle"></i>Object-oriented programming</p>
-            </div>
-        </div>
-
-        <div class="enroll">
-            <h3>This course includes:</h3>
-            <p><i class="far fa-video"></i>52 hours video</p>
-            <p><i class="far fa-newspaper"></i>75 articles</p>
-            <p><i class="far fa-cloud-download"></i>Downloadable resources</p>
-            <p><i class="far fa-infinity"></i>Full lifetime access</p>
-            <p><i class="fas fa-mobile-alt"></i>Access on mobile and TV</p>
-            <p><i class="far fa-paperclip"></i>Assignments</p>
-            <p><i class="far fa-trophy-alt"></i>Certificate of completion</p>
-
-            {% if request.user.is_authenticated %}
-            <div class="enroll-btn">
-              <a id="enroll_btn" class="blue" href="#" data-course-id="{{ course.id }}" data-user="{{ request.user.username }}" data-user-id="{{ request.user.id }}" data-price="{{course.price}}">
-                Enroll Course
-                <i class="fas fa-angle-double-right load-more-icon"></i>
-              </a>
-              <!--
-              <div>
-                <button id="enroll_btn" type="button" class="blue" data-bs-toggle="modal" data-bs-target="#enroll_course">Enroll</button>
+<div class="main container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="single-post">
+              <h1>{{course.name}}</h1>
+              <div class="post-meta text-muted">
+                <span><i class="far fa-user"> </i> Instructor: {{course.tutor}} </span><span><img style="width: 20px;" src="img/icon/calendar.svg" alt=""> August 24, 2021</span>
               </div>
-              -->
-            </div>
-            {% else %}
-              <div class="enroll-btn">
-                <a class="blue" href="{% url 'users:login' %}?next={{request.path}}">Login To Enroll</a>
+              <div class="post-contant">
+                <div class="post-img"><img src="{% if course.cover %}{{ course.cover.url }}{% else %}https://dummyimage{% endif %}" alt=""></div>
+                <h3>Course Overview</h3>
+                <p> {{course.overview|linebreaks }} </p>
+                
+                <h6>This course includes:</h6>
+                <ul class="list-in-text">
+                  <li>Lorem ipsum dolor sit amet consectetur.</li>
+                  <li>Lorem ipsum dolor sit amet consectetur.</li>
+                  <li>Lorem ipsum dolor sit amet consectetur.</li>
+                  <li>Lorem ipsum dolor sit amet consectetur.</li>
+                  <li>Lorem ipsum dolor sit amet consectetur.</li>
+                </ul>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit laudantium, labore inventore fugiat doloremque ab soluta at. Ex, corporis? Necessitatibus distinctio quam sed unde soluta delectus facilis, corporis iusto. Nihil modi eveniet laudantium quisquam a expedita est inventore doloremque, ad officiis odit earum alias asperiores. Nihil accusamus rerum delectus cumque ducimus illum temporibus ratione dolores quibusdam sint facere provident aperiam quis dignissimos reiciendis sed iure quidem eos quasi, nesciunt, ipsum voluptatem at debitis odio. Doloribus explicabo dignissimos nemo rerum sunt amet aspernatur distinctio, deleniti blanditiis cumque soluta officiis suscipit. Minima nesciunt dicta magnam aliquid inventore voluptates laudantium quaerat aperiam in.</p>
+                
+                <div class="share">
+                  <a href=""><i class="fab fa-facebook-f"></i> FACEBOOK</a>
+                  <a href=""> <i class="fab fa-google-plus-g"></i> GOOGLE+</a>
+                  <a href=""><i class="fab fa-linkedin-in"></i> LINKEDIN</a>
+                  <a href=""><i class="fab fa-pinterest-p"></i> PINTEREST</a>
+                </div>
+                
+          
+                <div class="line"></div>
+                <!-- course submit button -->
+                {% if request.user.is_authenticated %}
+                  <div class="d-grid">
+                    <button  id="enroll_btn" class="main-btn" href="https://wa.me/08187669362" target="_blank" data-course-id="{{ course.id }}" data-user="{{ request.user.username }}" data-user-id="{{ request.user.id }}" data-price="{{course.price}}">
+                      Enroll Course
+                    <i class="fas fa-angle-double-right load-more-icon"></i>
+                    </button>
+                  </div>
+
+                  {% else %}
+                  <div class="d-grid">
+
+                    <button class="main-btn" href="{% url 'users:login' %}?next={{request.path}}">Buy ${{course.price}}</button>
+                  </div>
+                {% endif %}
+
+
               </div>
-            {% endif %}
+            </div>
+          </div>
+
+
+          <div class="sidebar col-lg-4">
+            <div class="input-group">
+              <div class="form-outline">
+                <input id="search-input" type="search" id="form1" class="form-control" placeholder="search" />
+              </div>
+              <button id="search-button" type="button" class="btn dark">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <div class="sidebar-category">
+              <h4>We take care of your business</h4>
+              <div class="category">
+                <div class="category-item">
+                  <img class="category-icon" src="img/icon/marketing.svg" alt="">
+                  <h3 class="category-title">Digital<br>Marketing</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
+                </div>
+                <div class="category-item">
+                  <img class="category-icon" src="img/icon/identity.svg" alt="">
+                  <h3 class="category-title">Corporate<br>Identity</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
+                </div>
+                <div class="category-item">
+                  <img class="category-icon" src="img/icon/email.svg" alt="">
+                  <h3 class="category-title">Email<br>Marketing</h3>
+                  <p>Lorem Ipsum is simply dummy text of the printing </p>
+                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
+                </div>
+          </div>
+            </div> 
+            <div class="recent-posts my-5">
+              <h4>Our latest Articles</h4>
+              <a href="">All category <img style="width: 20px; margin-left: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
+            <div class="latest-articles-wrapper">
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-1.png" alt=""></div>
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Develop Marketing</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">August 24, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-2.png" alt=""></div>  
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Resources Your Blog</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">July 13, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+              <div class="article">
+                <div class="arcticle-photo"><img src="img/post-3.png" alt=""></div>
+                <div class="article-text">
+                <a href="single-post.html"><h5 class="title">Know Your Audience</h5></a>
+                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">April 18, 2021</span></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                </div>
+              </div>
+            </div>       
+          </div>
+          </div>
         </div>
-    </section>
+      </div>
+
 {%endblock content%}
-
 {% block js %}
- <script src="{%static 'jtalks/script.js' %}"></script>
-<script src="{% static 'jtalks/home.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="{%static 'jtalks/js/nav-bg.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {% endblock js %}

@@ -47,6 +47,7 @@
               <div><img src="img/icon/point-design-logo.svg" alt=""></div>
             </div>
           </div> -->
+          
           <!-- See our projects -->
           <div class="see-our-projects">
             <h1>See our <span class="yellow-stroke">courses</span> </h1>
@@ -166,24 +167,14 @@
           <div class="latest-articles text-center">
             <h1>Our latest <span class="yellow-stroke">Articles</span></h1>
             <div class="latest-articles-wrapper">
+                {% for post in latest_posts %}
               <div class="article">
-                <img src="{%static 'jtalks/images/post-1.png' %}" alt="">
-                <p class="article-meta"><img src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""><span class="data text-muted">August 24, 2021</span></p>
-                <a href="single-post.html"><h4 class="title">Develop Marketing</h4></a>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                <img src="{{ post.image.url }}" alt="">
+                <p class="article-meta"><img src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""><span class="data text-muted">{{ post.date }}</span></p>
+                <a href="{% url 'forum:post_detail' post.pk post.slug %}"><h4 class="title">{{ post.title|title }}</h4></a>
+                <p>{{ post.body|truncatewords_html:10 }}</p>
               </div>
-              <div class="article">
-                <img src="{%static 'jtalks/images/post-2.png' %}" alt="">
-                <p class="article-meta"><img src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""><span class="data text-muted">July 13, 2021</span></p>
-                <a href="single-post.html"><h4 class="title">Resources Your Blog</h4></a>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              </div>
-              <div class="article">
-                <img src="{%static 'jtalks/images/post-1.png' %}" alt="">
-                <p class="article-meta"><img src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""><span class="data text-muted">April 18, 2021</span></p>
-                <a href="single-post.html"><h4 class="title">Know Your Audience</h4></a>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-              </div>
+                {% endfor %}
             </div>
           </div>
         </div>

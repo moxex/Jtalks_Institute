@@ -16,11 +16,24 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="single-post">
-              <h1>{{ post.title }}</h1>
+              <h1>{{ post.title|title }}</h1>
               <div class="post-meta text-muted">
-                <span><i class="far fa-user"></i>By <a href="{% url 'users:user_profile' post.author.id %}">{{ post.author }}</a></span>
+                <span><i class="far fa-user"></i>By {{ post.author }}</span>
                 <span><img style="width: 20px;" src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""> On {{ post.date }}</span>
-                <span><i class="far fa-comment-alt"></i> 0 comments</span>
+                <span>
+                    <i class="far fa-comment-alt"></i>
+                    {% if post.number_of_comments %}
+                    {% with post.number_of_comments as total_comments %}
+                    {{ total_comments }} Comment{{ total_comments|pluralize }}
+                    {% endwith %}
+                    {% else %}
+                    0 Comment
+                    {% endif %}
+                </span>
+                  <span>
+                      <i class="far fa-comment-alt"></i>
+                      {{ post.total_likes }} Like{{ post.total_likes|pluralize }}
+                  </span>
               </div>
               <div class="post-contant">
                 <div class="post-img"><img src="{{ post.image.url }}" alt=""></div>
@@ -35,11 +48,15 @@
                   <a href=""><i class="fab fa-pinterest-p"></i> PINTEREST</a>
                 </div>
                 <div class="navigation">
-                  <a class="prew"><i class="fas fa-chevron-left"></i> PREVIOUS</a>
-                  <a href="page={{ posts.next_page_number }}" class="next">NEXT <i class="fas fa-chevron-right"></i></a>
+                  <a class="prew" href="{% url 'forum:post_list' %}"><i class="fas fa-chevron-left"></i>All Post</a>
+                    <div>
+                            <form action="{% url 'forum:like_post' post.id post.slug %}" method="POST">
+                                {% csrf_token %}
+                                <button class="contact_button trans_200" type="submit" name="post_id" value="{{ post.id }}">Like Post</button>
+                                <strong>- {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</strong>
+                            </form>
+                        </div>
                 </div>
-                <div class="line"></div>
-
 
                 <div class="col-lg-6">
                 <!-- Display Comment Section -->
@@ -53,17 +70,10 @@
                         {% for comment in comments %}
                             <li>
                                 <div class="post-meta">
-                                    <ul>
-                                        <li>Comment {{ forloop.revcounter }} By <a href="{% url 'users:user_profile' comment.author.id %}">{{ comment.author }}</a></li>
-                                        <li> On {{ comment.date }}</li>
-                                    </ul>
+                                    <p>Comment {{ forloop.revcounter }} By {{ comment.name }} | <small>{{ comment.date }}</small></p>
                                 </div>
                                 <div class="post-contant">
-                                    {% if comment.author.gender == 'Male' %}
-                                    <p> He wrote:<br>{{ comment.comment|safe }}</p>
-                                    {% else %}
-                                    <p> She wrote:<br>{{ comment.comment|safe }}</p>
-                                    {% endif %}
+                                    <p>{{ comment.comment|safe }}</p>
                                 </div>
                             </li>
                             <hr>
@@ -77,87 +87,26 @@
 
                 <!-- COMMENT FORM -->
                 <form method="POST" id="commentForm">
-                    {% if user.is_authenticated %}
-                        {% if new_comment %}
+                    <p>Please note that your details is safe with us and cannot be shared with anyone else...</p>
+                    {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label" for="comment">Add A New Comment</label>
+                            <textarea name="body" class="form-control" placeholder="Type Your Message Here ..." style="height: 10rem;" required></textarea>
+                        </div>
 
-                            {% csrf_token %}
-                            <!-- Message input -->
-                            <div class="mb-3">
-                                <label class="form-label" for="comment">Add another Comment</label>
-                                <textarea class="form-control" id="comment" type="text" placeholder="" style="height: 10rem;" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">Comment is required.</div>
-                            </div>
-
-                                <!-- Name input -->
-                            <div class="mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Name *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
-                            </div>
-
-                            <!-- Email address input -->
-                            <div class="mb-3">
-                                <input class="form-control" id="emailAddress" type="email*" placeholder="Email Address *" data-sb-validations="required, email" />
-                                <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                            </div>
-
-                            <!-- Form submissions success message -->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">Your comment has been added successfully!</div>
-                            </div>
-
-                            <!-- Form submissions error message -->
-                            <div class="d-none" id="submitErrorMessage">
-                                <div class="text-center text-danger mb-3">Error sending message!</div>
-                            </div>
-
-                            <!-- Form submit button -->
-                            <div class="d-grid">
-                                <button class="main-btn" id="submitButton" type="submit">Post Comment</button>
-                            </div>
-                        {% else %}
-
-                            {% csrf_token %}
-                            <!-- Message input -->
-                            <div class="mb-3">
-                                <label class="form-label" for="comment">Add a New Comment</label>
-                                <textarea class="form-control" id="comment" type="text" placeholder="" style="height: 10rem;" data-sb-validations="required"></textarea>
-                                <div class="invalid-feedback" data-sb-feedback="message:required">Comment is required.</div>
-                            </div>
-
-                                <!-- Name input -->
-                            <div class="mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Name *" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">Name is required.</div>
-                            </div>
-
-                            <!-- Email address input -->
-                            <div class="mb-3">
-                                <input class="form-control" id="emailAddress" type="email*" placeholder="Email Address *" data-sb-validations="required, email" />
-                                <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                            </div>
-
-                            <!-- Form submissions success message -->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">Form submission successful!</div>
-                            </div>
-
-                            <!-- Form submissions error message -->
-                            <div class="d-none" id="submitErrorMessage">
-                                <div class="text-center text-danger mb-3">Error sending message!</div>
-                            </div>
-
-                            <!-- Form submit button -->
-                            <div class="d-grid">
-                                <button class="main-btn" id="submitButton" type="submit">Post Comment</button>
-                            </div>
-                        {% endif %}
-                    {% else %}
-                            <div class="d-grid">
-                                <a href="{% url 'users:login' %}?next={{request.path}}" style="color: purple;">Please Log in to add a comment!</a>
-                            </div>
-                    {% endif %}
+                        <!-- Name input -->
+                        <div class="mb-3">
+                            <input class="form-control" name="full_name" type="text" placeholder="Enter Your Full Name" required/>
+                        </div>
+                    
+                        <!-- Email address input -->
+                        <div class="mb-3">
+                            <input class="form-control" name="email" type="email" placeholder="Enter Your Email Address" required/>
+                        </div>
+                    <!-- Form submit button -->
+                    <div class="d-grid">
+                        <button class="main-btn" id="submitButton" type="submit">Post Comment</button>
+                    </div>
                 </form>
               </div>
             </div>
@@ -165,105 +114,38 @@
 
 
 
-          <div class="sidebar col-lg-4">
-            <div class="input-group">
-              <div class="form-outline">
-                <input id="search-input" type="search" id="form1" class="form-control" placeholder="search" />
-              </div>
-              <button id="search-button" type="button" class="btn dark">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
+            <div class="sidebar col-lg-4">
             <div class="sidebar-category">
-              <h4>We take care of your business</h4>
+              <h4>All Categories</h4>
               <div class="category">
-                <div class="category-item">
-                  <img class="category-icon" src="img/icon/marketing.svg" alt="">
-                  <h3 class="category-title">Digital<br>Marketing</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing </p>
-                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
-                </div>
-                <div class="category-item">
-                  <img class="category-icon" src="img/icon/identity.svg" alt="">
-                  <h3 class="category-title">Corporate<br>Identity</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing </p>
-                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
-                </div>
-                <div class="category-item">
-                  <img class="category-icon" src="img/icon/email.svg" alt="">
-                  <h3 class="category-title">Email<br>Marketing</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing </p>
-                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
-                </div>
+                  {% for category in categories %}
+                  <div class="category-item">
+                    <a class="category-title" href="{% url 'forum:blog_category' category.name %}">{{ category.name }}</a>
+                  </div>
+                  {% endfor %}
           </div>
-            </div> 
 
-            <!-- Latest Post -->
+          <!-- Recent Post -->
+            </div>
             <div class="recent-posts my-5">
               <h4>Our latest Articles</h4>
-              <a href="">All category <img style="width: 20px; margin-left: 20px;" src="{%static 'jtalks/images/icon/arrow-right-icon.svg' %}" alt=""></a>
             <div class="latest-articles-wrapper">
-                {% for post in categories %}
-                    <div class="article">
-                        <div class="arcticle-photo"><img src="{{ post.image.url }}" alt=""></div>
-                        <div class="article-text">
-                        <a href="{% url 'forum:post_detail' post.pk post.slug %}"><h5 class="title">Develop Marketing</h5></a>
-                        <p class="article-meta"><img src="{%static 'jtalks/img/icon/calendar.svg' %}" alt=""><span class="data text-muted">August 24, 2021</span></p>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                        </div>
-                    </div>
+                {% for post in latest_posts %}
+              <div class="article">
+                <div class="arcticle-photo"><img src="{{ post.title|title }}" alt=""></div>
+                <div class="article-text">
+                <a href="{% url 'forum:post_detail' post.pk post.slug %}"><h5 class="title">{{ post.title|title }}</h5></a>
+                <p class="article-meta"><img src="{{ post.image.url }}" alt=""><span class="data text-muted">{{ post.get_days }}</span></p>
+                <p>{{ post.body|truncatewords_html:10 }}</p>
+                </div>
+              </div>
                 {% endfor %}
               
-            </div>       
+            </div>
           </div>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-<section id="blog-container">
-    <div class="blogs postpage">
-        <div class="post">
-            <img src="{{ post.image.url }}" alt="">
-            <h3>{{ post.title }}</h3>
-            <div class="blog_meta">
-                <ul>
-                    <li>By <a href="{% url 'users:user_profile' post.author.id %}">{{ post.author }}</a></li>
-                    {% for category in post.categories.all %}
-                    <li>In
-                        <a href="{% url 'forum:blog_category' category.name %}">
-                            {{ category.name }}
-                        </a></li>
-                    {% endfor %}
-                    <li> On {{ post.date }}</li>
-                </ul>
-                </div>
-            <p>{{ post.body|linebreaks }}</p>
-            <a class="blue" href="page={{ posts.next_page_number }}">Read Next ?</a>
-        </div>
-
-    </div> -->
-
-</section>
 
 {% endblock content %}
 

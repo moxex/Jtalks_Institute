@@ -1,7 +1,6 @@
 {% extends 'jtalks/base.html' %}
 {% load static %}
 {% block title %}Jtalk Blog | Home {% endblock title %}
-{% block blog_new %} Add Post {% endblock blog_new %}
 
 {% block blog_style %}
 <link rel="stylesheet" href="{%static 'jtalks/css/main.css' %}">
@@ -19,11 +18,31 @@
                 <div class="post-item">
                     <div class="post-img"><img src="{{ post.image.url }}" alt=""></div>
                     <div class="post-main-info">
-                    <h4>{{ post.title }}</h4>
+                    <h4>{{ post.title|title }}</h4>
                     <div class="post-meta text-muted">
-                    <span><i class="far fa-user"></i> <a href="{% url 'users:user_profile' post.author.id %}">{{ post.author }}</a></span><span><img style="width: 20px;" src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""> On {{ post.date }}</span><span><i class="far fa-comment-alt"></i> 0 comments</span>
+                    <span>
+                        <i class="far fa-user"></i>{{ post.author }}
+                    </span>
+                        <span>
+                            <img style="width: 20px;" src="{%static 'jtalks/images/icon/calendar.svg' %}" alt=""> On {{ post.date }}
+                        </span>
+                        <span>
+                            <i class="far fa-comment-alt"></i>
+                            {% if post.number_of_comments %}
+                                {% with post.number_of_comments as total_comments %}
+                                    <a href="{% url 'forum:post_detail' post.pk post.slug %}">{{ total_comments }} Comment{{ total_comments|pluralize }}</a>
+                                {% endwith %}
+                            {% else %}
+                                0 Comment
+                            {% endif %}
+                        </span>
+                        
+                        <span>
+                            <i class="far fa-comment-alt"></i>
+                            {{ post.total_likes }} Like{{ post.total_likes|pluralize }}
+                        </span>
                 </div>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum beatae pariatur sequi vitae quia velit? Facere maxime delectus cum voluptas unde accusantium rerum ullam rem asperiores. Alias, omnis quidem....</p>
+                        <p>{{ post.body | slice:":150" }}...</p>
                     <a href="{% url 'forum:post_detail' post.pk post.slug %}" class="main-btn">Read More</a>
                     </div>
                 </div>
@@ -36,86 +55,60 @@
 
             <nav aria-label="blog navigation">
               <ul class="pagination">
+                  {% if posts.has_previous %}
                 <li class="page-item ">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
+                  <a class="page-link" href="?page={{ posts.previous_page_number }}" aria-label="Previous">
                     <span class="sr-only">Previous</span>
                   </a>
                 </li>
-                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  {% endif %}
+                <li class="page-item">Page {{ posts.number }} of {{ posts.paginator.num_pages }}</li>
+                  {% if posts.has_next %}
                 <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
+                  <a class="page-link" href="?page={{ posts.next_page_number }}" aria-label="Next">
                     <span class="sr-only">Next</span>
                   </a>
                 </li>
+                  {% endif %}
               </ul>
             </nav>
           </div>
           <div class="sidebar col-lg-4">
-            <div class="input-group">
-              <div class="form-outline">
-                <input id="search-input" type="search" id="form1" class="form-control" placeholder="search" />
-              </div>
-              <button id="search-button" type="button" class="btn dark">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-outline">
+                    <input id="search-input" type="search" class="form-control" placeholder="search posts" name="q" required>
+                </div>
+                <button id="search-button" type="submit" name="submit" class="btn dark">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
             <div class="sidebar-category">
-              <h4>We take care of your business</h4>
+              <h4>All Categories</h4>
               <div class="category">
-                <div class="category-item">
-                  <img class="category-icon" src="img/icon/marketing.svg" alt="">
-                  <h3 class="category-title">Digital<br>Marketing</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing </p>
-                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
-                </div>
-                <div class="category-item">
-                  <img class="category-icon" src="img/icon/identity.svg" alt="">
-                  <h3 class="category-title">Corporate<br>Identity</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing </p>
-                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
-                </div>
-                <div class="category-item">
-                  <img class="category-icon" src="img/icon/email.svg" alt="">
-                  <h3 class="category-title">Email<br>Marketing</h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing </p>
-                  <a class="arrow" href=""><img style="width: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
-                </div>
+                  {% for category in categories %}
+                  <div class="category-item">
+                    <a class="category-title" href="{% url 'forum:blog_category' category.name %}">{{ category.name }}</a>
+                  </div>
+                  {% endfor %}
           </div>
 
           <!-- Recent Post -->
             </div>  
             <div class="recent-posts my-5">
               <h4>Our latest Articles</h4>
-              <a href="">All category <img style="width: 20px; margin-left: 20px;" src="img/icon/arrow-right-icon.svg" alt=""></a>
             <div class="latest-articles-wrapper">
+                {% for post in latest_posts %}
               <div class="article">
-                <div class="arcticle-photo"><img src="img/post-1.png" alt=""></div>
+                <div class="arcticle-photo"><img src="{{ post.title|title }}" alt=""></div>
                 <div class="article-text">
-                <a href="single-post.html"><h5 class="title">Develop Marketing</h5></a>
-                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">August 24, 2021</span></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                <a href="{% url 'forum:post_detail' post.pk post.slug %}"><h5 class="title">{{ post.title|title }}</h5></a>
+                <p class="article-meta"><img src="{{ post.image.url }}" alt=""><span class="data text-muted">{{ post.get_days }}</span></p>
+                <p>{{ post.body|truncatewords_html:10 }}</p>
                 </div>
               </div>
-              <div class="article">
-                <div class="arcticle-photo"><img src="img/post-2.png" alt=""></div>  
-                <div class="article-text">
-                <a href="single-post.html"><h5 class="title">Resources Your Blog</h5></a>
-                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">July 13, 2021</span></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                </div>
-              </div>
-              <div class="article">
-                <div class="arcticle-photo"><img src="img/post-3.png" alt=""></div>
-                <div class="article-text">
-                <a href="single-post.html"><h5 class="title">Know Your Audience</h5></a>
-                <p class="article-meta"><img src="img/icon/calendar.svg" alt=""><span class="data text-muted">April 18, 2021</span></p>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                </div>
-              </div>
+                {% endfor %}
+              
             </div>       
           </div>
           </div>
@@ -124,7 +117,6 @@
 
 </div>
 {% endblock content %}
-
 
 
 

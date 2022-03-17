@@ -8,7 +8,7 @@ from courses.models import Category, Courses
 from cart.cart import Cart
 from cart.forms import CartAddProductForm
 from products.models import Product
-from forum.models import About, ContactUs
+from forum.models import About, ContactUs, Post
 
 
 def home(request):
@@ -16,7 +16,7 @@ def home(request):
     categories = Category.objects.all()
     courses = Courses.objects.all().order_by('-id')[:2]
     total_data = Courses.objects.count()
-
+    latest_posts = Post.objects.order_by('-date')[:3]
     # for products
     products = Product.objects.all().order_by('-id')[:2]
     total_products = Product.objects.count()
@@ -29,7 +29,8 @@ def home(request):
         'total_data': total_data,
         'products': products,
         'total_products': total_products,
-        'cart': cart
+        'cart': cart,
+        'latest_posts': latest_posts
     }
     return render(request, 'jtalks/home.html', context)
 
