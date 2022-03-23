@@ -1,0 +1,1 @@
+web: gunicorn jtalks_institute.wsgi --log-file -

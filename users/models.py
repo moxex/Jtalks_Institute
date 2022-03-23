@@ -6,7 +6,7 @@ from django.db.models import CharField
 # Create your models here.
 class User(AbstractUser):
     phone_number = models.CharField(max_length=20, blank=True)
-    photo = models.ImageField(upload_to='admin_pics/%Y/%m/%d/', null=True)
+    # photo = models.ImageField(upload_to='admin_pics/%Y/%m/%d/', null=True)
     GENDER = [
         ('M', 'Male'),
         ('F', 'Female'),
@@ -14,16 +14,16 @@ class User(AbstractUser):
     gender = models.CharField(choices=GENDER, max_length=10, blank=True)
     location = models.CharField(max_length=50, blank=True)
     
-    Here_about_us = [
-        ('W', 'WhatsApp'), 
-        ('F', 'Facebook'), 
-        ('T', 'Twitter'), 
-        ('I', 'Instagram'), 
-        ('Y', 'YouTube'), 
-        ('B', 'Blog')
-    ]
-    about_us = models.CharField(choices=Here_about_us, max_length=20, blank=True)
-    referral = models.CharField(max_length=50, default="Referral Name", blank=True)
+    # Here_about_us = [
+    #     ('W', 'WhatsApp'), 
+    #     ('F', 'Facebook'), 
+    #     ('T', 'Twitter'), 
+    #     ('I', 'Instagram'), 
+    #     ('Y', 'YouTube'), 
+    #     ('B', 'Blog')
+    # ]
+    # about_us = models.CharField(choices=Here_about_us, max_length=20, blank=True)
+    # referral = models.CharField(max_length=50, default="Referral Name", blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
     # USERNAME_FIELD = "email"

@@ -1,47 +1,55 @@
 {% extends 'jtalks/base.html' %} {% load static %} {% block title %} Login Form {% endblock title %} 
 {% block content %}
 
+<section class="vh-50">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Login</h2>
+			  <p class="margin-bottom-30 message">
+					{% if messages %}
+						{% for message in messages %}
+						<h3 style="text-align: center;">{{ message }}</h3>
+						{% endfor %}
+					{% endif %}
+			   </p>
 
+              <form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+            	
+				<div class="form-outline mb-4">
+                  <input type="text" id="username" name="username" class="form-control form-control-lg" />
+                  <label class="form-label" for="username">Username</label>
+                </div>
 
-<div class="container">
-  <div class="row">
-				<div class="col-md-4 col-md-offset-4">
-					
-					<!-- Start Login Form -->
-					<form method="POST" class="fh5co-form animate-box" data-animate-effect="fadeIn">
-            {% csrf_token %}
-						<h2>Login Form</h2>
-						<!-- <div class="form-group">
-              {% if messages %} {% for message in messages %}
-                <div class="alert alert-success" role="alert">{{ message }}</div>
-              {% endfor %} {% endif %}
-						  <div class="alert alert-success" role="alert">Your info has been saved.</div>
-						</div> -->
-            <div class="form-group">
-							<label for="username" class="sr-only">Username</label>
-							<input type="text" class="form-control"name="username" placeholder="username" required>
-						</div>
-						
-						<div class="form-group">
-							<label for="password" class="sr-only">Password</label>
-							<input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-              <input type="checkbox" onclick="showPassword()" /> Show Password
-						</div>
+                <div class="form-outline mb-4">
+                  <input type="password" id="password" name="password" class="form-control form-control-lg" />
+                  <label class="form-label" for="password">Password</label>
+				  <input type="checkbox" onclick="showPassword()" /> Show Password
+                </div>
 
-						<div class="form-group">
-							<p>Don't have an account? <a href="{% url 'users:signup' %}">Register</a></p>
-						</div>
-						<div class="form-group">
-							<input type="submit" value="Login" class="btn btn-primary">
-						</div>
-					</form>
-					<!-- END Login Form -->
+            
+                <div class="d-flex justify-content-center">
+                  <button type="submit" value="Login" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
 
-				</div>
-			</div>
-</div>
+                <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="{% url 'users:signup' %}" class="fw-bold text-body"><u>Login here</u></a></p>
 
-{% endblock %} {% block js %}
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} 
+
+{% block js %}
 <script src="{%static 'jtalks/script.js' %}"></script>
 <script>
   function showPassword() {

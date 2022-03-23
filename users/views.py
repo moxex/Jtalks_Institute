@@ -18,8 +18,8 @@ def user_signup(request):
         gender = request.POST['gender']
         location = request.POST['location']
         phone_number = request.POST['phone_number']
-        referral = request.POST['referral']
-        photo = request.FILES['photo']
+        # referral = request.POST['referral']
+        # photo = request.FILES['photo']
         about_us = request.POST['about_us']
         password = request.POST['password']
         password2 = request.POST['password2']
@@ -52,11 +52,11 @@ def user_signup(request):
 
         User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name,
                                  location=location, phone_number=phone_number, about_us=about_us,
-                                 referral=referral, photo=photo, gender=gender)
+                                gender=gender)
         user = User.objects.get(username=username)
         context = {
             'username': username, 'email': email, 'first_name': first_name, 'last_name': last_name,
-            'location': location, 'phone_number': phone_number, 'referral': referral, 'photo': user.photo,
+            'location': location, 'phone_number': phone_number,
             'gender': gender, 'about_us': about_us
         }
         return render(request, 'users/signup_success.html', context)
