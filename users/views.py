@@ -20,7 +20,7 @@ def user_signup(request):
         phone_number = request.POST['phone_number']
         # referral = request.POST['referral']
         # photo = request.FILES['photo']
-        about_us = request.POST['about_us']
+        # about_us = request.POST['about_us']
         password = request.POST['password']
         password2 = request.POST['password2']
 
