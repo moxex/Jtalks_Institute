@@ -51,13 +51,13 @@ def user_signup(request):
             return render(request, 'users/signup.html')
 
         User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name,
-                                 location=location, phone_number=phone_number, about_us=about_us,
+                                 location=location, phone_number=phone_number,
                                 gender=gender)
         user = User.objects.get(username=username)
         context = {
             'username': username, 'email': email, 'first_name': first_name, 'last_name': last_name,
             'location': location, 'phone_number': phone_number,
-            'gender': gender, 'about_us': about_us
+            'gender': gender,
         }
         return render(request, 'users/signup_success.html', context)
     return render(request, 'users/signup.html')
